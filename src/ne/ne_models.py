@@ -29,4 +29,5 @@ def crammer_model(d):
   return 1E8 * (3.89 * d**-10.5 + 0.00869 * d**-2.57) * 1E6
 
 def predictive_science_model(x, y, z):
+  pickle.load
   print(x, ",", y, ",", z)
