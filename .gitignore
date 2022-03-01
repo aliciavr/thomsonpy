@@ -1,0 +1,3 @@
+rsc/*
+*.ipynb_checkpoints*
+src/octree/__pycache__/
