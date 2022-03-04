@@ -8,7 +8,7 @@ Original file is located at
 """
 
 from math import radians
-from constants.units import AU_TO_METERS
+from thomsonpy.constants.units import AU_TO_METERS
 SIGMA_E = 7.95E-30 # Differential cross section for perpendicular scattering in m²·sr⁻¹.
 WAVELENGTH = 5000E-10 # Target wavelength (5000A) in m.
 T_SOL = 5778 # Solar temperature in K.
