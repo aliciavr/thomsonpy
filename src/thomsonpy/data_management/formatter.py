@@ -1,4 +1,5 @@
 from thomsonpy.data_management.octree.octree import Data
+import pickle
 import numpy as np
 
 def from_numpy_to_octree_data(xyz, ne):
@@ -16,9 +17,9 @@ def from_numpy_to_octree_data(xyz, ne):
     -------
     data : list
         List of data in octree data format.
-        """
+    """
     progress = 0
-    total = xyz.size
+    total = ne.size
     data = list()
     for i, ne_val in enumerate(ne):
         ne_val = ne_val * 1e6 # conversion to m⁻³.
@@ -95,71 +96,88 @@ def coords_system_change(coords, distance = 215):
     new_coords = (x, y, z)
     return new_coords
 
-
-import pickle
 # FORMATTING AND STORAGE
 # Octree 1
-f = open('points_1', 'rb')
+f = open('points_1.obj', 'rb')
 points_1 = pickle.load(f)
 f.close()
+print("Loaded points for octree 1")
 
-f = open('ne_1', 'rb')
+f = open('ne_1.obj', 'rb')
 ne_1 = pickle.load(f)
 f.close()     
+print("Loaded ne values for octree 1")
 
 octree_data_1 = from_numpy_to_octree_data(points_1, ne_1)
-f = open('octree_data_1', 'wb')
+f = open('octree_data_1.obj', 'wb')
 pickle.dump(octree_data_1, f)
 f.close()
+print("Stored data for octree 1")
+
+del(points_1)
+del(ne_1)
+del(octree_data_1)
 
 
+# Octree 2
+f = open('points_2.obj', 'rb')
+points_2 = pickle.load(f)
+f.close()
+print("Loaded points for octree 2")
 
-import open3d as o3d
-## VISUALIZATION
-pcd = o3d.geometry.PointCloud()
-pcd.points = o3d.utility.Vector3dVector(points_1)
-geoms = pcd
-o3d.visualization.draw_geometries(geoms)
+f = open('ne_2.obj', 'rb')
+ne_2 = pickle.load(f)
+f.close()     
+print("Loaded ne values for octree 2")
 
-"""
-octree_data_2 = formatter.from_numpy_to_octree_data(points_2, ne_2)
-f = open('octree_data_2', 'wb')
+octree_data_2 = from_numpy_to_octree_data(points_2, ne_2)
+f = open('octree_data_2.obj', 'wb')
 pickle.dump(octree_data_2, f)
 f.close()
+print("Stored data for octree 2")
 
-octree_data_3 = formatter.from_numpy_to_octree_data(points_3, ne_3)
-f = open('octree_data_3', 'wb')
+del(points_2)
+del(ne_2)
+del(octree_data_2)
+
+# Octree 3
+f = open('points_3.obj', 'rb')
+points_3 = pickle.load(f)
+f.close()
+print("Loaded points for octree 3")
+
+f = open('ne_3.obj', 'rb')
+ne_3 = pickle.load(f)
+f.close()     
+print("Loaded ne values for octree 3")
+
+octree_data_3 = from_numpy_to_octree_data(points_3, ne_3)
+f = open('octree_data_3.obj', 'wb')
 pickle.dump(octree_data_3, f)
 f.close()
+print("Stored data for octree 3")
 
-octree_data_4 = formatter.from_numpy_to_octree_data(points_4, ne_4)
-f = open('octree_data_4', 'wb')
+del(points_3)
+del(ne_3)
+del(octree_data_3)
+
+# Octree 4
+f = open('points_4.obj', 'rb')
+points_4 = pickle.load(f)
+f.close()
+print("Loaded points for octree 4")
+
+f = open('ne_4.obj', 'rb')
+ne_4 = pickle.load(f)
+f.close()     
+print("Loaded ne values for octree 4")
+
+octree_data_4 = from_numpy_to_octree_data(points_4, ne_4)
+f = open('octree_data_4.obj', 'wb')
 pickle.dump(octree_data_4, f)
 f.close()
+print("Stored data for octree 4")
 
-
-import open3d as o3d
-## VISUALIZATION
-pcd = o3d.geometry.PointCloud()
-pcd.points = o3d.utility.Vector3dVector(points_1)
-geoms = pcd
-o3d.visualization.draw_geometries(geoms)
-
-## VISUALIZATION
-pcd = o3d.geometry.PointCloud()
-pcd.points = o3d.utility.Vector3dVector(points_2)
-geoms = pcd
-o3d.visualization.draw_geometries(geoms)
-
-## VISUALIZATION
-pcd = o3d.geometry.PointCloud()
-pcd.points = o3d.utility.Vector3dVector(points_3)
-geoms = pcd
-o3d.visualization.draw_geometries(geoms)
-
-## VISUALIZATION
-pcd = o3d.geometry.PointCloud()
-pcd.points = o3d.utility.Vector3dVector(points_4)
-geoms = pcd
-o3d.visualization.draw_geometries(geoms)
-"""
+del(points_4)
+del(ne_4)
+del(octree_data_4)

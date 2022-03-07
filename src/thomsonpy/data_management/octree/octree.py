@@ -213,11 +213,12 @@ class Octree:
         self.__num_data = len(data)
         self.__root = Node(1, None, self.__min, self.__max, self)
         progress = 0
+        total = len(data)
         for p in data:
             self.__root.add(p)
             # progress...
             if progress % 100000 == 0:
-                print(progress / len(data) * 100)
+                print(progress / total * 100)
             progress += 1
         self.visual_nodes = list()
 
