@@ -47,7 +47,7 @@ class Node:
         self.__data = list()
 
     def __str__(self):
-        return 'Node at level {} with {} data at coordinates {} and {}'.format(self.__level, len(self.__data), self.__min, self.__max)
+        return 'Node at level {} with {} data at coordinates {} and {}. Total data:{}.'.format(self.__level, len(self.__data), self.__min, self.__max, len(self.__data))
 
     def __create_children(self):
         self.__children = [None] * 8
@@ -104,7 +104,7 @@ class Node:
                     c.add(data)
 
     def search(self, data):
-        if len(self.__data) == 0 and self.contains(data):
+        if len(self.__children) != 0 and self.contains(data):
             for c in self.__children:
                 if c.contains(data):
                     return c.search(data)
@@ -113,7 +113,7 @@ class Node:
         return None
 
     def search_nearest(self, p):
-        if len(self.__data) == 0 and self.inside(p):
+        if len(self.__children) != 0 and self.inside(p):
             for c in self.__children:
                 if c.inside(p):
                     return c.search_nearest(p)
@@ -197,7 +197,7 @@ class Node:
         lines=o3d.utility.Vector2iVector(lines),
         )
 
-        if (self.__level > 0):
+        if (self.__level >= 0):
         #if (self.has_data()):
             self.__octree.visual_nodes.append(line_set)
         for c in self.__children:
@@ -211,14 +211,14 @@ class Octree:
         self.__level_limit = level_limit
         self.__data_limit = data_limit
         self.__num_data = len(data)
-        self.__root = Node(1, None, self.__min, self.__max, self)
+        self.__root = Node(0, None, self.__min, self.__max, self)
         progress = 0
         total = len(data)
         for p in data:
             self.__root.add(p)
             # progress...
             if progress % 100000 == 0:
-                print(progress / total * 100)
+                print(progress / total * 100, "%")
             progress += 1
         self.visual_nodes = list()
 

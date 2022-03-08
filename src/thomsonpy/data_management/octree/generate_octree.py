@@ -21,11 +21,11 @@ f.close()
 # Creating octree...
 octree_1 = Octree(op.MAX_LEVEL, op.MAX_DATA, octree_data_1, op.MIN_1, op.MAX_1)
 Octree.save(octree_1, "octree_1.obj")
-# Deleting resources...
-del(octree_data_1)
-del(octree_1)
 print("Octree 1 created.")
-
+# Deleting resources...
+#del(octree_data_1)
+#del(octree_1)
+"""
 # Loading data...
 f = open('../octree_data_2.obj', 'rb')
 octree_data_2 = pickle.load(f)
@@ -61,3 +61,12 @@ Octree.save(octree_4, "octree_4.obj")
 del(octree_data_4)
 del(octree_4)
 print("Octree 4 created.")
+"""
+
+for d in octree_data_1:
+    node = octree_1.search(d)
+    if node == None:
+        print(d, "NOT FOUND")
+    else:
+        print(node)
+            
