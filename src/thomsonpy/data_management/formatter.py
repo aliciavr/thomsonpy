@@ -1,6 +1,18 @@
+import thomsonpy.config.paths as paths
 from thomsonpy.data_management.octree.octree import Data
 import pickle
 import numpy as np
+
+def dump(filename, obj):
+    f = open(filename, "wb")
+    pickle.dump(obj, f)
+    f.close()
+
+def load(filename):
+    f = open(filename, "rb")
+    obj = pickle.load(f)
+    f.close()
+    return obj
 
 def from_numpy_to_octree_data(xyz, ne):
     """
@@ -56,9 +68,9 @@ def spherical_to_cartesian(r, theta, phi):
         z coordinate in cartesian coordinates.
 
     """
-    x = r * np.sin(theta) * np.cos(phi) 
+    x = r * np.sin(theta) * np.sin(phi) 
     y = r * np.cos(theta)
-    z = r * np.sin(theta) * np.sin(phi)
+    z = r * np.sin(theta) * np.cos(phi)
     return np.array([x, y, z])
 
 def coords_system_change(coords, distance = 215):
@@ -99,86 +111,65 @@ def coords_system_change(coords, distance = 215):
 def format_data():
     # FORMATTING AND STORAGE
     # Octree 1
-    f = open('points_1.obj', 'rb')
-    points_1 = pickle.load(f)
-    f.close()
-    print("Loaded points for octree 1")
+    points_1 = load(paths.OCTREE_DATA_PATH + "points_1.obj")
+    print("Loaded points for octree 1 from", paths.OCTREE_DATA_PATH + "points_1.obj")
 
-    f = open('ne_1.obj', 'rb')
-    ne_1 = pickle.load(f)
-    f.close()     
-    print("Loaded ne values for octree 1")
+    ne_1 = load(paths.OCTREE_DATA_PATH + "ne_1.obj")
+    print("Loaded ne values for octree 1 from", paths.OCTREE_DATA_PATH + "ne_1.obj")
 
     octree_data_1 = from_numpy_to_octree_data(points_1, ne_1)
-    f = open('octree_data_1.obj', 'wb')
-    pickle.dump(octree_data_1, f)
-    f.close()
-    print("Stored data for octree 1")
+    dump(paths.OCTREE_DATA_PATH + "octree_data_1.obj", octree_data_1)
+    print("Stored data for octree 1 at", paths.OCTREE_DATA_PATH + "octree_data_1.obj")
 
-    del(points_1)
-    del(ne_1)
-    del(octree_data_1)
-
+    del points_1
+    del ne_1
+    del octree_data_1
 
     # Octree 2
-    f = open('points_2.obj', 'rb')
-    points_2 = pickle.load(f)
-    f.close()
-    print("Loaded points for octree 2")
+    points_2 = load(paths.OCTREE_DATA_PATH + "points_2.obj")
+    print("Loaded points for octree 2 from", paths.OCTREE_DATA_PATH + "points_2.obj")
 
-    f = open('ne_2.obj', 'rb')
-    ne_2 = pickle.load(f)
-    f.close()     
-    print("Loaded ne values for octree 2")
+    ne_2 = load(paths.OCTREE_DATA_PATH + "ne_2.obj")
+    print("Loaded ne values for octree 2 from", paths.OCTREE_DATA_PATH + "ne_2.obj")
 
     octree_data_2 = from_numpy_to_octree_data(points_2, ne_2)
-    f = open('octree_data_2.obj', 'wb')
-    pickle.dump(octree_data_2, f)
-    f.close()
-    print("Stored data for octree 2")
+    dump(paths.OCTREE_DATA_PATH + "octree_data_2.obj", octree_data_2)
+    print("Stored data for octree 2 at", paths.OCTREE_DATA_PATH + "octree_data_2.obj")
 
-    del(points_2)
-    del(ne_2)
-    del(octree_data_2)
-
+    del points_2
+    del ne_2
+    del octree_data_2
+    
     # Octree 3
-    f = open('points_3.obj', 'rb')
-    points_3 = pickle.load(f)
-    f.close()
-    print("Loaded points for octree 3")
+    points_3 = load(paths.OCTREE_DATA_PATH + "points_3.obj")
+    print("Loaded points for octree 3 from", paths.OCTREE_DATA_PATH + "points_3.obj")
 
-    f = open('ne_3.obj', 'rb')
-    ne_3 = pickle.load(f)
-    f.close()     
-    print("Loaded ne values for octree 3")
+    ne_3 = load(paths.OCTREE_DATA_PATH + "ne_3.obj")
+    print("Loaded ne values for octree 3 from", paths.OCTREE_DATA_PATH + "ne_3.obj")
 
     octree_data_3 = from_numpy_to_octree_data(points_3, ne_3)
-    f = open('octree_data_3.obj', 'wb')
-    pickle.dump(octree_data_3, f)
-    f.close()
-    print("Stored data for octree 3")
+    dump(paths.OCTREE_DATA_PATH + "octree_data_3.obj", octree_data_3)
+    print("Stored data for octree 3 at", paths.OCTREE_DATA_PATH + "octree_data_3.obj")
 
-    del(points_3)
-    del(ne_3)
-    del(octree_data_3)
-
+    del points_3
+    del ne_3
+    del octree_data_3
+    
     # Octree 4
-    f = open('points_4.obj', 'rb')
-    points_4 = pickle.load(f)
-    f.close()
-    print("Loaded points for octree 4")
+    points_4 = load(paths.OCTREE_DATA_PATH + "points_4.obj")
+    print("Loaded points for octree 4 from", paths.OCTREE_DATA_PATH + "points_4.obj")
 
-    f = open('ne_4.obj', 'rb')
-    ne_4 = pickle.load(f)
-    f.close()     
-    print("Loaded ne values for octree 4")
+    ne_4 = load(paths.OCTREE_DATA_PATH + "ne_4.obj")
+    print("Loaded ne values for octree 4 from", paths.OCTREE_DATA_PATH + "ne_4.obj")
 
     octree_data_4 = from_numpy_to_octree_data(points_4, ne_4)
-    f = open('octree_data_4.obj', 'wb')
-    pickle.dump(octree_data_4, f)
-    f.close()
-    print("Stored data for octree 4")
+    dump(paths.OCTREE_DATA_PATH + "octree_data_4.obj", octree_data_4)
+    print("Stored data for octree 4 at", paths.OCTREE_DATA_PATH + "octree_data_4.obj")
 
-    del(points_4)
-    del(ne_4)
-    del(octree_data_4)
+    del points_4
+    del ne_4
+    del octree_data_4
+    
+# FORMATTING
+format_data()
+print("Stored formatted octree data for all octrees at", paths.OCTREE_DATA_PATH)
