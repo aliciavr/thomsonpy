@@ -170,6 +170,3 @@ def format_data():
     del ne_4
     del octree_data_4
     
-# FORMATTING
-format_data()
-print("Stored formatted octree data for all octrees at", paths.OCTREE_DATA_PATH)
