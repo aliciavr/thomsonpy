@@ -6,8 +6,8 @@ MAX_LEVEL = 8
 MAX_DATA = 1000
 
 # Maximum and minimum distance of octree data from the center of the Sun in RSol.
-MAX_R = 7
-MIN_R = 1
+MAX_R = 1.9223684 # RSol
+MIN_R = 1 # RSol
 
 # Maximum bounds for octree according a MAX_R radius.
 MAX_COORD = np.sqrt(MAX_R**2 / 2)
