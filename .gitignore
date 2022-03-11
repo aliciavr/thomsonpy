@@ -1,3 +1,13 @@
-rsc/*
+data/
+src/dist/
+src/thomsonpy.egg-info/
+aux_notebooks_code/
 *.ipynb_checkpoints*
-src/octree/__pycache__/
+*/__pycache__/*
+*.pyc
+*.obj
+
+## Files not submited yet
+src/thomsonpy/solar_imager/solar_imager_depr.ipynb
+src/thomsonpy/data_management/octree/nearest.py
+src/thomsonpy/test.py
