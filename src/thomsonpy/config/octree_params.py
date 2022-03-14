@@ -26,5 +26,5 @@ MAX_3 = np.array([0, 0, MAX_COORD])
 MIN_3 = np.array([MIN_COORD, MIN_COORD, MIN_COORD])
 
 # Octree 4: x >= 0 & y <= 0
-MAX_4 = np.array([0, MIN_COORD, MIN_COORD])
-MIN_4 = np.array([MAX_COORD, 0, MAX_COORD])
+MAX_4 = np.array([MAX_COORD, 0, MAX_COORD])
+MIN_4 = np.array([0, MIN_COORD, MIN_COORD])
