@@ -727,7 +727,7 @@ def Gp(omega, chi, u, z = 1):
     Valor de la dispersión polarizada.
     '''
 
-    return (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
+    return pow(np.sin(chi), 2) * (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
 
 def Gr(omega, chi, u, z = 1):
     '''
