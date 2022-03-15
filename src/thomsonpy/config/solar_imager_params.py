@@ -1,7 +1,7 @@
 import numpy as np
 import thomsonpy.constants.units as units
 import thomsonpy.config.octree_params as op
-import thomsonpy.thomson_scattering.thomson_scattering_toolas as tsp
+import thomsonpy.thomson_scattering.thomson_scattering_tools as tsp
 
 """
 Coordinate system centered on the center of the Sun defined by the right-hand rule.
@@ -13,7 +13,7 @@ All parameters are in the International System of Units.
 """
 SUN_CENTER = np.array([0, 0, 0]) # m
 OBSERVER = np.array([0, 0, -units.AU_TO_METERS]) # m
-SOLAR_RADIUS = units.RSOL_TO_METERS # m
+
 
 """
 Geometry for the Thomson Scattering process.
