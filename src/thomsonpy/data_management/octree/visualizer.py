@@ -92,4 +92,4 @@ def vis_octree_data(i):
     del ne_cloud
     del pcd
     
-vis_octree(0)
+vis_octree(3)
