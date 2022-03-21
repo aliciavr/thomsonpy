@@ -789,10 +789,10 @@ def f_Irec_z(x, epsilon, z, u, TG = None):
     d = ThomsonGeometry.faux_d(x, z, epsilon)
     omega = ThomsonGeometry.faux_omega(x, z, epsilon)
     chi = ThomsonGeometry.faux_chi(x, z, epsilon)
-    # scatt_factor = Gtotal(omega, chi, u)
-    # ne_value = ne.predictive_science_model(z, TG)
-    # return ne_value * scatt_factor
-    return ne.crammer_model(d / tsp.SOLAR_RADIUS) * Gtotal(omega, chi, u)
+    scatt_factor = Gtotal(omega, chi, u)
+    #ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
+    ne_value = ne.predictive_science_model(z, TG)
+    return ne_value * scatt_factor
   
 def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None):
     '''
