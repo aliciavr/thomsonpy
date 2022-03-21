@@ -15,5 +15,3 @@ INI_Z = 210 * units.RSOL_TO_METERS # m
 FIN_Z = 220 * units.RSOL_TO_METERS # m
 INCR_Z = 0.1 * units.RSOL_TO_METERS # m
 NUM_Z = (FIN_Z - INI_Z) / 0.1
-
-#NE_MODEL = octr.Octree.load(paths.OCTREE_OBJECTS_PATH + "octree_1.oct")

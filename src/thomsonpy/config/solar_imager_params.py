@@ -14,11 +14,6 @@ All parameters are in the International System of Units.
 SUN_CENTER = np.array([0, 0, 0]) # m
 OBSERVER = np.array([0, 0, -units.AU_TO_METERS]) # m
 
-
-"""
-Geometry for the Thomson Scattering process.
-"""
-TG = None
 """
 Image parameters.
 
@@ -30,4 +25,4 @@ MIN_COORD = -np.sqrt(MAX_VIS_R**2 / 2)
 IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
 IMAGE_MIN = np.array([MIN_COORD, MIN_COORD])
 IMAGE_RESOLUTION = 2000000 #  (2000 km)
-IMAGE_NUM_POINTS = (MAX_COORD - MIN_COORD) / IMAGE_RESOLUTION
+IMAGE_NUM_POINTS = int(np.rint((MAX_COORD - MIN_COORD) / IMAGE_RESOLUTION))
