@@ -187,8 +187,7 @@ class ThomsonGeometry:
         ----------
         Valor del ángulo omega en radianes (rad).
         '''
-
-        return asin(tsp.SOLAR_RADIUS / d)
+        return asin(tsp.SOLAR_RADIUS / d) 
 
     @staticmethod
     def faux_z_intensidad(x, d, chi):

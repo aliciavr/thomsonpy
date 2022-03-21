@@ -34,6 +34,5 @@ def crammer_model(d):
 def predictive_science_model(z, TG, NE_MODEL):
     octree = NE_MODEL
     target = TG.get_target(z) * units.METERS_TO_RSOL
-    print("Target:", target)
     data = octree.search_nearest(target)
     return data.get_ne() 
