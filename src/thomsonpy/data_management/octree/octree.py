@@ -129,7 +129,7 @@ class Node:
                         return c.search_nearest(p)
             else:
                 # Is a leave node
-                nearest = 0
+                nearest = Data(None, 0)
                 min_distance = sys.float_info.max
                 for data in self.__data:
                     distance = np.linalg.norm(p - data.get_coordinates())
@@ -137,7 +137,7 @@ class Node:
                         nearest = data
                         distance = min_distance
                 return nearest
-        return 0
+        return Data(None, 0)
 
     def contains(self, p):
         x = p[0]
