@@ -87,10 +87,12 @@ class Node:
                                   np.array([mid_x, max_y, max_z]), self.__octree)
     
     def add(self, data):
-        if len(self.__children) == 0:
+        if len(self.__children) == 0: # If it does not has children
             if self.__level == self.__octree.get_level_limit() or len(self.__data) < self.__octree.get_data_limit():
+                # If it has reached the maximum level or there is free space in this node it inserts data
                 self.__data.append(data)
             else:
+                # If it has not reached the maximum level and there is not free space in this node
                 self.__data.append(data)
                 self.__create_children()
                 for p in self.__data:
@@ -98,47 +100,50 @@ class Node:
                         if c.contains(p):
                             c.add(p)
                 self.__data.clear()
-        else:
+        else: # If it has children
             for c in self.__children:
+                # Searchs in each node containing this data
                 if c.contains(data):
                     c.add(data)
 
-    def search(self, data):
-        if len(self.__children) != 0 and self.contains(data):
-            for c in self.__children:
-                if c.contains(data):
-                    return c.search(data)
-        else:
-            return self
+    def search(self, p):
+        if self.contains(p):
+            if len(self.__children) != 0:
+                # Has children and contains the point
+                for c in self.__children:
+                    # Searchs the point in each children which contains the point
+                    if c.contains(p):
+                        return c.search(p)
+            else:
+                # Is a leaf node
+                return self
         return None
-
+    
     def search_nearest(self, p):
-        if len(self.__children) != 0 and self.inside(p):
-            for c in self.__children:
-                if c.inside(p):
-                    return c.search_nearest(p)
-        else:
-            nearest = None
-            min_distance = sys.float_info.max
-            for data in self.__data:
-                distance = np.linalg.norm(p - data.get_coordinates())
-                if distance < min_distance:
-                    nearest = data
-                    distance = min_distance
-            return nearest
-        return None
+        if self.contains(p):
+            # If contains the point
+            if len(self.__children) != 0:
+                # If has children
+                for c in self.__children:
+                    if c.contains(p):
+                        return c.search_nearest(p)
+            else:
+                # Is a leave node
+                nearest = 0
+                min_distance = sys.float_info.max
+                for data in self.__data:
+                    distance = np.linalg.norm(p - data.get_coordinates())
+                    if distance < min_distance:
+                        nearest = data
+                        distance = min_distance
+                return nearest
+        return 0
 
-    def inside(self, p):
+    def contains(self, p):
         x = p[0]
         y = p[1]
         z = p[2]        
-        return x < self.__max[0] and y < self.__max[1] and z < self.__max[2] and x >= self.__min[0] and y >= self.__min[1] and z >= self.__min[2]
-    
-    def contains(self, data):
-        x = data.get_x()
-        y = data.get_y()
-        z = data.get_z()
-        return x < self.__max[0] and y < self.__max[1] and z < self.__max[2] and x >= self.__min[0] and y >= self.__min[1] and z >= self.__min[2]
+        return x <= self.__max[0] and y <= self.__max[1] and z <= self.__max[2] and x >= self.__min[0] and y >= self.__min[1] and z >= self.__min[2]
 
     def get_min(self):
         return self.__min
@@ -222,8 +227,8 @@ class Octree:
             progress += 1
         self.visual_nodes = list()
 
-    def search(self, data):
-        return self.__root.search(data)
+    def search(self, p):
+        return self.__root.search(p)
     
     def search_nearest(self, p):
         return self.__root.search_nearest(p)
