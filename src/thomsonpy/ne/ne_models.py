@@ -31,8 +31,9 @@ def crammer_model(d):
     # en cm⁻³ --> m⁻³
     return 1E8 * (3.89 * d**-10.5 + 0.00869 * d**-2.57) * 1E6
 
-def predictive_science_model(z, TG):
-    octree = tsp.NE_MODEL
+def predictive_science_model(z, TG, NE_MODEL):
+    octree = NE_MODEL
     target = TG.get_target(z) * units.METERS_TO_RSOL
-    ne = octree.search_nearest_ne(target)
-    return ne
+    print("Target:", target)
+    data = octree.search_nearest(target)
+    return data.get_ne() 
