@@ -9,5 +9,7 @@ aux_notebooks_code/
 
 ## Files not submited yet
 src/thomsonpy/solar_imager/solar_imager_depr.ipynb
+src/thomsonpy/solar_imager/solar_imager.ipynb
 src/thomsonpy/data_management/octree/nearest.py
 src/thomsonpy/test.py
+src/thomsonpy/data_management/octree/test.py
