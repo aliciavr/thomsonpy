@@ -769,7 +769,7 @@ def Gtotal(omega, chi, u, z = 1):
 Respecto de z, en Rsol, y respecto del ángulo phi (O-S-Q).
 """
 
-def f_Irec_z(x, epsilon, z, u, TG = None):
+def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
     '''
     Función de la intensidad recibida por la dispersión de Thomson en un punto 
     z_i de la línea de visión.
@@ -791,10 +791,10 @@ def f_Irec_z(x, epsilon, z, u, TG = None):
     chi = ThomsonGeometry.faux_chi(x, z, epsilon)
     scatt_factor = Gtotal(omega, chi, u)
     #ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
-    ne_value = ne.predictive_science_model(z, TG)
+    ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
     return ne_value * scatt_factor
   
-def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None):
+def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
     '''
     Integración numérica de la dispersión de Thomson recibida a lo largo de toda
     la línea de visión (integración sobre la variable z).
@@ -817,7 +817,7 @@ def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None):
     pasos_z = np.arange(ini_z, fin_z + incr_z, incr_z)
     valorIrec = 0
     for i in pasos_z:
-        valorIrec += abs(f_Irec_z(x, epsilon, i + 1, u, TG) - f_Irec_z(x, epsilon, i, u, TG)) * incr_z
+        valorIrec += abs(f_Irec_z(x, epsilon, i + 1, u, TG, NE_MODEL) - f_Irec_z(x, epsilon, i, u, TG, NE_MODEL)) * incr_z
     return valorIrec
 
 def f_Irec_PHI(x, epsilon, phi, u):
@@ -872,7 +872,7 @@ def Irec_PHI(x, epsilon, phi, incr_phi, u):
 Cálculo de la intensidad final dispersada:
 """
 
-def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG = None):
+def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG = None, NE_MODEL = None):
     """  
     Computation of the scattered light by the Thomson Scattering of the K-Corona.
 
@@ -890,7 +890,7 @@ def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG 
     """
     u = coef_limb_darkening(wave)
     I0 = radiacion_planck(temperature, wave)
-    scattering = Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG)
+    scattering = Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG, NE_MODEL)
 
     scattered_light = I0 * scattering
 

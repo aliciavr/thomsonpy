@@ -12,7 +12,7 @@ Coordinate system centered on the center of the Sun defined by the right-hand ru
 All parameters are in the International System of Units.
 """
 SUN_CENTER = np.array([0, 0, 0]) # m
-OBSERVER = np.array([0, 0, -units.AU_TO_METERS]) # m
+OBSERVER = np.array([0, 0, units.AU_TO_METERS]) # m
 
 """
 Image parameters.
