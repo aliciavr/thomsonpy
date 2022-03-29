@@ -1,4 +1,6 @@
-OCTREE_DATA_PATH = "data/octree_data/"
-OCTREE_OBJECTS_PATH = "data/octree_data/octrees/"
+PROJECT_NAME = "first-quadrant"
+OCTREE_DATA_PATH = f"data/projects/{PROJECT_NAME}/octree_data_format/"
+OCTREES_PATH = f"data/projects/{PROJECT_NAME}/octrees/"
+MODELS_PATH = f"data/projects/{PROJECT_NAME}/models/"
 PREDSCI_DATA_PATH = "data/predictive_science/eclipse2021_mhd_final/corona/"
 NE_PREDSCI_DATA_PATH = "data/predictive_science/eclipse2021_mhd_final/corona/rho002.hdf"
