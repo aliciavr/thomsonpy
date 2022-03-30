@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb 24 11:06:09 2022
-
-@author: aliciavr
+.. module:: generate_octree
+        :platform: Unix
+        :synopsis: generates and stores an octree
+.. moduleauthor:: 
 """
 
 import pickle
 import numpy as np
 import open3d as o3d
-from octree import Octree, Data
+import time
+import thomsonpy.data_management.octree.octree as octr
 import thomsonpy.config.octree_params as op
 import thomsonpy.config.paths as paths
 import thomsonpy.data_management.formatter as formatter
-import time
+
 
 ## OCTREE CREATION AND STORAGE
 min_v = [op.MIN_1, op.MIN_2, op.MIN_3, op.MIN_4]
