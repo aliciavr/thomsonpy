@@ -1,8 +1,16 @@
+"""
+.. module:: visualizer
+        :platform: Unix
+        :synopsis: tools for manage data format, usage and storing 
+.. moduleauthor:: 
+"""
+import os
 import open3d as o3d
 import numpy as np
-from octree import Octree, Node, Data
+import thomsonpy.data_management.octree.octree as octr
 import thomsonpy.data_management.formatter as formatter
 import thomsonpy.config.paths as paths
+import thomsonpy.constants.units as units
 
 def vis_points_and_ne(i):
     points_filenames = ['points_1.obj', 'points_2.obj', 'points_3.obj', 'points_4.obj']
@@ -57,41 +65,31 @@ def vis_octree(i):
     viewer.run()
     viewer.destroy_window()
 
-def vis_octree_data(i):
-    points_filenames = ['points_1.obj', 'points_2.obj', 'points_3.obj', 'points_4.obj']
-    pclouds = list()
-    ne_filenames = ['ne_1.obj', 'ne_2.obj', 'ne_3.obj', 'ne_4.obj']
-    ne_clouds = list()
+def vis_octree_data():
+    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{ os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
 
-    pcloud = formatter.load(paths.OCTREE_DATA_PATH + points_filenames[i])
-    pclouds.append(pcloud)
-    ne_cloud = formatter.load(paths.OCTREE_DATA_PATH + ne_filenames[i])
-    ne_clouds.append(ne_cloud)
+    lista = list()
+    for p in my_data:
+        lista.append(p.get_coordinates() * units.METERS_TO_RSOL)
+        
     sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
 
     pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(pclouds[0])
-    colors = list()
-    for ne_val in ne_clouds[0]:
-        color = ne_val
-        colors.append(np.array([color, color, color]))
-    colors = np.array(colors)
-    pcd.colors = o3d.utility.Vector3dVector(colors)
+    pcd.points = o3d.utility.Vector3dVector(lista)
+    pcd.paint_uniform_color([1, 0, 0])
 
     viewer = o3d.visualization.Visualizer()
     viewer.create_window()
     viewer.add_geometry(pcd)
+
     viewer.add_geometry(sphere)
     opt = viewer.get_render_option()
     opt.show_coordinate_frame = True
     opt.background_color = np.asarray([0.0, 0.2, 0.2])
     viewer.run()
     viewer.destroy_window()
-    del pcloud
-    del ne_cloud
-    del pcd
-    
+
 def vis_found_and_not_found(i):
     my_octree = Octree.load(paths.OCTREE_OBJECTS_PATH + "octree_" + str(i) + ".oct")
     my_data = formatter.load(paths.OCTREE_DATA_PATH + "octree_data_" + str(i) + ".obj")
@@ -136,3 +134,4 @@ def vis_found_and_not_found(i):
     opt.background_color = np.asarray([0.0, 0.2, 0.2])
     viewer.run()
     viewer.destroy_window()
+vis_octree_data()
