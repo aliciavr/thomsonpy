@@ -1,172 +1,94 @@
-import thomsonpy.config.paths as paths
-from thomsonpy.data_management.octree.octree import Data
-import pickle
-import numpy as np
+# -*- coding: utf-8 -*-
+"""
+.. module:: formatter
+        :platform: Unix
+        :synopsis: tools for manage data format, usage and storing 
+.. moduleauthor:: 
+"""
 
-def dump(filename, obj):
-    f = open(filename, "wb")
+import thomsonpy.config.paths as paths
+import thomsonpy.constants.units as units
+import thomsonpy.data_management.octree.octree as octr
+
+import pickle
+from pyhdf.SD import SD
+import numpy as np
+import time
+import os
+
+def dump(filepath, obj):
+    """
+    Auxiliar function for storing data.
+    
+    :param filepath: name for the file storing the data
+    :type filepath: string
+    :param obj: object containing the data that will be stored
+    :type obj: any 
+    """
+    f = open(filepath, "wb")
     pickle.dump(obj, f)
     f.close()
 
-def load(filename):
-    f = open(filename, "rb")
+def load(filepath):
+    """
+    Auxiliar function for loading stored data.
+    
+    :param filepath: name for the file storing the data
+    :type filepath: string
+
+    :return: the object stored in filepath
+    :rtype: any
+    """
+    f = open(filepath, "rb")
     obj = pickle.load(f)
     f.close()
     return obj
 
-def from_numpy_to_octree_data(xyz, ne):
-    """
-    Adapts the numpy data to the octree data format.
-    
-    Parameters
-    ----------
-    xyz : numpy.array[float, float, float]
-        Numpy array of points with data.
-    ne : float
-        Electronic density for each point stored at xyz in cm⁻³.
-
-    Returns
-    -------
-    data : list
-        List of data in octree data format.
-    """
-    progress = 0
-    total = ne.size
-    data = list()
-    for i, ne_val in enumerate(ne):
-        ne_val = ne_val * 1e6 # conversion to m⁻³.
-        d = Data(xyz[i], ne_val)
-        data.append(d)
-        
-        # progress...
-        if progress % 500000 == 0:
-            print(progress / total * 100, "%")
-        progress += 1
-        
-    return data
-
 def spherical_to_cartesian(r, theta, phi):
     """
-    Gets cartesian coordinates form spherical coordinates.
+    Gets cartesian coordinates from spherical coordinates.
 
-    Parameters
-    ----------
-    r : float
-        Radius of the spherical coordinates.
-    theta : float
-        Latitude: starting from the North [0 - PI].
-    phi : float
-        Longitude: Carrington Longitude [0 - 2PI].
+    :param r: radius of the spherical coordinates
+    :type r: float
+    :param theta: latitude, starting from the North [0 - PI]
+    :type theta: float
+    :param phi: longitude: Carrington Longitude [0 - 2PI]
+    :type phi: float
 
-    Returns
-    -------
-    x : float
-        x coordinate in cartesian coordinates.
-    y : float
-        y coordinate in cartesian coordinates.
-    z : float
-        z coordinate in cartesian coordinates.
-
+    :return: coordinates in the Cartesian Coordinate System
+    :rtype: numpy.ndarray[float, float, float]
     """
     x = r * np.sin(theta) * np.sin(phi) 
     y = r * np.cos(theta)
     z = r * np.sin(theta) * np.cos(phi)
     return np.array([x, y, z])
 
-def coords_system_change(coords, distance = 215):
+def apply_octree_data_format(r, theta, phi, ne_mas):
     """
-    Description
-    -------------
-    Changes the coordinate system between Sun Centre as System S and
-    Observer Point as System O:
-    From System S to System O  
-    Xo = Xs
-    Yo = Ys
-    Zo = 215RSol - Zs
-
-    From System O to System S
-    Xs = Xo
-    Ys = Yo
-    Zs = 215RSol - Zo
-
-    Parameters
-    -------------
-    coords: (float, float, float)
-        Coordinates to be changed in either both sytems.
-    distance: float
-        Distance to be translated (the system of units dependes on the 
-        user). It is set by default to 215 in RSun units, equivalent to a 1 AU.
-
-    Returns
-    -------------
-    new_coords: (float, float, float)
-        New coordinates according to the other system involved.
+    It gives the required data format by the octree structure.
+    
+    The original data is stored in hdf format in the Spherical Coordinates System
+    in mas units. The octree structure needs the data stored as a list of Data 
+    objects where each one stores its coordinates in the Cartesian Coordinates 
+    System and its physical magnitudes associated in the International System of 
+    Units. 
+    
+    :param r: radius coordinate of the Spherical Coordinates System in RSol
+    :type r: float
+    :param theta: theta coordinate of the Spherical Coordinates System in rad
+    :type theta: float
+    :param phi: phi coordinate of the Sherical Coordinates System in rad
+    :type phi: float
+    :param ne_mas: ne value for the given coordinates in MAS units.
+    :type ne_mas: float
+    
+    :return: a Data object with coordinates in the Cartesian Coordinates System and
+            with units in the International System of Units.
+    :rtype: :class:`thomsonpy.data_management.octree.octree.Data`
+    
     """
-
-    x, y, z = coords[0], coords[1], coords[2]
-    z = distance - z
-    new_coords = (x, y, z)
-    return new_coords
-
-def format_data():
-    # FORMATTING AND STORAGE
-    # Octree 1
-    points_1 = load(paths.OCTREE_DATA_PATH + "points_1.obj")
-    print("Loaded points for octree 1 from", paths.OCTREE_DATA_PATH + "points_1.obj")
-
-    ne_1 = load(paths.OCTREE_DATA_PATH + "ne_1.obj")
-    print("Loaded ne values for octree 1 from", paths.OCTREE_DATA_PATH + "ne_1.obj")
-
-    octree_data_1 = from_numpy_to_octree_data(points_1, ne_1)
-    dump(paths.OCTREE_DATA_PATH + "octree_data_1.obj", octree_data_1)
-    print("Stored data for octree 1 at", paths.OCTREE_DATA_PATH + "octree_data_1.obj")
-
-    del points_1
-    del ne_1
-    del octree_data_1
-
-    # Octree 2
-    points_2 = load(paths.OCTREE_DATA_PATH + "points_2.obj")
-    print("Loaded points for octree 2 from", paths.OCTREE_DATA_PATH + "points_2.obj")
-
-    ne_2 = load(paths.OCTREE_DATA_PATH + "ne_2.obj")
-    print("Loaded ne values for octree 2 from", paths.OCTREE_DATA_PATH + "ne_2.obj")
-
-    octree_data_2 = from_numpy_to_octree_data(points_2, ne_2)
-    dump(paths.OCTREE_DATA_PATH + "octree_data_2.obj", octree_data_2)
-    print("Stored data for octree 2 at", paths.OCTREE_DATA_PATH + "octree_data_2.obj")
-
-    del points_2
-    del ne_2
-    del octree_data_2
-    
-    # Octree 3
-    points_3 = load(paths.OCTREE_DATA_PATH + "points_3.obj")
-    print("Loaded points for octree 3 from", paths.OCTREE_DATA_PATH + "points_3.obj")
-
-    ne_3 = load(paths.OCTREE_DATA_PATH + "ne_3.obj")
-    print("Loaded ne values for octree 3 from", paths.OCTREE_DATA_PATH + "ne_3.obj")
-
-    octree_data_3 = from_numpy_to_octree_data(points_3, ne_3)
-    dump(paths.OCTREE_DATA_PATH + "octree_data_3.obj", octree_data_3)
-    print("Stored data for octree 3 at", paths.OCTREE_DATA_PATH + "octree_data_3.obj")
-
-    del points_3
-    del ne_3
-    del octree_data_3
-    
-    # Octree 4
-    points_4 = load(paths.OCTREE_DATA_PATH + "points_4.obj")
-    print("Loaded points for octree 4 from", paths.OCTREE_DATA_PATH + "points_4.obj")
-
-    ne_4 = load(paths.OCTREE_DATA_PATH + "ne_4.obj")
-    print("Loaded ne values for octree 4 from", paths.OCTREE_DATA_PATH + "ne_4.obj")
-
-    octree_data_4 = from_numpy_to_octree_data(points_4, ne_4)
-    dump(paths.OCTREE_DATA_PATH + "octree_data_4.obj", octree_data_4)
-    print("Stored data for octree 4 at", paths.OCTREE_DATA_PATH + "octree_data_4.obj")
-
-    del points_4
-    del ne_4
-    del octree_data_4
+    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS # From RSol to m
+    ne = ne_mas * units.NE_MAS_FACTOR # From MAS to m⁻³.
+    data = octr.Data(coords, ne)
+    return data
     
