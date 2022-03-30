@@ -19,9 +19,9 @@ Image parameters.
 
 All parameters are in the International System of Units.
 """
-MAX_VIS_R = 1.9223684 * units.RSOL_TO_METERS # m
-MAX_COORD = np.sqrt(MAX_VIS_R**2 / 2) 
-MIN_COORD = -np.sqrt(MAX_VIS_R**2 / 2)
+MAX_VIS_R = 3 * units.RSOL_TO_METERS # m
+MAX_COORD = MAX_VIS_R 
+MIN_COORD = -MAX_VIS_R
 IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
 IMAGE_MIN = np.array([MIN_COORD, MIN_COORD])
 IMAGE_RESOLUTION = 10000000 #  (10000 km)

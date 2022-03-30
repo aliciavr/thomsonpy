@@ -11,7 +11,7 @@ X = 1 * units.AU_TO_METERS # Distance between the Observer (Earth) and the Sun: 
 EPSILON = (radians(10)) # Elongation in rad.
 SOLAR_RADIUS = units.RSOL_TO_METERS # m
 
-INI_Z = 213 * units.RSOL_TO_METERS # m
-FIN_Z = 217 * units.RSOL_TO_METERS # m
+INI_Z = 212 * units.RSOL_TO_METERS # m
+FIN_Z = 218 * units.RSOL_TO_METERS # m
 INCR_Z = 0.05 * units.RSOL_TO_METERS # m
 NUM_Z = (FIN_Z - INI_Z) / INCR_Z
