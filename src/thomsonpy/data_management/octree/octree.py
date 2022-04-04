@@ -97,13 +97,13 @@ class Node:
                 self.__create_children()
                 for p in self.__data:
                     for c in self.__children:
-                        if c.contains(p):
+                        if c.contains(p.get_coordinates()):
                             c.add(p)
                 self.__data.clear()
         else: # If it has children
             for c in self.__children:
                 # Searchs in each node containing this data
-                if c.contains(data):
+                if c.contains(data.get_coordinates()):
                     c.add(data)
 
     def search(self, p):
