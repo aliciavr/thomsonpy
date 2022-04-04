@@ -36,7 +36,7 @@ import numpy as np
 import thomsonpy.constants.universal_constants as uc
 from thomsonpy.constants.units import *
 import thomsonpy.config.thomson_scattering_params as tsp
-import thomsonpy.ne.ne_models as ne
+import thomsonpy.thomson_scattering.ne_models as ne
 RSOL = RSOL_TO_METERS
 
 """####Constantes"""

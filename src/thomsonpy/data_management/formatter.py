@@ -19,7 +19,7 @@ import os
 def dump(filepath, obj):
     """
     Auxiliar function for storing data.
-    
+
     :param filepath: name for the file storing the data
     :type filepath: string
     :param obj: object containing the data that will be stored

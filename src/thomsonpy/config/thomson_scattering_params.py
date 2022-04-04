@@ -13,5 +13,5 @@ SOLAR_RADIUS = units.RSOL_TO_METERS # m
 
 INI_Z = 212 * units.RSOL_TO_METERS # m
 FIN_Z = 218 * units.RSOL_TO_METERS # m
-INCR_Z = 0.05 * units.RSOL_TO_METERS # m
+INCR_Z = 0.5 * units.RSOL_TO_METERS # m
 NUM_Z = (FIN_Z - INI_Z) / INCR_Z

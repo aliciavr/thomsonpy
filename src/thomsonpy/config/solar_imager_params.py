@@ -21,7 +21,7 @@ All parameters are in the International System of Units.
 """
 MAX_VIS_R = 3 * units.RSOL_TO_METERS # m
 MAX_COORD = MAX_VIS_R 
-MIN_COORD = -MAX_VIS_R
+MIN_COORD = 0
 IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
 IMAGE_MIN = np.array([MIN_COORD, MIN_COORD])
 IMAGE_RESOLUTION = 10000000 #  (10000 km)

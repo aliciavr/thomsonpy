@@ -1,4 +1,5 @@
 import numpy as np
+import thomsonpy.constants.units as units
 
 # Maximum deep level of the octree.
 MAX_LEVEL = 8
