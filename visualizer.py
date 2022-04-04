@@ -110,13 +110,14 @@ def vis_found_and_not_found(i):
         fin_time = time.perf_counter()
         time_nearest = fin_time - ini_time
         times.append(time_nearest)
+        print(time_nearest)
         if node.get_coordinates() is None:
             not_found += 1
             listaNOTFOUND.append(coord)
         else:
             found += 1
             listaFOUND.append(coord)
-        if count % 100000 == 0:
+        if count % 1000 == 0:
             print(count / length * 100)
             print("FOUND =", found)
             print("NOT FOUND =", not_found)
@@ -166,8 +167,8 @@ def vis_found_and_not_found_multicore(i):
     found = 0
     not_found = 0
     
-    print("Starting")
     for p in my_data:
+        print("Starting")
         coord = p.get_coordinates()
         ini_time = time.perf_counter()
         node = my_octree.search_nearest(coord)
@@ -181,7 +182,7 @@ def vis_found_and_not_found_multicore(i):
         else:
             found += 1
             listaFOUND.append(coord)
-        if count % 1000 == 0:
+        if count % 100000 == 0:
             print(count / length * 100)
             print("FOUND =", found)
             print("NOT FOUND =", not_found)
