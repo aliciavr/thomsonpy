@@ -6,4 +6,6 @@ aux_notebooks_code/
 */__pycache__/*
 *.pyc
 *.obj
+docs/build/
+docs/sources/_templates/
 
