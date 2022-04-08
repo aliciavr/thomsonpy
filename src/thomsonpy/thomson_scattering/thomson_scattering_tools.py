@@ -19,22 +19,22 @@ RSOL = RSOL_TO_METERS
 class ThomsonGeometry:
 
     def __init__(self, sun_center, observer, target, radius):
-        '''
-        Creates a ThomsonGeometry object, which stores and maintains the fundamental
+        """
+        It creates a ThomsonGeometry object, which stores and maintains the fundamental
         magnitudes of the Thomson scattering geometry.
 
         :param sun_center: Center of the Sun (S) in coordinates of the Obsever Reference 
-                  System.
+                            System.
         :type sun_center: numpy.ndarray([float, float, float])
         :param target: Scattering Point (Q) in coordinates of the Obsever Reference 
-                  System.
+                          System.
         :type target: numpy.ndarray([float, float, float])
         :param radius: solar radius. 
         :type radius: float
 
         :return: an object with a coherent geometry according to the Thomson scattering.
         :rtype: thomsonpy.thomson_scattering.ThomsonGeometry
-        '''
+        """
         # Zero margin value for floating and double comparisons.
         self.__zero = 1E-3
 
@@ -69,7 +69,7 @@ class ThomsonGeometry:
         A brief description of a ThomsonGeometry object.
         
         :return: a brief description.
-        :rtype: string.
+        :rtype: string
         """
         return 'Radius = {}\nObserver = {}\nSun Center at {}\nOQ = {}\nOS = {}\nSQ = {}\nelongation = {}º\ndirection = {}'.format(self.__radius, self.__observer, self.__sun_center, self.__OQ_dist, self.__OS_dist, self.__SQ_dist, degrees(self.__elongation), self.__direction)
       
@@ -78,280 +78,272 @@ class ThomsonGeometry:
       
     def get_target(self, s):
         """
-        Description
-        -----------
-        Computes the target of Thomson scattering (a.k.a. real-time scattering 
-        point) with the parameter s.
-
-        Parameters
-        -----------
-        s: parameter of the segment.
-
-        Returns
-        -----------
-        (x, y, z) as a target for Thomson scattering.
+        Computes the target :math:`\\vec{t}` of Thomson scattering 
+        (a.k.a. real-time scattering point) from a pre-computed unitary
+        direction :math:`\\vec{d}_u` with the given parameter s.
+        
+        .. math::
+            \\vec{t} = \\vec{o} + s \\vec{d}_u
+        
+        :param s: parameter of the segment.
+        :type s: float
+        
+        :return: a target :math:`\\vec{t}` for Thomson scattering.
+        :rtype: np.ndarray([float, float, float])
         """
         target = self.__observer + s * self.__direction
         return target
 
     def get_radius(self):
         """
-        Description
-        -----------
-        Gets the radius of the star.
+        It gets the radius of the star.
 
-        Returns
-        -----------
-        Radius of the star.
+        :return: radius of the Sun.
+        :rtype: float
         """
         return self.__radius
 
     def get_distance_OS(self):
         """
-        Description
-        -----------
-        Gets the distance between the Observer (O) and the Center of the Sun (S).
-
-        Returns
-        -----------
-        Distance OS.
+        It gets the distance between the Observer (O) and the Center of the Sun (S).
+        
+        :return: distance OS.
+        :rtype: float
         """
         return self.__OS_dist
 
     def get_distance_OQ(self):
         """
-        Description
-        -----------
-        Gets the distance between the Observer (O) and the Scattering Point (Q).
+        It gets the distance between the Observer (O) and the Scattering Point (Q).
 
-        Returns
-        -----------
-        Distance OQ.
+        :return: distance OQ.
+        :rtype: float
         """
         return self.__OQ_dist
 
     def get_distance_SQ(self):
         """
-        Description
-        -----------
-        Gets the distance between the Center of the Sun (S) and the Scattering Point (Q).
+        It gets the distance between the Center of the Sun (S) and the Scattering Point (Q).
 
-        Returns
-        -----------
-        Distance SQ.
+        :return: distance SQ.
+        :rtype: float
         """
         return self.__SQ_dist    
 
     def get_elongation(self):
-        return self.__elongation
+        """
+        It gets the elongation angle, :math:`\epsilon`, between the distance OS and 
+        the distance OQ.
 
-    # Primera parte: para un solo electrón.
+        :return: elongation (rad).
+        :rtype: float
+        """
+        return self.__elongation
 
     @staticmethod
     def faux_omega_d(d):
-        '''
-        Devuelve un valor para el ángulo omega (T-Q-S) en radianes (rad) en función de
-        la distancia, d, del centro de la estrella, S, al punto de dispersión, Q.
-
-        En el caso de que se emplee el radio estelar como unidad, por defecto, r = 1.
-
-        Función auxiliar de la geometría de la dispersión de Thomson.
-
-        Parámetros
-        ----------
-        d: distancia entre el centro de la estrella, S, y el punto de dispersión, Q.
-        r: radio de la estrella. 
-
-        Devuelve
-        ----------
-        Valor del ángulo omega en radianes (rad).
+        """
+        It gets a value for the omega angle between the distance QS and the distance
+        QT as a function of the distance d and the radius of the Sun.
         
-        .. math: sin(RSOL / d)
-             :label: omega_d
-         This is an example for :math:numref:`omega_d`.
+        .. math::
+            \Omega = \\arcsin{\\frac{RSol}{d}}
+
+        :param d: distance QS (distance d).
+        :type d: float
         
-        '''
+        :return: angle omega (rad).
+        :rtype: float
+        """
         return asin(tsp.SOLAR_RADIUS / d) 
 
     @staticmethod
     def faux_z_intensidad(x, d, chi):
-        '''
-        Devuelve el valor de la distancia, z, del observador, O, al punto de 
-        dispersión, Q, en función del ángulo de dispersión (S-Q-O) y de la distancia, 
-        d, del punto de dispersión (Q) al centro de la estrella (S).
+        """
+        It gets a value for the distance OQ (z) as a function of the distance OS (x),
+        the distance QS (d) and the scattering angle (S-Q-O).
 
-        Función auxiliar de la geometría de la dispersión de Thomson.
+        .. math::
+            z = d \cos{\chi} + \sqrt{d^2(\cos{\chi} - 1)^2 + x^2}
+        
+        :param x: distance OS.
+        :type x: float
+        :param d: distance QS.
+        :type d: float
+        :param chi: scattering angle (rad) between distance OQ and distance QS.
+        :type chi: float
+        
+        :return: distance OQ.
+        :rtype: float
 
-        Parámetros
-        ----------
-        x: distancia del observador (O) al centro de la estrella (S).
-        d: distancia del punto de dispersión (Q) al centro de la estrella (S).
-        chi: ángulo de dispersión (S-Q-O) en radianes (rad).
-
-        Devuelve
-        ----------
-        Valor de la distancia, z, del observador, O, al centro de la estrella, S.
-        '''
+        """
 
         return d * cos(chi) + sqrt(pow(d, 2) * (pow(cos(chi), 2) - 1) + pow(x, 2))
 
-    # Segunda parte: a través de la línea del observador.
-
     @staticmethod
     def faux_chi(x, z, epsilon):
-        '''
-        Devuelve un valor para la distancia, d, entre el Sol, S, y el punto de
-        dispersión, Q, en función de la distancia, z, desde el observador, O, y el
-        punto de dispersión, Q, y del ángulo de la elongación, epsilon.
+        """
+        It gets a value for the scattering angle, S-Q-O (rad) as a function of
+        the distance OS (x), the distance OQ (z) and the elongation angle (:math:`\epsilon`), 
+        S-Q-O.
+        
+        Distance QS (d) is needed for the computations, and therefore obtained from the function
+        ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x, z, epsilon)``
+        
+        .. math::
+            \chi = \\arcsin{\\frac{x \sin{\epsilon}}{d}} \quad where \quad 
+            d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}
 
-        Función auxiliar de la geometría de la dispersión de Thomson.
-
-        Parámetros
-        ----------
-        x: distancia del observador (O) al centro de la estrella (S).
-        z: distancia entre el observador, O, y el punto de dispersión, Q.
-        epsilon: ángulo de la elongación (S-Q-O) en radianes (rad).
-
-        Devuelve
-        ----------
-        Valor de la distancia, d.
-        '''
+        :param x: distance OS.
+        :type x: float
+        :param z: distance OQ.
+        :type z: float
+        :param epsilon: elongation angle, Q-O-S (rad).
+        :type epsilon: float
+        
+        :return: scattering angle, S-Q-O (rad).
+        :rtype: float
+        """
 
         return np.arcsin(x * np.sin(epsilon) / ThomsonGeometry.faux_d(x, z, epsilon))
 
-    
     @staticmethod
     def faux_d(x, z, epsilon):
-        '''
-        Devuelve un valor para la distancia, d, entre el Sol, S, y el punto de
-        dispersión, Q, en función de la distancia, z, desde el observador, O, y el
-        punto de dispersión, Q, y del ángulo de la elongación, epsilon.
-
-        Función auxiliar de la geometría de la dispersión de Thomson.
-
-        Parámetros
-        ----------
-        x: distancia del observador (O) al centro de la estrella (S).
-        z: distancia entre el observador, O, y el punto de dispersión, Q.
-        epsilon: ángulo de la elongación (S-Q-O) en radianes (rad).
-
-        Devuelve
-        ----------
-        Valor de la distancia, d.
-        '''
+        """
+        It gets a value for the distance QS (d) as a function of the distance OS (x),
+        the distance OQ (z) and the elongation angle, :math:`\epsilon` (Q-O-S).
+        
+        .. math::
+            d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}
+            
+        :param x: distance OS.
+        :type x: float
+        :param z: distance OQ.
+        :type z: float
+        :param epsilon: elongation angle, Q-O-S (rad).
+        :type epsilon: float
+        
+        :return: distance QS (d).
+        :rtype: float
+        """
 
         return pow(pow(x, 2) + pow(z, 2) - 2 * x * z * cos(epsilon), 0.5)
 
     @staticmethod
     def faux_omega(x, z, epsilon):
-        '''
-        Devuelve un valor para el ángulo omega (T-Q-S) en radianes (rad) en función de
-        la distancia, z, del observador, O, al punto de dispersión, Q, y del ángulo de
-        la elongación, epsilon.
-
-        En el caso de que se emplee el radio estelar como unidad, por defecto, r = 1.
-
-        Función auxiliar de la geometría de la dispersión de Thomson.
-
-        Parámetros
-        ----------
-        x: distancia del observador (O) al centro de la estrella (S).
-        z: distancia entre el observador, O, y el punto de dispersión, Q.
-        epsilon: ángulo de la elongación (S-Q-O) en radianes (rad).
-        r: radio de la estrella.
-
-        Devuelve
-        ----------
-        Valor del ángulo omega en radianes (rad).
-
-        Véase
-        ----------
-        faux_d: función auxiliar que obtiene la distancia d en función de 
-        la distancia z y el ángulo epsilon.
-        faux_omega_d: función auxiliar que obtiene el ángulo omega en función de la
-        distancia d.
-        '''
+        """
+        It gets the angle :math:`\Omega` (T-Q-S) as a function of the distance OS (x),
+        the distance OQ (z) and the elongation angle, :math:`\epsilon` (Q-O-S).
+        
+        Functions ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x, z, epsilon)``
+        and ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega_d(d)`` are used
+        in the computations to obtain d and :math:`\Omega`.
+        
+        .. math::
+            \Omega = \\arcsin{\\frac{RSol}{d}} \quad \quad \quad \quad
+            where \quad d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}
+        
+        :param x: distance OS.
+        :type x: float
+        :param z: distance OQ.
+        :type z: float
+        :param epsilon: elongation angle, Q-O-S (rad).
+        :type epsilon: float
+        
+        :return: angle :math:`\Omega`, T-Q-S (rad).
+        :rtype: float
+        """
 
         return ThomsonGeometry.faux_omega_d(ThomsonGeometry.faux_d(x, z, epsilon))
 
     @staticmethod
     def faux_z(x, epsilon, phi):
-        '''
-        Devuelve el valor de la distancia, z, del observador, O, al punto de 
-        dispersión, Q, en función del ángulo de la elongación (Q-O-S), epsilon, y del
-        ángulo phi (O-S-Q).
+        """
+        Gets a value for the distance OQ (z) as a function of the distance OS (x),
+        the elongation angle :math:`\epsilon`, and angle :math:`\phi` (O-S-Q).
 
-        Función auxiliar de la geometría de la dispersión de Thomson.
-
-        Parámetros
-        ----------
-        x: distancia del observador (O) al centro de la estrella (S).
-        epsilon: ángulo de la elongación (Q-O-S) en radianes (rad).
-        phi: ángulo O-S-Q en radianes (rad).
-
-        Devuelve
-        ----------
-        Valor de la distancia, z, del observador, O, al centro del Sol, S, en radios
-        solares (Rsol).
-        '''
+        .. math::
+            z = \\frac{(x \\tan \phi)}{(\sin{\epsilon} + \\tan(\phi) \cos{\epsilon})}
+        
+        :param x: distance OS.
+        :type x: float
+        :param epsilon: scattering angle (rad).
+        :type epsilon: float
+        :param phi: angle O-S-Q (rad).
+        :type phi: float
+        
+        :return: distance OQ.
+        :rtype: float
+        """
 
         return (x * tan(phi)) / (sin(epsilon) + tan(phi) * cos(epsilon))
 
 """####**Ley de desplazamiento de Wien**"""
 
-def ley_wien(onda):
-    return 2.8978E-3 / onda
+def ley_wien(temperature):
+    """
+    Given a value for temperature it gives the value of the wavelength with 
+    the maximum black body emission.
+    
+    .. math::
+        \lambda_{max} = \\frac{2.8978E-3}{T}
+    
+    :param temperature: temperature of the black body.
+    :type temperature: float
+    
+    :return: the wavelength value with the maximum black body emission.
+    :rtype: float
+    """
+    
+    return 2.8978E-3 / temperature
 
-"""####**Ley de Planck:** radiación de cuerpo negro
+def radiacion_planck(temperature, wave, is_wavelength = True):
+    """
+    It computes the Planck's law for the black body radiation. 
+    
+    Two versions of this law are implemented:
+    
+    * The one based on the wavelength:
+        .. math::
+            I_\lambda = \\frac{2 h c^2}{\lambda^5}\\frac{1}{e^{\\frac{hc}{\lambda k T}} - 1}
+    * The one based on the frequency:
+        .. math::
+            I_\\nu = \\frac{2 h \\nu^3}{c^2}\\frac{1}{e^{\\frac{h \\nu}{k T}}-1}
+            
+    Where:
+    
+    * :math:`h = 6.62607015·10^{-34} J·s` Planck's constant.  
+    * :math:`\lambda` is the wavelength of the wave.
+    * :math:`\\nu` is the frequency of the wave.
+    * :math:`k = 1.38·10^{-23}J·K^{-1}` Boltzmann's constant.
+    * :math:`c = 3·10^8m·s^{-1}` is speed of light.
+    * :math:`T = 5778 K` is temperature of the black body (in this case the Sun).
+        
+    
+    :param temperature: temperature of the black body, in this case, of the Sun.
+    :type temperature: float
+    
+    :param wave: property of the wave (it can be the wavelength :math:`\lambda` or the frequency :math:`\\nu`) defined by the parameter ``is_wavelength``.
+    :type wave: float
+    
+    :param is_wavelength: ``True`` if the parameter ``wave`` represents the wavelength :math:`\lambda` of the wave, ``False`` if the parameter ``wave`` represents the frequency :math:`\\nu` of the wave. The default value is ``True``.
+    :type is_wavelength: boolean
+    
+    :return: radiation of the black body as a function of the wavelength :math:`I_\lambda` or as a function of the frequency :math:`I_\\nu`.
+    :rtype: float
 
-En función de la **frecuencia**, $\nu$:
-$$I_\nu = \frac{2 h \nu^3}{c^2}\frac{1}{e^{\frac{h \nu}{k T}}-1}$$
-
-En función de la **longitud de onda**, $\lambda$:
-$$I_\lambda = \frac{2 h c^2}{\lambda^5}\frac{1}{e^{\frac{hc}{\lambda k T}} - 1}$$
-Donde:
-
-
-* $h = 6.62607015·10^{-34} J·s$ es la constante de Planck.  
-* $\nu $ es la frecuencia de la longitud de onda.
-* $k = 1.38·10^{-23}J·K^{-1}$ es la constante de Boltzmann.
-* $c = 3·10^8m·s^{-1}$ es la velocidad de la luz.
-* $T = 5778 K$ es la temperatura (en este caso del Sol).
-
-
-"""
-
-def radiacion_planck(T, onda, es_long_onda = True):
-    '''
-    Ley de radiación de Planck para el cuerpo negro. Contempla las dos 
-    expresiones, en función de la longitud de onda o en función de la frecuencia
-    de la onda.
-
-    Parámetros
-    -----------
-    T: temperatura efectiva del cuerpo negro.
-    onda: longitud de onda en metros.
-    es_long_onda: True si el valor del parámetro 'onda' se corresponde con la
-    longitud de onda, False si no, y, por tanto, se corresponde con la frecuencia
-    de la onda.
-
-    Devuelve
-    -----------
-    La intensidad de radiancia del cuerpo negro en unidades (SI)
-    '''
-
-    if (es_long_onda):
+    """
+    i0 = 0
+    if (is_wavelength):
         # Ley de Planck en función de la longitud de onda.
-        i0 = (2 * uc.h * uc.c**2) / (onda**5 * (exp((uc.h * uc.c) / (onda * uc.k * T)) - 1))
+        i0 = (2 * uc.h * uc.c**2) / (wave**5 * (exp((uc.h * uc.c) / (wave * uc.k * temperature)) - 1))
     else:
         # Ley de Planck en función de la frecuencia de la onda.
-        i0 = (2 * uc.h * onda**3) / (uc.c**2 * (np.exp((uc.h * onda) / (uc.k * T)) - 1))
+        i0 = (2 * uc.h * wave**3) / (uc.c**2 * (np.exp((uc.h * wave) / (uc.k * temperature)) - 1))
 
     return i0
 
-"""####Función de limb-darkening"""
-
-def allen_clv(wave,theta,check = 0):
+def __allen_clv(wave,theta,check = 0):
 
     """
     Allen's Astrophysical Quantities, Springer, 2000 
@@ -383,34 +375,27 @@ def allen_clv(wave,theta,check = 0):
         return u + v
     return 1 - u - v + u*np.cos(theta)+v*np.cos(theta),u,v,u + v
 
-def coef_limb_darkening(onda, unidades = 1E+10):
-    '''
-    Adaptación de la función allen_clv al parámetro necesario para la dispersión
-    de Thomson, el coeficiente de limb-darkening (u).
+def coef_limb_darkening(wavelength, units = 1E+10):
+    """
+    Adaptation from the private function ``__allen_clv`` to obtain the coefficient
+    of limb-darkening :math:`u` needed for the Thomson scattering computations.
+    
+    The ``__allen_clv`` is a function based at the Allen tables (Astrophysical Quantities, 
+    Springer 2000) an implemented in the SPG (IAA - CSIC) repositories.
 
-    Parámetros
-    -------------
-    onda: longitud de onda en metros (m).
-    unidades: factor de conversión necesario para que la longitud de onda se
-    transforme a Ángstroms. Por defecto asume que el parámetro onda
-    se da en unidades SI y, por tanto, multiplica por el factor 1E+10 para obtener
-    Ángstroms.
+    :param wavelength: wavelength in I.S. units (meters).
+    :type wavelength: float
+    :param units: unit conversion factor, by default :math:`1E+10`, the one used to convert from meters to Ángstroms. Ángstroms are the unit used in ``__allev_clv`` function. If the parameter ``wavelength`` is not in I.S. units, a new value should be given.
+    :type units: float 
+    
+    :return: coefficient of limb-darkening :math:`u`.
+    :rtype: float
+    """
+    
+    wavelength = wavelength * units
+    return __allen_clv(wavelength, 1, 2)
 
-    Véase
-    ----------
-    allen_clv: función basada en las tablas de Allen (Astrophysical Quantities, 
-    Springer 2000) de SPG (IAA - CSIC).
-
-    Devuelve
-    ----------
-    El coeficiente de limb-darkening (u).
-    '''
-    onda = onda * unidades
-    return allen_clv(onda, 1, 2)
-
-"""####Parámetros iniciales"""
-
-def print_params_state(RSOL, SIGMAe, ONDA, T, I0, U, X, EPSILON):
+def __print_params_state(RSOL, SIGMAe, ONDA, T, I0, U, X, EPSILON):
     print("RSOL =", RSOL, "m")
     print("SIGMAe =", SIGMAe, "m²sr⁻¹") # sección eficaz de un electrón, e, (m²sr⁻¹)
     print("ONDA =", ONDA, "m") # Longitud de onda en estudio, en metros (5000A)
@@ -420,44 +405,35 @@ def print_params_state(RSOL, SIGMAe, ONDA, T, I0, U, X, EPSILON):
     print("X =", X, "RSOL") # RSol, distancia entre la Tierra y el Sol (O-S).
     print("EPSILON =", EPSILON, "rad")
 
-"""### 1.2. Funciones auxiliares ligadas a la geometría de la dispersión de Thomson
-
-## **2. Dispersión de Thomson para un único electrón**
-
-###2.1. Obtención de los **coeficientes de van de Hulst**
-
-Coeficiente **A** de van de Hulst:
-"""
-
 def vanDeHulstA(omega):
-    '''
-    Coeficiente A de van de Hulst en función del ángulo omega.
+    """
+    It gets the coefficient A of van de Hulst as a function of the angle :math:`\Omega`.
+    
+    .. math::
+        A = \cos{\Omega} \sin^2{\Omega}
+    
+    :param omega: angle :math:`\Omega`, T-Q-S (rad).
+    :type omega: float
 
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S en radianes (rad).
-
-    Devuelve
-    ---------
-    Valor del coeficiente A de van de Hulst.
-    '''
+    :return: Coefficient A of van de Hulst.
+    :rtype: float
+    """
 
     return cos(omega) * pow(sin(omega), 2)
 
-"""Coeficiente **B** de van de Hulst:"""
-
 def vanDeHulstB(omega):
-    '''
-    Coeficiente B de van de Hulst en función del ángulo omega.
+    """
+    It gets the coefficient B of van de Hulst as a function of the angle :math:`\Omega`.
+    
+    .. math::
+        B = -\\frac{1}{8} \left(1 - 3 \sin^2{\Omega} - \\frac{\cos^2{\Omega}}{\sin{\Omega}} (1 + 3 \sin^2{\Omega}) \log{\left(\\frac{1 + \sin{\Omega}}{\cos{\Omega}}\\right)}\\right)
+    
+    :param omega: angle :math:`\Omega`, T-Q-S (rad).
+    :type omega: float
 
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S en radianes (rad).
-
-    Devuelve
-    ---------
-    Valor del coeficiente B de van de Hulst.
-    '''
+    :return: Coefficient B of van de Hulst.
+    :rtype: float
+    """
 
     return -1 / 8 * (1 - 3 * pow(sin(omega), 2) - (pow(cos(omega), 2) / sin(omega)
     * (1 + 3 * pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega))))
@@ -465,124 +441,131 @@ def vanDeHulstB(omega):
 """Coeficiente **C** de van de Hulst"""
 
 def vanDeHulstC(omega):
-    '''
-    Coeficiente C de van de Hulst en función del ángulo omega.
+    """
+    It gets the coefficient C of van de Hulst as a function of the angle :math:`\Omega`.
+    
+    .. math::
+        C = \\frac{4}{3} - \cos{\Omega} - \\frac{\cos^3{\Omega}}{3}
+    
+    :param omega: angle :math:`\Omega`, T-Q-S (rad).
+    :type omega: float
 
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S en radianes (rad).
-
-    Devuelve
-    ---------
-    Valor del coeficiente C de van de Hulst.
-    '''
+    :return: Coefficient C of van de Hulst.
+    :rtype: float
+    """
 
     return 4 / 3 - cos(omega) - pow(cos(omega), 3) / 3
 
 """Coeficiente **D** de van de Hulst:"""
 
 def vanDeHulstD(omega):
-    '''
-    Coeficiente D de van de Hulst en función del ángulo omega.
+    """
+    It gets the coefficient D of van de Hulst as a function of the angle :math:`\Omega`.
+    
+    .. math::
+        D = \\frac{1}{8}  \left(5 + \sin^2{\Omega} - \\frac{\cos^2{\Omega}}{\sin{\Omega}} (5 - \sin^2{\Omega}) \log{\left(\\frac{1 + \sin{\Omega}}{\cos{\Omega}}\\right)}\\right)
+                  
+    :param omega: angle :math:`\Omega`, T-Q-S (rad).
+    :type omega: float
 
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S en radianes (rad).
-
-    Devuelve
-    ---------
-    Valor del coeficiente D de van de Hulst.
-    '''
+    :return: Coefficient D of van de Hulst.
+    :rtype: float
+    """
 
     return 1 / 8 * (5 + pow(sin(omega), 2) - (pow(cos(omega), 2) / sin(omega)) * 
                   (5 - pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega)))
 
-def vanDeHulst(omega, coeficiente):
-    '''
-    Dado un valor para el ángulo omega, y el nombre de uno de los coeficientes
-    de van de Hulst, devuelve su valor. Acepta el nombre tanto en minúsculas como
-    en mayúsculas.
+def vanDeHulst(omega, coefficient):
+    """
+    It computes any of the four coefficients of van de Hulst given a value for the
+    angle :math:`\Omega` (T-Q-S).
+    
+    The name of the coefficients can be either in uppercase or lowercase.
+    
+    :param omega: angle :math:`\Omega`, T-Q-S (rad).
+    :type omega: float
+    
+    :param coefficient: name of the coefficient of van de Hulst (in uppercase or lowercase).
+    :type coefficient: string
+    
+    :return: the value of the asked coefficient.
+    :rtype: float
+    """
 
-    Parámetros
-    -----------
-    omega: ángulo S-Q-T en radianes (rad).
-    coeficiente: nombre del coeficiente de van de Hulst pedido.
+    coefficient = coefficient.upper()
 
-    Devuelve
-    ---------
-    Valor del coeficiente de van de Hulst pasado como atributo.
-    '''
-
-    coeficiente = coeficiente.upper()
-
-    # Coeficientes de van de Hulst en función del ángulo omega (T-Q-S).
-    valorCoeficiente = -1
+    # Coefficients of van de Hulst as a function of angle omega (T-Q-S).
+    coeff_value = -1
     if coeficiente == 'A':
-        # Coeficiente A.
-        valorCoeficiente = vanDeHulstA(omega)
+        # Coefficient A.
+        coeff_value = vanDeHulstA(omega)
     elif coeficiente == 'B':
-        # Coeficiente B.
-        valorCoeficiente = vanDeHulstB(omega)
+        # Coefficient B.
+        coeff_value = vanDeHulstB(omega)
     elif coeficiente == 'C':
-        # Coeficiente C.
-        valorCoeficiente = vanDeHulstC(omega)
+        # Coefficient C.
+        coeff_value = vanDeHulstC(omega)
     elif coeficiente == 'D':
-        # Coeficiente D.
-        valorCoeficiente = vanDeHulstD(omega)
+        # Coefficient D.
+        coeff_value = vanDeHulstD(omega)
     else:
-        # Notifica al usuario de que ha introducido un nombre no válido para los
-        # coeficientes de van de Hulst.
+        # Not valid value for coefficient of van de Hulst.
         print("[vanDeHulstDistanciaSol_ERR]::Coeficiente no válido.")
-    return valorCoeficiente
-
-"""### 2.2. Obtención de las **intensidades**
-
-Intensidad **polarizada** (**Ip**)
-"""
+    return coeff_value
 
 def Ip(i0, sigma_e, z, omega, chi, u):
-    '''
-    Dada una intensidad inicial, I0, la sección eficaz del electrón, sigma_e, la 
-    distancia, z, del observador, O, al punto de dispersión, Q, el ángulo omega 
-    (T-Q-S), el ángulo chi (S-Q-O) y el coeficiente de limb-darkening, u, devuelve
-    la intensidad polarizada.
-
-    Parámetros
-    -----------
-    i0: intensidad inicial en [ver unidades].
-    sigma_e: sección eficaz del electrón (m²sr-¹).
-    z: distancia del observador, O, al punto de dispersión Q.
-    omega: ángulo T-Q-S en radianes (rad).
-    chi: ángulo de dispersión (S-Q-O) en radianes (rad).
-    u: coeficiente de limb-darkening en [0, 1].
-
-    Devuelve
-    ---------
-    Valor de la intensidad polarizada.
-    '''
+    """
+    It computes the polarized intensity :math:`I_P` as a function of the initial intensity :math:`I_0`, 
+    given by the Planck's law, the cross section for perpendicular Thomson scattering :math:`\sigma_e`, 
+    the distance OQ (z), the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
+    (S-Q-O) and the coefficient of limb-darkening :math:`u`.
+        
+    .. math::
+        I_P = I_0 \\frac{\pi \sigma_e}{2 z^2} \sin^2{\chi} ((1-u) A + u B)
+    
+    :param i0: initial intensity, given by the Planck's law.
+    :type i0: float
+    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :type sigma_e: float
+    :param z: distance OQ.
+    :type z: float
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    
+    :return: polarized intensity :math:`I_P`.
+    :rtype: float
+    """
+    
     return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * pow(sin(chi), 2) * ((1 - u) 
     * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
 
-"""Intensidad **tangencial** (**It**)"""
-
 def It(i0, sigma_e, z, omega, u):
     '''
-    Dada una intensidad inicial, I0, la sección eficaz del electrón, sigma_e, la 
-    distancia, z, del observador, O, al punto de dispersión, Q, el ángulo 
-    omega (T-Q-S) y el coeficiente de limb-darkening, u, devuelve la intensidad 
-    tangencial.
+    It computes the tangencial intensity :math:`I_T` as a function of the initial intensity
+    :math:`I_0`, given by the Planck's law, the cross section for perpendicular Thomson
+    scattering :math:`\sigma_e`, the distance OQ (z), the angle :math:`Omega` (T-Q-S) and the 
+    coefficent of limb-darkening :math:`u`.
+    
+    .. math::
+        I_T = I_0 \\frac{\pi \sigma_e}{2 z^2} ((1 - u) C + u D)
 
-    Parámetros
-    -----------
-    i0: intensidad inicial en [ver unidades].
-    sigma_e: sección eficaz del electrón (m²sr-¹).
-    z: distancia del observador, O, al punto de dispersión Q.
-    omega: ángulo T-Q-S en radianes (rad).
-    u: coeficiente de limb-darkening en [0, 1].
+    :param i0: initial intensity, given by the Planck's law.
+    :type i0: float
+    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :type sigma_e: float
+    :param z: distance OQ.
+    :type z: float
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
 
-    Devuelve
-    ---------
-    Valor de la intensidad tangencial.
+    :return: tangencial intensity :math:`I_T`.
+    :rtype: float
     '''
 
     return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * ((1 - u) 
@@ -591,57 +574,73 @@ def It(i0, sigma_e, z, omega, u):
 """Intensidad **radial** (**Ir**)"""
 
 def Ir(i0, sigma_e, z, omega, chi, u):
-    '''
-    Dada una intensidad inicial, i0, la sección eficaz del electrón, sigma_e, la 
-    distancia, z, del observador, O, al punto de dispersión, Q, el ángulo omega 
-    (T-Q-S), el ángulo chi (S-Q-O) y el coeficiente de limb-darkening, u, devuelve
-    la intensidad radial.
-
-    Parámetros
-    -----------
-    i0: intensidad inicial en [ver unidades].
-    sigma_e: sección eficaz del electrón (m²sr-¹).
-    z: distancia del observador, O, al punto de dispersión Q.
-    omega: ángulo T-Q-S en radianes (rad).
-    chi: ángulo de dispersión (S-Q-O) en radianes (rad).
-    u: coeficiente de limb-darkening en [0, 1].
-
-    Devuelve
-    ---------
-    Valor de la intensidad radial.
-    '''
+    """
+    It computes the radial intensity :math:`I_P` as a function of the initial 
+    intensity :math:`I_0`, given by the Planck's law, the cross section for 
+    perpendicular Thomson scattering :math:`\sigma_e`, the distance OQ (z), 
+    the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
+    (S-Q-O) and the coefficient of limb-darkening :math:`u`.
+        
+    .. math::
+        I_R = I_T - I_P
+        
+    where
+    
+    .. math::
+        I_T = I_0 \\frac{\pi \sigma_e}{2 z^2} ((1 - u) C + u D) \\
+        
+        I_P = I_0 \\frac{\pi \sigma_e}{2 z^2} \sin^2{\chi} ((1-u) A + u B)
+        
+        
+    :param i0: initial intensity, given by the Planck's law.
+    :type i0: float
+    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :type sigma_e: float
+    :param z: distance OQ.
+    :type z: float
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    
+    :return: radial intensity :math:`I_R`.
+    :rtype: float
+    """
     return It(i0, sigma_e, z, omega, u) - Ip(i0, sigma_e, z, omega, chi, u)
 
 """Intensidad **total** (**Itotal**)"""
 
 def Itotal(i0, sigma_e, z, omega, chi, u):
-    '''
-    Dada una intensidad inicial, i0, la sección eficaz del electrón, sigma_e, la 
-    distancia, z, del observador, O, al punto de dispersión, Q, el ángulo omega 
-    (T-Q-S), el ángulo chi (S-Q-O) y el coeficiente de limb-darkening, u, devuelve
-    la intensidad radial.
+    """
+    It computes the total intensity :math:`I_{Total}` as a function of the initial 
+    intensity :math:`I_0`, given by the Planck's law, the cross section for 
+    perpendicular Thomson scattering :math:`\sigma_e`, the distance OQ (z), 
+    the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
+    (S-Q-O) and the coefficient of limb-darkening :math:`u`
 
-    En base a las intensidades tangencial y polarizada calcula la intensidad total
-    dispersada.
+    The functions :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.It` and :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.Ip` are used for the computations.
+    
+    .. math::
+        I_{Total} = 2I_T - I_P
 
-    Parámetros
-    -----------
-    i0: intensidad inicial en [ver unidades].
-    sigma_e: sección eficaz del electrón (m²sr-¹).
-    z: distancia del observador, O, al punto de dispersión Q.
-    omega: ángulo T-Q-S en radianes (rad).
-    chi: ángulo de dispersión (S-Q-O) en radianes (rad).
-    u: coeficiente de limb-darkening en [0, 1].
-
-    Devuelve
-    ---------
-    Valor de la intensidad total.
-
-    Véase
-    ---------
-    It: función de la intensidad tangencial.
-    Ip: función de la intensidad polarizada.
-    '''
+    :param i0: initial intensity, given by the Planck's law.
+    :type i0: float
+    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :type sigma_e: float
+    :param z: distance OQ.
+    :type z: float
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    
+    :return: total intensity :math:`I_{Total}`.
+    :rtype: float
+    """
     return 2 * It(i0, sigma_e, z, omega, u) - Ip(i0, sigma_e, z, omega, chi, u)
 
 """## **3. Dispersión de Thomson a través de la línea de visión del observador**
