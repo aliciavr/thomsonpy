@@ -667,107 +667,117 @@ estilos = [       ':',              '-',              '--',              '-.',  
 colores = [       'm',              'b',              'g',               'r',            'orange',         'brown',            'y']
 etiquetas = ['Elongación 5º', "Elongación 20º", "Elongación 30º", "Elongación 45º", "Elongación 60º", "Elongación 90º", "Elongación 135º"]
 
-"""### **3.2. Integración numérica**
-
-####Funciones **necesarias para la integración** en la línea de visión
-
-#####**Expresiones de la dispersión**
-Simplificadas para la integración numérica.
-"""
-
 def Gt(omega, u, z = 1):
-    '''
-    Expresión de la dispersión de Thomson para la intensidad tangencial.
-
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S
-    z: distancia del observador (O) al punto de dispersión (Q). Asigna z = 1 por
-    defecto para la simplificación de cálculos en la integración numérica de la 
-    dispersión a lo largo de la línea de visión.
-
-    Devuelve
-    -----------
-    Valor de la dispersión tangencial.
-    '''
+    """
+    It computes the Thomson scattering factor for the tangencial intensity.
+    
+    .. math::
+        G_T = \\frac{\pi \sigma_e}{2 z^2} \left((1-u) C + u D \\right)
+        
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param z: distance OQ, by default is z = 1 for a simplified form of the computations.
+    :type z: float
+    
+    :return: tangencial Thomson scattering factor.
+    :rtype: float
+    """
 
     return (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'C') + u * vanDeHulst(omega, 'D'))
 
 def Gp(omega, chi, u, z = 1):
-    '''
-    Expresión de la dispersión de Thomson para la intensidad polarizada.
-
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S
-    z: distancia del observador (O) al punto de dispersión (Q). Asigna z = 1 por
-    defecto para la simplificación de cálculos en la integración numérica de la 
-    dispersión a lo largo de la línea de visión.
-
-    Devuelve
-    -----------
-    Valor de la dispersión polarizada.
-    '''
+    """
+    It computes the Thomson scattering factor for the polarized intensity.
+    
+    .. math::
+        G_P = \sin^2{\chi} \\frac{\pi \sigma_e}{2 z^2} \left((1 - u) A + u D\\right)
+        
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param z: distance OQ, by default is z = 1 for a simplified form of the computations.
+    :type z: float
+    
+    :return: polarized Thomson scattering factor.
+    :rtype: float
+    """
 
     return pow(np.sin(chi), 2) * (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
 
 def Gr(omega, chi, u, z = 1):
-    '''
-    Expresión de la dispersión de Thomson para la intensidad radial.
-
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S
-    z: distancia del observador (O) al punto de dispersión (Q). Asigna z = 1 por
-    defecto para la simplificación de cálculos en la integración numérica de la 
-    dispersión a lo largo de la línea de visión.
-
-    Devuelve
-    -----------
-    Valor de la dispersión radial.
-    '''
+    """
+    It computes the Thomson scattering factor for the radial intensity.
+    
+    .. math::
+        G_R = G_T - G_P
+        
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param z: distance OQ, by default is z = 1 for a simplified form of the computations.
+    :type z: float
+    
+    :return: radial Thomson scattering factor.
+    :rtype: float
+    """
 
     return Gt(omega, u, z) - Gp(omega, chi, u, z)
 
 def Gtotal(omega, chi, u, z = 1):
-    '''
-    Expresión de la dispersión de Thomson para la intensidad total.
-
-    Parámetros
-    -----------
-    omega: ángulo T-Q-S
-    z: distancia del observador (O) al punto de dispersión (Q). Asigna z = 1 por
-    defecto para la simplificación de cálculos en la integración numérica de la 
-    dispersión a lo largo de la línea de visión.
-
-    Devuelve
-    -----------
-    Valor de la dispersión total.
-    '''
+    """
+    It computes the Thomson scattering factor for the total intensity.
+    
+    .. math::
+        G_{Total} = 2 G_T - G_P
+        
+    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :type omega: float
+    :param chi: scattering angle :math:`\chi`, S-Q-O.
+    :type chi: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param z: distance OQ, by default is z = 1 for a simplified form of the computations.
+    :type z: float
+    
+    :return: radial Thomson scattering factor.
+    :rtype: float
+    """
 
     return 2 * Gt(omega, u, z) - Gp(omega, chi, u, z)
 
-"""#####**Funciones de integración numérica**
-Respecto de z, en Rsol, y respecto del ángulo phi (O-S-Q).
-"""
-
 def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
-    '''
-    Función de la intensidad recibida por la dispersión de Thomson en un punto 
-    z_i de la línea de visión.
-
-    Parámetros
-    ------------
-    x: distancia del observador (O) al centro de la estrella (S).
-    epsilon: ángulo de la elongación, S-Q-O, en radianes (rad).
-    z: distancia del observador (O) al punto de dispersión (Q).
-    r: radio de la estrella. Asigna r = RSOL por defecto, para trabajar en 
-    unidades SI. Si r = 1, se entiende que se trabaja en el radio de la estrella.
-
-    Devuelve
-    ------------
-    El valor de la dispersión de Thomson recibida para un z_i dado.
-    '''
+    """
+    It computes the factor of intensity received after the Thomson scattering phenomenon at a 
+    point :math:`z_i` of line of sight.
+    
+    .. math::
+        f_{scattering_z}(z) = \\rho(z) G_{Total}(z)
+    
+    :param x: distance OS.
+    :type x: float
+    :param epsilon: elongation angle :math:`\epsilon`, Q-O-S.
+    :type epsilon: float
+    :param z: distance OQ (independent variable of the function).
+    :type z: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
+    :type TG: float
+    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type NE_MODEL: float
+    
+    :return: factor of intensity received from the Thomson scattering phenomenon at the given point.
+    :rtype: float
+    """
+    
     d = ThomsonGeometry.faux_d(x, z, epsilon)
     omega = ThomsonGeometry.faux_omega(x, z, epsilon)
     chi = ThomsonGeometry.faux_chi(x, z, epsilon)
@@ -777,24 +787,32 @@ def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
     return ne_value * scatt_factor
   
 def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
-    '''
-    Integración numérica de la dispersión de Thomson recibida a lo largo de toda
-    la línea de visión (integración sobre la variable z).
-
-    Parámetros
-    ------------
-    x: distancia del observador (O) al centro de la estrella (S).
-    epsilon: ángulo de la elongación, S-Q-O, en radianes (rad).
-    z: distancia del observador (O) al punto de dispersión (Q). Límite superior de
-    la integración.
-    incr_z: incremento de z para el cálculo de la integral numérica.
-    r: radio de la estrella. Asigna r = RSOL por defecto, para trabajar en 
-    unidades SI. Si r = 1, se entiende que se trabaja en el radio de la estrella.
-
-    Devuelve
-    ------------
-    El valor de la dispersión de Thomson recibida para un z_i dado.
-    '''
+    """
+    Numerical integration of the Thomson scattering along the line of sight over z.
+    
+    .. math::
+        \int_{z=z_0}^{z=z_f} f_{scattering}(z) dz = |f_{scattering}(z_{i+1}) - f_{scattering}(z_{i})| (z_{i+1} - z_i)
+    
+    :param x: distance OS.
+    :type x: float
+    :param epsilon: elongation angle :math:`\epsilon`, Q-O-S.
+    :type epsilon: float
+    :param ini_z: starting value for the independent variable :math:`z` representing the distance OQ.
+    :type ini_z: float
+    :param fin_z: final value for the independent variable :math:`z` representing the distance OQ.
+    :type fin_z: float
+    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the distance OQ.
+    :type incr_z: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
+    :type TG: float
+    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type NE_MODEL: float
+    
+    :return: integrated Thomson scattering factor por a given geometry over z.
+    :rtype: float
+    """
 
     pasos_z = np.arange(ini_z, fin_z + incr_z, incr_z)
     valorIrec = 0
@@ -802,7 +820,7 @@ def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
         valorIrec += abs(f_Irec_z(x, epsilon, i + 1, u, TG, NE_MODEL) - f_Irec_z(x, epsilon, i, u, TG, NE_MODEL)) * incr_z
     return valorIrec
 
-def f_Irec_PHI(x, epsilon, phi, u):
+def __f_Irec_PHI(x, epsilon, phi, u):
     '''
     Función de la intensidad recibida por la dispersión de Thomson para un ángulo
     dado phi_i.
@@ -822,7 +840,7 @@ def f_Irec_PHI(x, epsilon, phi, u):
     valor_contribucion_fIrec = 0
     return valor_contribucion_fIrec 
 
-def Irec_PHI(x, epsilon, phi, incr_phi, u):
+def __Irec_PHI(x, epsilon, phi, incr_phi, u):
     '''
     Integración numérica de la dispersión de Thomson recibida a lo largo de toda
     la línea de visión (integración sobre la variable phi).
@@ -849,26 +867,36 @@ def Irec_PHI(x, epsilon, phi, incr_phi, u):
         valorIrec += abs(f_Irec_PHI(x, epsilon, i + 1, u) - f_Irec_PHI(x, epsilon, i, u)) * incr_phi
     return valorIrec
 
-"""# 4. Espectro de la K - Corona
-
-Cálculo de la intensidad final dispersada:
-"""
-
 def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG = None, NE_MODEL = None):
     """  
     Computation of the scattered light by the Thomson Scattering of the K-Corona.
-
-    Parameters
-    ------------
-    wave: float
-    Wavelength of the solar spectrum, assumed to be in meters (m).
-    temperature: float
-    Temperature of the Sun, assumed to be in Kelvins (K).
-
-    Returns
-    ------------
-    scattered_light: float
-    Scattered light for a given wavelength and temperature, in W·m^-3.
+    
+    .. math::
+        I_{scattered} = I_0 \int_{z=z_0}^{z=z_f} f_{scattering}(z) dz
+        
+    :param wave: wavelength of the solar spectrum.
+    :type wave: float
+    :param temperature: temperature of the Sun.
+    :type temperature:
+    :param x: distance OS.
+    :type x: float
+    :param epsilon: elongation angle :math:`\epsilon`, Q-O-S.
+    :type epsilon: float
+    :param ini_z: starting value for the independent variable :math:`z` representing the distance OQ.
+    :type ini_z: float
+    :param fin_z: final value for the independent variable :math:`z` representing the distance OQ.
+    :type fin_z: float
+    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the distance OQ.
+    :type incr_z: float
+    :param u: coefficient of limb-darkening.
+    :type u: float
+    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
+    :type TG: float
+    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type NE_MODEL: float
+    
+    :return: scattered light for a given wavelength, temperature and line of sight (:math:`W·m^-3` in I.S. units).
+    :rtype: float
     """
     u = coef_limb_darkening(wave)
     I0 = radiacion_planck(temperature, wave)
