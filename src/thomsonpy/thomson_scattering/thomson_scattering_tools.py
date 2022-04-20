@@ -496,16 +496,16 @@ def vanDeHulst(omega, coefficient):
 
     # Coefficients of van de Hulst as a function of angle omega (T-Q-S).
     coeff_value = -1
-    if coeficiente == 'A':
+    if coefficient == 'A':
         # Coefficient A.
         coeff_value = vanDeHulstA(omega)
-    elif coeficiente == 'B':
+    elif coefficient == 'B':
         # Coefficient B.
         coeff_value = vanDeHulstB(omega)
-    elif coeficiente == 'C':
+    elif coefficient == 'C':
         # Coefficient C.
         coeff_value = vanDeHulstC(omega)
-    elif coeficiente == 'D':
+    elif coefficient == 'D':
         # Coefficient D.
         coeff_value = vanDeHulstD(omega)
     else:
@@ -782,8 +782,8 @@ def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
     omega = ThomsonGeometry.faux_omega(x, z, epsilon)
     chi = ThomsonGeometry.faux_chi(x, z, epsilon)
     scatt_factor = Gtotal(omega, chi, u)
-    #ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
-    ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
+    ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
+    #ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
     return ne_value * scatt_factor
   
 def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
