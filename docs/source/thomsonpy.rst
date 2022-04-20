@@ -9,6 +9,7 @@ Subpackages
     thomsonpy.config
     thomsonpy.constants
     thomsonpy.data_management
+    thomsonpy.data_management.octree
     thomsonpy.thomson_scattering
 
 Module contents

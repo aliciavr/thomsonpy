@@ -8,9 +8,19 @@ Welcome to Thomson Scattering of the K - Corona's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   :caption: Introduction:
+   introduction
+   
+   :caption: Installation:
+   installation
+   
+   :caption: Contents:
    modules
+   
+   :caption: Links to the project:
+   GitHub
+   PyPI
 
 .. image:: images/logo_principal_color_sin_letras.png
 .. image:: images/SPGLOGO-HR.png
