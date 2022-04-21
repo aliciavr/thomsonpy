@@ -5,7 +5,8 @@ Subpackages
 ============
 
 .. toctree::
-
+    :maxdepth: 3
+    
     thomsonpy.config
     thomsonpy.constants
     thomsonpy.data_management
