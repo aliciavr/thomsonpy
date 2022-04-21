@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 """
-.. py:module:: thomsonpy.thomson_scattering.thomson_scattering_tools
 .. module:: thomson_scattering_tools
         :platform: Unix
         :synopsis: tools for computing the Thomson scattering across the line of sight 
@@ -17,6 +15,9 @@ import thomsonpy.thomson_scattering.ne_models as ne
 RSOL = RSOL_TO_METERS
 
 class ThomsonGeometry:
+    """
+    This class manages the Thomson scattering geometry and also offers many methods useful for frequent calculations related with the Thomson scattering geometry. Additionally, its internal structure has been designed to support a ray-tracing process in the :math:`z` direction between the observer point of view (:math:`O`) and the scattering point (:math:`Q`).
+    """
 
     def __init__(self, sun_center, observer, target, radius):
         """

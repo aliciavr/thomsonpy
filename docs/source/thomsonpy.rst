@@ -1,8 +1,8 @@
 thomsonpy package
-=================
+*****************
 
 Subpackages
------------
+============
 
 .. toctree::
 
@@ -11,11 +11,3 @@ Subpackages
     thomsonpy.data_management
     thomsonpy.data_management.octree
     thomsonpy.thomson_scattering
-
-Module contents
----------------
-
-.. automodule:: thomsonpy
-    :members:
-    :undoc-members:
-    :show-inheritance:
