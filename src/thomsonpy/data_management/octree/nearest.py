@@ -1,3 +1,10 @@
+"""
+.. module:: nearest
+        :platform: Unix
+        :synopsis: script with some octree testing.
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
+"""
+
 from thomsonpy.data_management.octree.octree import *
 import thomsonpy.config.paths as paths
 import thomsonpy.data_management.formatter as formatter

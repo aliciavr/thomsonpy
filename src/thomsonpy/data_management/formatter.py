@@ -3,18 +3,17 @@
 .. module:: formatter
         :platform: Unix
         :synopsis: tools for manage data format, usage and storing 
-.. moduleauthor:: 
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
-
-import thomsonpy.config.paths as paths
-import thomsonpy.constants.units as units
-import thomsonpy.data_management.octree.octree as octr
 
 import pickle
 from pyhdf.SD import SD
 import numpy as np
 import time
 import os
+import thomsonpy.config.paths as paths
+import thomsonpy.constants.units as units
+import thomsonpy.data_management.octree.octree as octr
 
 def dump(filepath, obj):
     """
@@ -46,7 +45,14 @@ def load(filepath):
 
 def spherical_to_cartesian(r, theta, phi):
     """
-    Gets cartesian coordinates from spherical coordinates.
+    It gets cartesian coordinates from spherical coordinates.
+
+    .. math::
+        x &= \sin{\\theta} \sin{\phi} 
+        
+        y &= \cos{\\theta} 
+        
+        z &= \sin{\\theta} \cos{\phi}
 
     :param r: radius of the spherical coordinates
     :type r: float

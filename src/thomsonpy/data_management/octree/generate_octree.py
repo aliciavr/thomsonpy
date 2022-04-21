@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 .. module:: generate_octree
         :platform: Unix
-        :synopsis: generates and stores an octree
-.. moduleauthor:: 
+        :synopsis: it generates and stores an octree.
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 import os
 import pickle
@@ -15,7 +14,6 @@ import thomsonpy.data_management.octree.octree as octr
 import thomsonpy.config.octree_params as op
 import thomsonpy.config.paths as paths
 import thomsonpy.data_management.formatter as formatter
-
 
 ## OCTREE CREATION AND STORAGE
 min_v = [op.MIN_1, op.MIN_2, op.MIN_3, op.MIN_4]

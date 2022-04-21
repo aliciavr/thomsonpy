@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 .. module:: fragmenter
         :platform: Unix
-        :synopsis: selects and applies octree format to original data 
-.. moduleauthor:: 
+        :synopsis: it selects and applies octree format to original data 
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 import os
 import numpy as np

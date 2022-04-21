@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 """
-.. module:: visualizer
+.. module:: formatter
         :platform: Unix
-        :synopsis: tools for manage data format, usage and storing 
-.. moduleauthor:: 
+        :synopsis: tools for visualizing and testing data 
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 import os
 import open3d as o3d
