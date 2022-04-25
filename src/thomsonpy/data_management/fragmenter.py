@@ -35,7 +35,7 @@ def get_ne_raw_coords(filepath, opt):
     
     :param filepath: filepath to the file storing the raw model.
     :type filepath: string
-    :param opt: it accepts the values ``phi``, ``theta`` or ``z``, indicating the coordinate in the Spherical Coordinates Systems to be loaded.
+    :param opt: it accepts the values ``phi``, ``theta`` or ``radial``, indicating the coordinate in the Spherical Coordinates Systems to be loaded.
     :type opt: string
     
     :return: the values for the chosen spherical coordinate. ``None`` if the ``opt`` parameter has an invalid value.
@@ -48,15 +48,15 @@ def get_ne_raw_coords(filepath, opt):
     coords = None
     if opt == "phi":
         coords = hdf.select(0).get()  # PHI (rad, 0-2PI) 699
-        num_phi = data_phi.size
+        num_phi = coords.size
         print("\nPHI (rad, 0-2PI). # phi =", num_phi)
     elif opt == "theta":
         coords = hdf.select(1).get()  # THETA (rad, 0-PI) 327
-        num_theta = data_theta.size
+        num_theta = coords.size
         print("THETA (rad, 0-PI). # theta =", num_theta)
-    elif opt == "z":
+    elif opt == "radial":
         coords = hdf.select(2).get()  # RADIAL (RSOL, 1-30) 288
-        num_radial = data_radial.size    
+        num_radial = coords.size    
         print("RADIAL (RSOL, 1-30). # radial =", num_radial)
 
     return coords 
@@ -80,15 +80,16 @@ def selection(r, theta, phi, ne):
     cartesian_coords = formatter.spherical_to_cartesian(r, theta, phi)
     return cartesian_coords[0] >= 0 and cartesian_coords[1] >= 0 and r <= 3
 
-def fragment(selection_func, ne_raw, progress_step = 1e6): 
+def fragment(selection_func, ne_raw, data_radial, data_theta, data_phi, progress_step = 1e6): 
     """
     
     :param selection_func:
     :type:
     
     """
-    it = np.nditer(data, flags=['multi_index'])
-
+    it = np.nditer(ne_raw, flags=['multi_index'])
+    num_points = ne_raw.size
+    print(num_points)
     octree_data = []
     # Progress and auxiliar variables
     max_r = -1 
@@ -109,3 +110,5 @@ def fragment(selection_func, ne_raw, progress_step = 1e6):
         if progress % 1e6 == 0:
             print(progress / num_points * 100, "%")
         progress += 1
+        
+    return octree_data

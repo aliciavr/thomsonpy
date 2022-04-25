@@ -14,6 +14,66 @@ import thomsonpy.config.paths as paths
 import thomsonpy.constants.units as units
 import time
 
+def vis_octree_data(filepath):
+    """
+    It renders the octree data selected in the fragmentation process and the it gives a rainbow color for testing structure.
+    """
+    my_data = formatter.load(filepath)
+
+    lista = list()
+    for p in my_data:
+        lista.append(p.get_coordinates() * units.METERS_TO_RSOL)
+        
+    sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
+    sphere.paint_uniform_color([0.8, 0.5, 0.0])
+
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(lista)
+    #pcd.paint_uniform_color([1, 0, 0])
+
+    viewer = o3d.visualization.Visualizer()
+    viewer.create_window()
+    viewer.add_geometry(pcd)
+
+    viewer.add_geometry(sphere)
+    opt = viewer.get_render_option()
+    opt.show_coordinate_frame = True
+    opt.background_color = np.asarray([0.0, 0.2, 0.2])
+    viewer.run()
+    viewer.destroy_window()
+
+def vis_ne(filepath):
+    """
+    It renders the octree data selected in the fragmentation process with the values of ne.
+    """
+    my_data = formatter.load(filepath)
+
+    points = list()
+    colors = list()
+    
+    for p in my_data:
+        points.append(p.get_coordinates() * units.METERS_TO_RSOL)
+        color = np.log(p.get_ne())
+        colors.append(np.array([color, color, color]))
+    
+    sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
+    sphere.paint_uniform_color([0.8, 0.5, 0.0])
+
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(points)
+    pcd.colors = o3d.utility.Vector3dVector(colors)
+
+    viewer = o3d.visualization.Visualizer()
+    viewer.create_window()
+    viewer.add_geometry(pcd)
+
+    viewer.add_geometry(sphere)
+    opt = viewer.get_render_option()
+    opt.show_coordinate_frame = True
+    opt.background_color = np.asarray([0.0, 0.2, 0.2])
+    viewer.run()
+    viewer.destroy_window()
+    
 def vis_points_and_ne(i):
     points_filenames = ['points_1.obj', 'points_2.obj', 'points_3.obj', 'points_4.obj']
     pclouds = list()
@@ -49,10 +109,7 @@ def vis_points_and_ne(i):
     del ne_cloud
     del pcd
     
-def vis_octree(i):
-
-    octrees_filenames = ["octree_1.oct", "octree_2.oct", "octree_3.oct", "octree_4.oct"]
-    octree = octr.Octree.load(paths.OCTREES_PATH + octrees_filenames[i])
+def vis_octree(octree):
     octree_geom = octree.get_visual_octree()
     sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
@@ -67,30 +124,7 @@ def vis_octree(i):
     viewer.run()
     viewer.destroy_window()
 
-def vis_octree_data():
-    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{ os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
 
-    lista = list()
-    for p in my_data:
-        lista.append(p.get_coordinates() * units.METERS_TO_RSOL)
-        
-    sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
-    sphere.paint_uniform_color([0.8, 0.5, 0.0])
-
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(lista)
-    #pcd.paint_uniform_color([1, 0, 0])
-
-    viewer = o3d.visualization.Visualizer()
-    viewer.create_window()
-    viewer.add_geometry(pcd)
-
-    viewer.add_geometry(sphere)
-    opt = viewer.get_render_option()
-    opt.show_coordinate_frame = True
-    opt.background_color = np.asarray([0.0, 0.2, 0.2])
-    viewer.run()
-    viewer.destroy_window()
 
 def vis_found_and_not_found(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")
@@ -149,10 +183,6 @@ def vis_found_and_not_found(i):
     opt.background_color = np.asarray([0.0, 0.2, 0.2])
     viewer.run()
     viewer.destroy_window()
-    
-#vis_octree_data()
-#vis_octree(0)
-vis_found_and_not_found(1)
 
 def vis_found_and_not_found_multicore(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")

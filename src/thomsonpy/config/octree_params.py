@@ -15,19 +15,19 @@
 import numpy as np
 import thomsonpy.constants.units as units
 
-MAX_LEVEL = 8
+MAX_LEVEL = 6
 """ Maximum deep level of the octree. """
 
 MAX_DATA = 1000
 """ Maximum amount of data in each leaf node. """
 
-MAX_R = 3.1 * units.RSOL_TO_METERS
+MAX_R = 3 * units.RSOL_TO_METERS
 """ Maximum and minimum distance of octree data from the center of the Sun in :math:`m`. """
 
-MAX_COORD = MAX_R
+MAX_COORD = MAX_R * np.sqrt(1/2)
 """ Maximum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
-MIN_COORD = -MAX_R
+MIN_COORD = 0
 """ Minimum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
 # Quadrant 1: x >= 0 & y >= 0
