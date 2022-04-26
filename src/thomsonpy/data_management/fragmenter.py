@@ -80,7 +80,7 @@ def selection(r, theta, phi, ne):
     cartesian_coords = formatter.spherical_to_cartesian(r, theta, phi)
     return cartesian_coords[0] >= 0 and cartesian_coords[1] >= 0 and r <= 3
 
-def fragment(selection_func, ne_raw, data_radial, data_theta, data_phi, progress_step = 1e6): 
+def fragment(selection_func, format_func, ne_raw, data_radial, data_theta, data_phi, progress_step = 1e6): 
     """
     
     :param selection_func:
@@ -90,9 +90,8 @@ def fragment(selection_func, ne_raw, data_radial, data_theta, data_phi, progress
     it = np.nditer(ne_raw, flags=['multi_index'])
     num_points = ne_raw.size
     print(num_points)
-    octree_data = []
+    data = []
     # Progress and auxiliar variables
-    max_r = -1 
     progress = 0
     # Fragmentation process.
     for ne_mas in it:
@@ -102,13 +101,10 @@ def fragment(selection_func, ne_raw, data_radial, data_theta, data_phi, progress
         phi = data_phi[i]
 
         if selection(r, theta, phi, ne_mas) == True:
-            d = formatter.apply_octree_data_format(r, theta, phi, ne_mas)
-            octree_data.append(d)
-
-            if r > max_r:
-                max_r = r
+            d = format_func(r = r, theta = theta, phi = phi, ne_mas = ne_mas)
+            data.append(d)
         if progress % 1e6 == 0:
             print(progress / num_points * 100, "%")
         progress += 1
         
-    return octree_data
+    return data
