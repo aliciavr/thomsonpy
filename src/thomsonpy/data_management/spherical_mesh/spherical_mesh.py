@@ -1,9 +1,11 @@
 import numpy as np
 import sys
+import pickle
+import thomsonpy.data_management.formatter as fmt
 
 class SphericalMesh:
     
-    def __init__(self, nd_theta, nd_phi, nd_radial, radial_max):
+    def __init__(self, nd_phi, nd_theta, nd_radial, radial_max):
         self.__nd_phi = nd_phi
         self.__nd_theta = nd_theta
         self.__nd_radial = nd_radial
@@ -12,7 +14,6 @@ class SphericalMesh:
         self.__length_phi = np.pi / nd_phi
         self.__length_theta = 2 * np.pi / nd_theta
         self.__length_radial = radial_max / nd_radial
-
         self.__mesh =  [[[None]*nd_radial]*nd_theta]*nd_phi
         for i in range(nd_phi):
             for j in range (nd_theta):
@@ -20,24 +21,36 @@ class SphericalMesh:
                     self.__mesh[i][j][k] = Sector3D()
 
     def add_data(self, data):
-        sector = self.get_sector(data.get_phi(), data.get_theta(), data.get_radial())
-        sector.__add_data(data)
+        sector = self.get_sector(fmt.cartesian_to_spherical(data.get_coordinates()))
+        sector.add_data(data)
         
-    def get_sector(self, phi, theta, radial):
-        i = int((phi//self.__length_phi)) % self.__nd_phi
-        j = int((theta//self.__length_theta)) % self.__nd_theta
-        k = int((radial//self.__length_radial)) % self.__nd_radial
-        print(i, j, k)
+    def get_sector(self, coords):
+        i = int((coords[0]//self.__length_phi)) % self.__nd_phi
+        j = int((coords[1]//self.__length_theta)) % self.__nd_theta
+        k = int((coords[2]//self.__length_radial)) % self.__nd_radial
         sector = self.__mesh[i][j][k] 
         return sector
     
-    def search_nearest(self, coords):
+    def get_sector_and_neighbors(self, coords):
+        i = int((coords[0]//self.__length_phi)) % self.__nd_phi
+        j = int((coords[1]//self.__length_theta)) % self.__nd_theta
+        k = int((coords[2]//self.__length_radial)) % self.__nd_radial
+        sectors = []
+        num_data = 0
+        r = [-1,0,1]
+        for ii in r:
+            for jj in r:
+                for kk in r:
+                    sector = self.__mesh[(i + ii) % self.__nd_phi][(j + jj) % self.__nd_theta][(k + kk) % self.__nd_radial]
+                    sectors.append(sector)
+                    num_data += sector.get_num_data()
         
-        phi = 
-        theta = 
-        radial = 
-        sector = get_sector(phi, theta, radial)
-        nearest = sector.__search_nearest()
+        print(num_data)
+        return sectors
+    
+    def search_nearest(self, coords):
+        sectors = self.get_sector_and_neighbors(fmt.cartesian_to_spherical(coords))
+        nearest = Sector3D.search_nearest(coords, sectors)
         return nearest
     
     @staticmethod
@@ -46,7 +59,7 @@ class SphericalMesh:
         It saves the spherical mesh structure in a binary file.
         """
         f = open(filename, 'wb')
-        pickle.dump(octree, f)
+        pickle.dump(sphmesh, f)
         f.close()
 
     @staticmethod
@@ -63,18 +76,26 @@ class Sector3D:
     def __init__(self):
         self.__data = []
         
-    def __search_nearest(self):
+    @staticmethod
+    def search_nearest(coords, sectors):
         nearest = Data(None, 0)
         min_distance = sys.float_info.max
-        for data in self.__data:
-            distance = np.linalg.norm(p - data.get_coordinates())
-            if distance < min_distance:
-                nearest = data
-                distance = min_distance
+        for sector in sectors:      
+            for data in sector.get_all_data():
+                distance = np.linalg.norm(coords - data.get_coordinates())
+                if distance < min_distance:
+                    nearest = data
+                    distance = min_distance
         return nearest
     
-    def __add_data(self, data):
+    def add_data(self, data):
         self.__data.append(data)
+        
+    def get_all_data(self):
+        return self.__data
+        
+    def get_num_data(self):
+        return len(self.__data)
         
 class Data:
 
