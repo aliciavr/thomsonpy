@@ -11,8 +11,8 @@ class SphericalMesh:
         self.__nd_radial = nd_radial
         self.__radial_max = radial_max
         
-        self.__length_phi = np.pi / nd_phi
-        self.__length_theta = 2 * np.pi / nd_theta
+        self.__length_phi = 2 * np.pi / nd_phi
+        self.__length_theta = np.pi / nd_theta
         self.__length_radial = radial_max / nd_radial
         self.__mesh =  [[[None]*nd_radial]*nd_theta]*nd_phi
         for i in range(nd_phi):
@@ -85,7 +85,7 @@ class Sector3D:
                 distance = np.linalg.norm(coords - data.get_coordinates())
                 if distance < min_distance:
                     nearest = data
-                    distance = min_distance
+                    min_distance = distance
         return nearest
     
     def add_data(self, data):
