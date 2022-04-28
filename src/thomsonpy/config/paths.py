@@ -5,7 +5,7 @@
 .. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 
-PROJECT_NAME = "first-quadrant"
+PROJECT_NAME = "test"
 """ Path to the base folder of the project in execution. """
 
 PREDSCI_FILENAME = "rho002.hdf"

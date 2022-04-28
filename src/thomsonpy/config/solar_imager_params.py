@@ -23,7 +23,7 @@ OBSERVER = np.array([0, 0, units.AU_TO_METERS])
 
 MAX_VIS_R = 3 * units.RSOL_TO_METERS
 """ Maximum radius of image visualization in :math:`m`. """
-MAX_COORD = MAX_VIS_R 
+MAX_COORD = MAX_VIS_R * np.sqrt(1/2)
 """ Maximum common value for the coordinates of the image in :math:`m`. """
 MIN_COORD = 0
 """ Minimum common value for the coordinates of the image in :math:`m`. """

@@ -14,6 +14,7 @@ import os
 import thomsonpy.config.paths as paths
 import thomsonpy.constants.units as units
 import thomsonpy.data_management.octree.octree as octr
+import thomsonpy.data_management.spherical_mesh.spherical_mesh as sphmesh
 
 def dump(filepath, obj):
     """
@@ -43,6 +44,16 @@ def load(filepath):
     f.close()
     return obj
 
+def cartesian_to_spherical(coords):
+    x = coords[0]
+    y = coords[1]
+    z = coords[2]
+    radial = np.sqrt(x**2 + y**2 + z**2)
+    phi = np.arctan(x / z)
+    theta = np.arccos(y / radial)
+    return np.array([phi, theta, radial])
+    
+    
 def spherical_to_cartesian(r, theta, phi):
     """
     It gets cartesian coordinates from spherical coordinates.
@@ -96,5 +107,11 @@ def apply_octree_data_format(r, theta, phi, ne_mas):
     coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS # From RSol to m
     ne = ne_mas * units.NE_MAS_FACTOR # From MAS to m⁻³.
     data = octr.Data(coords, ne)
+    return data
+    
+def apply_spherical_mesh_data_format(r, theta, phi, ne_mas):
+    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS # From RSol to m
+    ne = ne_mas * units.NE_MAS_FACTOR # From MAS to m⁻³.
+    data = sphmesh.Data(coords, ne)
     return data
     

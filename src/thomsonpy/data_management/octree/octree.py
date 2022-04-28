@@ -226,7 +226,7 @@ class Node:
                     distance = np.linalg.norm(p - data.get_coordinates())
                     if distance < min_distance:
                         nearest = data
-                        distance = min_distance
+                        min_distance = distance
                 return nearest
         return Data(None, 0)
 

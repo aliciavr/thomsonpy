@@ -783,8 +783,8 @@ def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
     omega = ThomsonGeometry.faux_omega(x, z, epsilon)
     chi = ThomsonGeometry.faux_chi(x, z, epsilon)
     scatt_factor = Gtotal(omega, chi, u)
-    ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
-    #ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
+    #ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
+    ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
     return ne_value * scatt_factor
   
 def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
@@ -903,6 +903,7 @@ def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG 
     I0 = radiacion_planck(temperature, wave)
     scattering = Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG, NE_MODEL)
 
-    scattered_light = I0 * scattering
+    #scattered_light = I0 * scattering
+    scattered_light = scattering
 
     return scattered_light
