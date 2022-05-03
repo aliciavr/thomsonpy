@@ -24,7 +24,7 @@ MAX_DATA = 1000
 MAX_R = 3 * units.RSOL_TO_METERS
 """ Maximum and minimum distance of octree data from the center of the Sun in :math:`m`. """
 
-MAX_COORD = MAX_R * np.sqrt(1/2)
+MAX_COORD = MAX_R # * np.sqrt(1/2)
 """ Maximum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
 MIN_COORD = 0
