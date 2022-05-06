@@ -78,7 +78,13 @@ def selection(r, theta, phi, ne):
     
     """
     cartesian_coords = formatter.spherical_to_cartesian(r, theta, phi)
-    return cartesian_coords[0] >= 0 and cartesian_coords[1] >= 0 and r <= 3
+    x = cartesian_coords[0]
+    y = cartesian_coords[1]
+    z = cartesian_coords[2]
+    limit = 3.5
+    return     (x <= limit and x >= -limit and
+                y <= limit and y >= -limit and
+                z <= limit and z >= -limit)
 
 def fragment(selection_func, format_func, ne_raw, data_radial, data_theta, data_phi, progress_step = 1e6): 
     """
