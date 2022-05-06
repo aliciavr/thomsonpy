@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thomsonpy.data_management.octree package &mdash; Thomson Scattering of the K - Corona 1.0.0-beta documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="thomsonpy.thomson_scattering package" href="thomsonpy.thomson_scattering.html" />
+    <link rel="prev" title="thomsonpy.data_management package" href="thomsonpy.data_management.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Thomson Scattering of the K - Corona
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">thomsonpy Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="thomsonpy.html">thomsonpy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="thomsonpy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.config.html">thomsonpy.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.constants.html">thomsonpy.constants package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="thomsonpy.data_management.html">thomsonpy.data_management package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">thomsonpy.data_management.octree package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.thomson_scattering.html">thomsonpy.thomson_scattering package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Thomson Scattering of the K - Corona</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">thomsonpy Documentation</a> &raquo;</li>
+          <li><a href="thomsonpy.html">thomsonpy package</a> &raquo;</li>
+          <li><a href="thomsonpy.data_management.html">thomsonpy.data_management package</a> &raquo;</li>
+      <li>thomsonpy.data_management.octree package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/thomsonpy.data_management.octree.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thomsonpy-data-management-octree-package">
+<h1>thomsonpy.data_management.octree package<a class="headerlink" href="#thomsonpy-data-management-octree-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<section id="thomsonpy-data-management-octree-generate-octree-module">
+<h3>thomsonpy.data_management.octree.generate_octree module<a class="headerlink" href="#thomsonpy-data-management-octree-generate-octree-module" title="Permalink to this headline"></a></h3>
+<p>It generates the octree needed for managing the electron density model in the solar imager.</p>
+</section>
+<section id="thomsonpy-data-management-octree-nearest-module">
+<h3>thomsonpy.data_management.octree.nearest module<a class="headerlink" href="#thomsonpy-data-management-octree-nearest-module" title="Permalink to this headline"></a></h3>
+<p>It checks the correct construction of the octree.</p>
+</section>
+<section id="thomsonpy-data-management-octree-octree-module">
+<h3>thomsonpy.data_management.octree.octree module<a class="headerlink" href="#thomsonpy-data-management-octree-octree-module" title="Permalink to this headline"></a></h3>
+<p>Main class of the octree data structure, it manages its structure and all its functionality.</p>
+<span class="target" id="module-thomsonpy.data_management.octree.octree"></span><span class="target" id="module-octree"></span><dl class="py class">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thomsonpy.data_management.octree.octree.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ne</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing structured object for the Octree class <a class="reference internal" href="#thomsonpy.data_management.octree.octree.Octree" title="thomsonpy.data_management.octree.octree.Octree"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Octree</span></code></a>.
+It relates the electron density with a point in <img class="math" src="_images/math/5b63470a1bfe5023b99f74cd666193568d0c946b.png" alt="\mathbb{R}^3"/>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data.get_coordinates">
+<span class="sig-name descname"><span class="pre">get_coordinates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data.get_coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the coordinates of the point represented by this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the coordinates of this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy.array([float, float, float])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data.get_ne">
+<span class="sig-name descname"><span class="pre">get_ne</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data.get_ne" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> related with the point represented by this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> of this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data.get_x">
+<span class="sig-name descname"><span class="pre">get_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data.get_x" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the <img class="math" src="_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/> coordinate of the point represented by this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the coordinate <img class="math" src="_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/> of this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data.get_y">
+<span class="sig-name descname"><span class="pre">get_y</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data.get_y" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the <img class="math" src="_images/math/1b5e577d6216dca3af7d87aa122a0b9b360d6cb3.png" alt="y"/> coordinate of the point represented by this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the coordinate <img class="math" src="_images/math/1b5e577d6216dca3af7d87aa122a0b9b360d6cb3.png" alt="y"/> of this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Data.get_z">
+<span class="sig-name descname"><span class="pre">get_z</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Data.get_z" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> coordinate of the point represented by this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the coordinate <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> of this <code class="docutils literal notranslate"><span class="pre">Data</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thomsonpy.data_management.octree.octree.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">octree</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Node data structure for constructing the <code class="docutils literal notranslate"><span class="pre">Octree</span></code> (<a class="reference internal" href="#thomsonpy.data_management.octree.octree.Octree" title="thomsonpy.data_management.octree.octree.Octree"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Octree</span></code></a>). It contains points as <code class="docutils literal notranslate"><span class="pre">Data</span></code> (<a class="reference internal" href="#thomsonpy.data_management.octree.octree.Data" title="thomsonpy.data_management.octree.octree.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Data</span></code></a>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.add" title="Permalink to this definition"></a></dt>
+<dd><p>It adds a new <code class="docutils literal notranslate"><span class="pre">Data</span></code> to the <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_mangement.octree.octree.Data</span></code>) – new spatial <code class="docutils literal notranslate"><span class="pre">Data</span></code> to be added to the <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.contains">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.contains" title="Permalink to this definition"></a></dt>
+<dd><p>It checks if this <code class="docutils literal notranslate"><span class="pre">Node</span></code> is containing the point <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>numpy.array</em><em>(</em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>)</em>) – a point in <img class="math" src="_images/math/5b63470a1bfe5023b99f74cd666193568d0c946b.png" alt="\mathbb{R}^3"/>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">p</span></code> is inside this <code class="docutils literal notranslate"><span class="pre">Node</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.get_data" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">Data</span></code> objects inside this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">Data</span></code> objects inside this</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.get_level">
+<span class="sig-name descname"><span class="pre">get_level</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.get_level" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the depth level where this <code class="docutils literal notranslate"><span class="pre">Node</span></code> has been created in the internal <code class="docutils literal notranslate"><span class="pre">Octree</span></code> structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the depth level of this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.get_max">
+<span class="sig-name descname"><span class="pre">get_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.get_max" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the maximum coordinates of the spatial region enclosed by this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the maximum coordinates of the spatial region enclosed by this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy.float([float][float][float])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.get_min">
+<span class="sig-name descname"><span class="pre">get_min</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.get_min" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the minimum coordinates of the spatial region enclosed by this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the minimum coordinates of the spatial region enclosed by this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>numpy.array([float][float][float])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.get_num_points">
+<span class="sig-name descname"><span class="pre">get_num_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.get_num_points" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the number of points inside this <code class="docutils literal notranslate"><span class="pre">Node</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>number of points inside this <code class="docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.has_children">
+<span class="sig-name descname"><span class="pre">has_children</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.has_children" title="Permalink to this definition"></a></dt>
+<dd><p>It checks if this <code class="docutils literal notranslate"><span class="pre">Node</span></code> has children nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if it has children nodes created, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.has_data">
+<span class="sig-name descname"><span class="pre">has_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.has_data" title="Permalink to this definition"></a></dt>
+<dd><p>It checks if this <code class="docutils literal notranslate"><span class="pre">Node</span></code> has any data stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if it has data stored, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.search" title="Permalink to this definition"></a></dt>
+<dd><p>It searchs for a specific point previously stored in the <code class="docutils literal notranslate"><span class="pre">Octree</span></code> data structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>numpy.array</em><em>(</em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>)</em>) – point to be found with information about electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="docutils literal notranslate"><span class="pre">Data</span></code> object representing the result of the searching process. If the search is successful, it returns the <code class="docutils literal notranslate"><span class="pre">Data</span></code> object related with the 3D point <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter, otherwise it returns a <code class="docutils literal notranslate"><span class="pre">None</span></code> object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thomsonpy.data_management.octree.octree.Data" title="thomsonpy.data_management.octree.octree.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Data</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.search_nearest">
+<span class="sig-name descname"><span class="pre">search_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.search_nearest" title="Permalink to this definition"></a></dt>
+<dd><p>It searchs for a specific point previously stored in the <code class="docutils literal notranslate"><span class="pre">Octree</span></code> data structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>numpy.array</em><em>(</em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>, </em><em>[</em><em>float</em><em>]</em><em>)</em>) – point to be located for retrieving the nearest data information about electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <code class="docutils literal notranslate"><span class="pre">Data</span></code> object representing the result of the nearest searching process. If the search is successful, it returns the nearest <code class="docutils literal notranslate"><span class="pre">Data</span></code> object to the 3D point <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter, otherwise it returns a <code class="docutils literal notranslate"><span class="pre">None</span></code> object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#thomsonpy.data_management.octree.octree.Data" title="thomsonpy.data_management.octree.octree.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Data</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Node.see_node">
+<span class="sig-name descname"><span class="pre">see_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Node.see_node" title="Permalink to this definition"></a></dt>
+<dd><p>It generates geometric structures for the <code class="docutils literal notranslate"><span class="pre">open3D</span></code> library for rendering the octree. It adds the geometric structures to the attrubute <code class="docutils literal notranslate"><span class="pre">visual_nodes</span></code> of the <code class="docutils literal notranslate"><span class="pre">Octree</span></code> data structure.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thomsonpy.data_management.octree.octree.</span></span><span class="sig-name descname"><span class="pre">Octree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level_limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>It manages the internal and root structure of an octree data structure.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.get_data_limit">
+<span class="sig-name descname"><span class="pre">get_data_limit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.get_data_limit" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the data limit used as a restriction for the construction process. If this quantity of <code class="docutils literal notranslate"><span class="pre">Data</span></code> objects in a particular <code class="docutils literal notranslate"><span class="pre">Node</span></code> is reached and a new <code class="docutils literal notranslate"><span class="pre">Data</span></code> object is inserted in that <code class="docutils literal notranslate"><span class="pre">Node</span></code>, then that <code class="docutils literal notranslate"><span class="pre">Node</span></code> creates eight children if <code class="docutils literal notranslate"><span class="pre">level_limit</span></code> has not been reached yet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the data_limit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.get_level_limit">
+<span class="sig-name descname"><span class="pre">get_level_limit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.get_level_limit" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the level limit used as a restriction for the construction process. If this level is reached the <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects at this level do not create more children nodes anymore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the level limit.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.get_num_data">
+<span class="sig-name descname"><span class="pre">get_num_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.get_num_data" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the number of <code class="docutils literal notranslate"><span class="pre">Data</span></code> objects stored in this <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.get_root">
+<span class="sig-name descname"><span class="pre">get_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.get_root" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the root of this <code class="docutils literal notranslate"><span class="pre">Octree</span></code> from where the rest of the nodes are processed recursively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the root <code class="docutils literal notranslate"><span class="pre">Node</span></code> of this <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#thomsonpy.data_management.octree.octree.Node" title="thomsonpy.data_management.octree.octree.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Node</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.get_visual_octree">
+<span class="sig-name descname"><span class="pre">get_visual_octree</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.get_visual_octree" title="Permalink to this definition"></a></dt>
+<dd><p>It gets a <code class="docutils literal notranslate"><span class="pre">list</span></code> with all the geometric objects representing the internal structure of this <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list with geometric objects readable by the <code class="docutils literal notranslate"><span class="pre">Open3D</span></code> library.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.load">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.load" title="Permalink to this definition"></a></dt>
+<dd><p>It loads an octree structure from a binary file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.save">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">octree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.save" title="Permalink to this definition"></a></dt>
+<dd><p>It saves the octree structure in a binary file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.search" title="Permalink to this definition"></a></dt>
+<dd><p>It calls the <code class="docutils literal notranslate"><span class="pre">search</span></code> method from the root <code class="docutils literal notranslate"><span class="pre">Node</span></code> of this <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The method <a class="reference internal" href="#thomsonpy.data_management.octree.octree.Node.search" title="thomsonpy.data_management.octree.octree.Node.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Node.search()</span></code></a> using the recursivity to search for the <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">Data</span></code> object representing the result of the searching process. If the search is successful, it returns the <code class="docutils literal notranslate"><span class="pre">Data</span></code> object related with the 3D point <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter, otherwise it returns a <code class="docutils literal notranslate"><span class="pre">None</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#thomsonpy.data_management.octree.octree.Data" title="thomsonpy.data_management.octree.octree.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Data</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.data_management.octree.octree.Octree.search_nearest">
+<span class="sig-name descname"><span class="pre">search_nearest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.data_management.octree.octree.Octree.search_nearest" title="Permalink to this definition"></a></dt>
+<dd><p>It calls the <code class="docutils literal notranslate"><span class="pre">search_nearest</span></code> method from the root <code class="docutils literal notranslate"><span class="pre">Node</span></code> of this <code class="docutils literal notranslate"><span class="pre">Octree</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The method <a class="reference internal" href="#thomsonpy.data_management.octree.octree.Node.search_nearest" title="thomsonpy.data_management.octree.octree.Node.search_nearest"><code class="xref py py-meth docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Node.search_nearest()</span></code></a> using the recursivity to search for the <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a <code class="docutils literal notranslate"><span class="pre">Data</span></code> object representing the result of the nearest searching process. If the search is successful, it returns the nearest <code class="docutils literal notranslate"><span class="pre">Data</span></code> object to the 3D point <code class="docutils literal notranslate"><span class="pre">p</span></code> passed as parameter, otherwise it returns a <code class="docutils literal notranslate"><span class="pre">None</span></code> object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#thomsonpy.data_management.octree.octree.Data" title="thomsonpy.data_management.octree.octree.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Data</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="thomsonpy.data_management.html" class="btn btn-neutral float-left" title="thomsonpy.data_management package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="thomsonpy.thomson_scattering.html" class="btn btn-neutral float-right" title="thomsonpy.thomson_scattering package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Alicia Vázquez Ramos (SPG - IAA).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

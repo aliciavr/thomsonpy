@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thomsonpy.config package &mdash; Thomson Scattering of the K - Corona 1.0.0-beta documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="thomsonpy.constants package" href="thomsonpy.constants.html" />
+    <link rel="prev" title="thomsonpy package" href="thomsonpy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Thomson Scattering of the K - Corona
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">thomsonpy Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="thomsonpy.html">thomsonpy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="thomsonpy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">thomsonpy.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.constants.html">thomsonpy.constants package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.data_management.html">thomsonpy.data_management package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.data_management.octree.html">thomsonpy.data_management.octree package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.thomson_scattering.html">thomsonpy.thomson_scattering package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Thomson Scattering of the K - Corona</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">thomsonpy Documentation</a> &raquo;</li>
+          <li><a href="thomsonpy.html">thomsonpy package</a> &raquo;</li>
+      <li>thomsonpy.config package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/thomsonpy.config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thomsonpy-config-package">
+<h1>thomsonpy.config package<a class="headerlink" href="#thomsonpy-config-package" title="Permalink to this headline"></a></h1>
+<p>Package for the management of all constants, parameters and unit conversion factors needed for the Thomson scattering computation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the parameters are in the <strong>International System of Units</strong>.</p>
+</div>
+<span class="target" id="module-thomsonpy.config"></span><section id="module-thomsonpy.config.octree_params">
+<span id="thomsonpy-config-octree-params-module"></span><h2>thomsonpy.config.octree_params module<a class="headerlink" href="#module-thomsonpy.config.octree_params" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-octree_params"></span><div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>The space is often divided in quadrants so we define our quadrants as:</dt><dd><ul class="simple">
+<li><p>Quadrant 1: x &gt;= 0 &amp; y &gt;= 0</p></li>
+<li><p>Quadrant 2: x &lt;= 0 &amp; y &gt;= 0</p></li>
+<li><p>Quadrant 3: x &lt;= 0 &amp; y &lt;= 0</p></li>
+<li><p>Quadrant 4: x &gt;= 0 &amp; y &lt;= 0</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_1">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([2089020000,</span> <span class="pre">2089020000,</span> <span class="pre">2089020000])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_1" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum coordinates for the first quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_2">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span> <span class="pre">2089020000,</span> <span class="pre">2089020000])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_2" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum coordinates for the second quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_3">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span> <span class="pre">2089020000])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_3" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum coordinates for the third quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_4">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([2089020000,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span> <span class="pre">2089020000])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_4" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum coordinates for the fourth quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_COORD">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_COORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2089020000</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_COORD" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum bounds for octree according a <code class="docutils literal notranslate"><span class="pre">MAX_R</span></code> radius in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_DATA">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_DATA" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum amount of data in each leaf node.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_LEVEL">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_LEVEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_LEVEL" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum deep level of the octree.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MAX_R">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MAX_R</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2089020000</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MAX_R" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum and minimum distance of octree data from the center of the Sun in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MIN_1">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MIN_1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MIN_1" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum coordinates for the first quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MIN_2">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MIN_2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MIN_2" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum coordinates for the second quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MIN_3">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MIN_3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MIN_3" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum coordinates for the third quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MIN_4">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MIN_4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MIN_4" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum coordinates for the fourth quadrant in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.octree_params.MIN_COORD">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.octree_params.</span></span><span class="sig-name descname"><span class="pre">MIN_COORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#thomsonpy.config.octree_params.MIN_COORD" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum bounds for octree according a <code class="docutils literal notranslate"><span class="pre">MAX_R</span></code> radius in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+</section>
+<section id="module-thomsonpy.config.paths">
+<span id="thomsonpy-config-paths-module"></span><h2>thomsonpy.config.paths module<a class="headerlink" href="#module-thomsonpy.config.paths" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-paths"></span><dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.MODELS_PATH">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">MODELS_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data/projects/all-sun-maxr3.5/models/'</span></em><a class="headerlink" href="#thomsonpy.config.paths.MODELS_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>Path to the folder containing the final image models of the Thomson scattering computation.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.OCTREES_PATH">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">OCTREES_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data/projects/all-sun-maxr3.5/data_structures/'</span></em><a class="headerlink" href="#thomsonpy.config.paths.OCTREES_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>Path to the folder containing the binary objects with the data structures.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.OCTREE_DATA_PATH">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">OCTREE_DATA_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data/projects/all-sun-maxr3.5/data_format/'</span></em><a class="headerlink" href="#thomsonpy.config.paths.OCTREE_DATA_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>Path to the formatted data.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.PREDSCI_DATA_PATH">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">PREDSCI_DATA_PATH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data/predictive_science/eclipse2021_mhd_final/corona/'</span></em><a class="headerlink" href="#thomsonpy.config.paths.PREDSCI_DATA_PATH" title="Permalink to this definition"></a></dt>
+<dd><p>Path to the base folder of the raw models provided by Predictive Science Inc.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.PREDSCI_FILENAME">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">PREDSCI_FILENAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rho002.hdf'</span></em><a class="headerlink" href="#thomsonpy.config.paths.PREDSCI_FILENAME" title="Permalink to this definition"></a></dt>
+<dd><p>Filename of the raw model.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.paths.PROJECT_NAME">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.paths.</span></span><span class="sig-name descname"><span class="pre">PROJECT_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all-sun-maxr3.5'</span></em><a class="headerlink" href="#thomsonpy.config.paths.PROJECT_NAME" title="Permalink to this definition"></a></dt>
+<dd><p>Path to the base folder of the project in execution.</p>
+</dd></dl>
+
+</section>
+<section id="module-thomsonpy.config.solar_imager_params">
+<span id="thomsonpy-config-solar-imager-params-module"></span><h2>thomsonpy.config.solar_imager_params module<a class="headerlink" href="#module-thomsonpy.config.solar_imager_params" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-solar_imager_params"></span><div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>The coordinates system is centered on the center of the Sun and defined by the right-hand rule.</dt><dd><ul class="simple">
+<li><p><strong>Y</strong>: vertical axis (|).</p></li>
+<li><p><strong>X</strong>: horizontal axis (—).</p></li>
+<li><p><strong>Z</strong>: axis aligned with the center of the Sun and the Observer point (·).</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.IMAGE_MAX">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">IMAGE_MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([1.47716021e+09,</span> <span class="pre">1.47716021e+09])</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.IMAGE_MAX" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum coordinates of the image in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.IMAGE_MIN">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">IMAGE_MIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.IMAGE_MIN" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum coordinates of the image in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.IMAGE_NUM_POINTS">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">IMAGE_NUM_POINTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">739</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.IMAGE_NUM_POINTS" title="Permalink to this definition"></a></dt>
+<dd><p>Number of points of the image according to the coordinates (<code class="docutils literal notranslate"><span class="pre">MAX_COORD</span></code> and <code class="docutils literal notranslate"><span class="pre">MIN_COORD</span></code>) and the <code class="docutils literal notranslate"><span class="pre">IMAGE_RESOLUTION</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.IMAGE_RESOLUTION">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">IMAGE_RESOLUTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2000000</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.IMAGE_RESOLUTION" title="Permalink to this definition"></a></dt>
+<dd><p>Image resolution in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.MAX_COORD">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">MAX_COORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1477160208.0343215</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.MAX_COORD" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum common value for the coordinates of the image in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.MAX_VIS_R">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">MAX_VIS_R</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2089020000</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.MAX_VIS_R" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum radius of image visualization in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.MIN_COORD">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">MIN_COORD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.MIN_COORD" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum common value for the coordinates of the image in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.OBSERVER">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">OBSERVER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0,</span> <span class="pre">149713100000])</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.OBSERVER" title="Permalink to this definition"></a></dt>
+<dd><p>Position of the observer (the Earth) in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.solar_imager_params.SUN_CENTER">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.solar_imager_params.</span></span><span class="sig-name descname"><span class="pre">SUN_CENTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">array([0,</span> <span class="pre">0,</span> <span class="pre">0])</span></em><a class="headerlink" href="#thomsonpy.config.solar_imager_params.SUN_CENTER" title="Permalink to this definition"></a></dt>
+<dd><p>Position of the centre of the Sun in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+</section>
+<section id="module-thomsonpy.config.thomson_scattering_params">
+<span id="thomsonpy-config-thomson-scattering-params-module"></span><h2>thomsonpy.config.thomson_scattering_params module<a class="headerlink" href="#module-thomsonpy.config.thomson_scattering_params" title="Permalink to this headline"></a></h2>
+<span class="target" id="module-thomson_scattering_params"></span><dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.EPSILON">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">EPSILON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.017453292519943295</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.EPSILON" title="Permalink to this definition"></a></dt>
+<dd><p>Elongation angle in <img class="math" src="_images/math/edef015585e4d2204d45d9d2fa04d54447b5c32b.png" alt="rad"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.FIN_Z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">FIN_Z</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">151105780000</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.FIN_Z" title="Permalink to this definition"></a></dt>
+<dd><p>Final/Upper limit for numerical integration of the Thomson scattering in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.INCR_Z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">INCR_Z</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">174085000.0</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.INCR_Z" title="Permalink to this definition"></a></dt>
+<dd><p>Step for numerical integration of the Thomson scattering in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.INI_Z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">INI_Z</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">148320420000</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.INI_Z" title="Permalink to this definition"></a></dt>
+<dd><p>Initial/Lower limit for numerical integration of the Thomson scattering in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.NUM_Z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">NUM_Z</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16.0</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.NUM_Z" title="Permalink to this definition"></a></dt>
+<dd><p>Number of points to be computed in numerical integration of the Thomson scattering in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.SIGMA_E">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">SIGMA_E</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7.95e-30</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.SIGMA_E" title="Permalink to this definition"></a></dt>
+<dd><p>Differential cross section for perpendicular Thomson scattering in <img class="math" src="_images/math/adf4a340cf8c82f5a15160498aaa5f6c7056b43f.png" alt="m^2 sr^{-1}"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.SOLAR_RADIUS">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">SOLAR_RADIUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">696340000</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.SOLAR_RADIUS" title="Permalink to this definition"></a></dt>
+<dd><p>Solar radius in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.T_SOL">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">T_SOL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5778</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.T_SOL" title="Permalink to this definition"></a></dt>
+<dd><p>Solar temperature in <img class="math" src="_images/math/52ddc0cde6d632f631533173562fe3ca375b1f32.png" alt="K"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.WAVELENGTH">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">WAVELENGTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5e-07</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.WAVELENGTH" title="Permalink to this definition"></a></dt>
+<dd><p>Observed wavelength in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="thomsonpy.config.thomson_scattering_params.X">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.config.thomson_scattering_params.</span></span><span class="sig-name descname"><span class="pre">X</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">149713100000</span></em><a class="headerlink" href="#thomsonpy.config.thomson_scattering_params.X" title="Permalink to this definition"></a></dt>
+<dd><p>Distance between the Observer (the Earth) and the Sun (distance <img class="math" src="_images/math/b615d68033ac287c426f136825a9cfe2d55a6a2f.png" alt="OS"/>) in <img class="math" src="_images/math/e9bc7da808d33a16a8347f27a519bd067186aa66.png" alt="m"/>.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="thomsonpy.html" class="btn btn-neutral float-left" title="thomsonpy package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="thomsonpy.constants.html" class="btn btn-neutral float-right" title="thomsonpy.constants package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Alicia Vázquez Ramos (SPG - IAA).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

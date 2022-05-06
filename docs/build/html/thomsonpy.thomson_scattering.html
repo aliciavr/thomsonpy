@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thomsonpy.thomson_scattering package &mdash; Thomson Scattering of the K - Corona 1.0.0-beta documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="thomsonpy.data_management.octree package" href="thomsonpy.data_management.octree.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Thomson Scattering of the K - Corona
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">thomsonpy Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="thomsonpy.html">thomsonpy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="thomsonpy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.config.html">thomsonpy.config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.constants.html">thomsonpy.constants package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.data_management.html">thomsonpy.data_management package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thomsonpy.data_management.octree.html">thomsonpy.data_management.octree package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">thomsonpy.thomson_scattering package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Thomson Scattering of the K - Corona</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">thomsonpy Documentation</a> &raquo;</li>
+          <li><a href="thomsonpy.html">thomsonpy package</a> &raquo;</li>
+      <li>thomsonpy.thomson_scattering package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/thomsonpy.thomson_scattering.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thomsonpy-thomson-scattering-package">
+<h1>thomsonpy.thomson_scattering package<a class="headerlink" href="#thomsonpy-thomson-scattering-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<section id="thomsonpy-thomson-scattering-ne-models-module">
+<h3>thomsonpy.thomson_scattering.ne_models module<a class="headerlink" href="#thomsonpy-thomson-scattering-ne-models-module" title="Permalink to this headline"></a></h3>
+<p>This module contains the electron density functions which admit readable models by this software.</p>
+<span class="target" id="module-thomsonpy.thomson_scattering.ne_models"></span><span class="target" id="module-ne_models"></span><dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.ne_models.crammer_model">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.ne_models.</span></span><span class="sig-name descname"><span class="pre">crammer_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.ne_models.crammer_model" title="Permalink to this definition"></a></dt>
+<dd><p>This model retrieves the electron number density profile obtained by Crammer et al. (1999) using the UVCS/WLC aboard SOHO satellite. Initially, the units are <img class="math" src="_images/math/c68e81cc20220f663352f79f396b7059334f175e.png" alt="cm^{-3}"/>. Therefore a units conversion factor have been applied to convert from <img class="math" src="_images/math/c68e81cc20220f663352f79f396b7059334f175e.png" alt="cm^{-3}"/> to <img class="math" src="_images/math/99b3b321f1f9c62973f24ab5c9814815aa2fce12.png" alt="m^{-3}"/>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>float</em>) – distance QS.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful with the units of parameter <code class="docutils literal notranslate"><span class="pre">d</span></code>. Its must be in <img class="math" src="_images/math/361f611540485b27b89234c9f13b061208c41b66.png" alt="RSol"/>. Otherwise, the model will not work properly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>electron number density profile at the given distance <img class="math" src="_images/math/badad346f6fbe2e237af99bfbd9a93a4da53a3da.png" alt="d"/>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.ne_models.predictive_science_model">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.ne_models.</span></span><span class="sig-name descname"><span class="pre">predictive_science_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NE_MODEL</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.ne_models.predictive_science_model" title="Permalink to this definition"></a></dt>
+<dd><p>This model retrieves the electron number density from a simulation made and published by <strong>Predictive Science Inc.</strong> for the <strong>solar eclipse of 4th December, 2021</strong> for a given distance <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> from the point of view of the observer (<img class="math" src="_images/math/ca1c00fd1af2e919aef045d7edc704a98cc7fccd.png" alt="O"/>) to the scattering point (<img class="math" src="_images/math/90cab5ae70bdb6e45756490226ba488f522c4c4e.png" alt="Q"/>) with a predefined <code class="docutils literal notranslate"><span class="pre">ThomsonGeometry</span></code> object that manages the coherence of the rest of the geometric components for the ray-tracing process.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This model will not work without a model (<code class="docutils literal notranslate"><span class="pre">NE_MODEL</span></code>) structured in the <code class="docutils literal notranslate"><span class="pre">Octree</span></code> data structure managed in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">thomsonpy</span></code> package.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>TG</strong> (<a class="reference internal" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry" title="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry</span></code></a>) – an object managing the internal coherence of the geometric components of the Thomson scattering ray-tracing process.</p></li>
+<li><p><strong>NE_MODEL</strong> (<a class="reference internal" href="thomsonpy.data_management.octree.html#thomsonpy.data_management.octree.octree.Octree" title="thomsonpy.data_management.octree.octree.Octree"><code class="xref py py-class docutils literal notranslate"><span class="pre">thomsonpy.data_management.octree.octree.Octree</span></code></a>) – an <code class="docutils literal notranslate"><span class="pre">Octree</span></code> containing a cloud of <code class="docutils literal notranslate"><span class="pre">Data`</span></code> objects representing the cloud of points with physical measures provided by Predictive Science Inc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>electron number density for the solar eclipse of 4th December, 2021.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="thomsonpy-thomson-scattering-thomson-scattering-tools-module">
+<h3>thomsonpy.thomson_scattering.thomson_scattering_tools module<a class="headerlink" href="#thomsonpy-thomson-scattering-thomson-scattering-tools-module" title="Permalink to this headline"></a></h3>
+<p>This module contains the main tools needed for computing Thomson scattering in the solar corona.</p>
+<span class="target" id="module-thomsonpy.thomson_scattering.thomson_scattering_tools"></span><span class="target" id="module-thomson_scattering_tools"></span><dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Gp">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Gp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Gp" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the Thomson scattering factor for the polarized intensity.</p>
+<div class="math">
+<p><img src="_images/math/78d3523572b2274877c41c03568a3a3e050c68f1.png" alt="G_P = \sin^2{\chi} \frac{\pi \sigma_e}{2 z^2} \left((1 - u) A + u D\right)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ, by default is z = 1 for a simplified form of the computations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>polarized Thomson scattering factor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Gr">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Gr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Gr" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the Thomson scattering factor for the radial intensity.</p>
+<div class="math">
+<p><img src="_images/math/b972e8a85ce2bd2b6d57cb34a3019444d73c2597.png" alt="G_R = G_T - G_P"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ, by default is z = 1 for a simplified form of the computations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>radial Thomson scattering factor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Gt">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Gt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Gt" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the Thomson scattering factor for the tangencial intensity.</p>
+<div class="math">
+<p><img src="_images/math/28d6507be5b507fe9c452526d78c3f2ae53e801d.png" alt="G_T = \frac{\pi \sigma_e}{2 z^2} \left((1-u) C + u D \right)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ, by default is z = 1 for a simplified form of the computations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tangencial Thomson scattering factor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Gtotal">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Gtotal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Gtotal" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the Thomson scattering factor for the total intensity.</p>
+<div class="math">
+<p><img src="_images/math/a679c30fcff0757c8876cb6d2558bdbe6f54d01a.png" alt="G_{Total} = 2 G_T - G_P"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ, by default is z = 1 for a simplified form of the computations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>radial Thomson scattering factor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Ip">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Ip" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the polarized intensity <img class="math" src="_images/math/cb08eac81a1bfd25c05b4df1431142769ed7b4a1.png" alt="I_P"/> as a function of the initial intensity <img class="math" src="_images/math/adcd782280d325715f28dea464d7791b13dfe769.png" alt="I_0"/>, 
+given by the Planck’s law, the cross section for perpendicular Thomson scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>, 
+the distance OQ (z), the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/> (T-Q-S), the scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/> 
+(S-Q-O) and the coefficient of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/>.</p>
+<div class="math">
+<p><img src="_images/math/23b1aaffa5d6d21c2cda67ddf2b31e4fe4c994e9.png" alt="I_P = I_0 \frac{\pi \sigma_e}{2 z^2} \sin^2{\chi} ((1-u) A + u B)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i0</strong> (<em>float</em>) – initial intensity, given by the Planck’s law.</p></li>
+<li><p><strong>sigma_e</strong> (<em>float</em>) – cross section for perpendicular scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>polarized intensity <img class="math" src="_images/math/cb08eac81a1bfd25c05b4df1431142769ed7b4a1.png" alt="I_P"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Ir">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Ir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Ir" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the radial intensity <img class="math" src="_images/math/cb08eac81a1bfd25c05b4df1431142769ed7b4a1.png" alt="I_P"/> as a function of the initial 
+intensity <img class="math" src="_images/math/adcd782280d325715f28dea464d7791b13dfe769.png" alt="I_0"/>, given by the Planck’s law, the cross section for 
+perpendicular Thomson scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>, the distance OQ (z), 
+the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/> (T-Q-S), the scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/> 
+(S-Q-O) and the coefficient of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/>.</p>
+<div class="math">
+<p><img src="_images/math/8df55bcfadc6b76866c9b6605e530701338f89d3.png" alt="I_R = I_T - I_P"/></p>
+</div><p>where</p>
+<div class="math">
+<p><img src="_images/math/3d4c67f4482a87dd0f55bbbe07ed461ac9c6c469.png" alt="I_T = I_0 \frac{\pi \sigma_e}{2 z^2} ((1 - u) C + u D) \
+
+I_P = I_0 \frac{\pi \sigma_e}{2 z^2} \sin^2{\chi} ((1-u) A + u B)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i0</strong> (<em>float</em>) – initial intensity, given by the Planck’s law.</p></li>
+<li><p><strong>sigma_e</strong> (<em>float</em>) – cross section for perpendicular scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>radial intensity <img class="math" src="_images/math/0bf2ef5069dbea477a29b26bebb3a2e06bc5c9be.png" alt="I_R"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Irec_z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Irec_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NE_MODEL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Irec_z" title="Permalink to this definition"></a></dt>
+<dd><p>Numerical integration of the Thomson scattering along the line of sight over z.</p>
+<div class="math">
+<p><img src="_images/math/cfe2baf211421458b1d6fda2cebab5905787d1f2.png" alt="\int_{z=z_0}^{z=z_f} f_{scattering}(z) dz = |f_{scattering}(z_{i+1}) - f_{scattering}(z_{i})| (z_{i+1} - z_i)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>, Q-O-S.</p></li>
+<li><p><strong>ini_z</strong> (<em>float</em>) – starting value for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>fin_z</strong> (<em>float</em>) – final value for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>incr_z</strong> (<em>float</em>) – step value in the numerical integration for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>TG</strong> (<em>float</em>) – object <cite>ThomsonGeometry</cite> storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.</p></li>
+<li><p><strong>NE_MODEL</strong> (<em>float</em>) – model of electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> needed for some simulations, not set by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>integrated Thomson scattering factor por a given geometry over z.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.It">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">It</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.It" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the tangencial intensity <img class="math" src="_images/math/1982dc8cfa5794657d805c8523c58e0a8e91d3bb.png" alt="I_T"/> as a function of the initial intensity
+<img class="math" src="_images/math/adcd782280d325715f28dea464d7791b13dfe769.png" alt="I_0"/>, given by the Planck’s law, the cross section for perpendicular Thomson
+scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>, the distance OQ (z), the angle <img class="math" src="_images/math/5e03ec61bc53cf50329840cfb9dcc1fb56b60140.png" alt="Omega"/> (T-Q-S) and the 
+coefficent of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/>.</p>
+<div class="math">
+<p><img src="_images/math/a4c95cc777f48666705abae6ddd3d41708e083b7.png" alt="I_T = I_0 \frac{\pi \sigma_e}{2 z^2} ((1 - u) C + u D)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i0</strong> (<em>float</em>) – initial intensity, given by the Planck’s law.</p></li>
+<li><p><strong>sigma_e</strong> (<em>float</em>) – cross section for perpendicular scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tangencial intensity <img class="math" src="_images/math/1982dc8cfa5794657d805c8523c58e0a8e91d3bb.png" alt="I_T"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.Itotal">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">Itotal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.Itotal" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the total intensity <img class="math" src="_images/math/2c504fa9002b330b15cce2089cf2dee2852a8741.png" alt="I_{Total}"/> as a function of the initial 
+intensity <img class="math" src="_images/math/adcd782280d325715f28dea464d7791b13dfe769.png" alt="I_0"/>, given by the Planck’s law, the cross section for 
+perpendicular Thomson scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>, the distance OQ (z), 
+the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/> (T-Q-S), the scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/> 
+(S-Q-O) and the coefficient of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/></p>
+<p>The functions <a href="#id1"><span class="problematic" id="id2">:py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.It`</span></a> and <a href="#id3"><span class="problematic" id="id4">:py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.Ip`</span></a> are used for the computations.</p>
+<div class="math">
+<p><img src="_images/math/c9d153d3f5e43ea2fa75937596c1310dfde85a36.png" alt="I_{Total} = 2I_T - I_P"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i0</strong> (<em>float</em>) – initial intensity, given by the Planck’s law.</p></li>
+<li><p><strong>sigma_e</strong> (<em>float</em>) – cross section for perpendicular scattering <img class="math" src="_images/math/b0d4511059b7d02521b102edf9da4ba7ac94ad89.png" alt="\sigma_e"/>.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle <img class="math" src="_images/math/52b130781cb6e2b47a5efb235ac1cb4162210d12.png" alt="\chi"/>, S-Q-O.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>total intensity <img class="math" src="_images/math/2c504fa9002b330b15cce2089cf2dee2852a8741.png" alt="I_{Total}"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">ThomsonGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sun_center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class manages the Thomson scattering geometry and also offers many methods useful for frequent calculations related with the Thomson scattering geometry. Additionally, its internal structure has been designed to support a ray-tracing process in the <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> direction between the observer point of view (<img class="math" src="_images/math/ca1c00fd1af2e919aef045d7edc704a98cc7fccd.png" alt="O"/>) and the scattering point (<img class="math" src="_images/math/90cab5ae70bdb6e45756490226ba488f522c4c4e.png" alt="Q"/>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_chi">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_chi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_chi" title="Permalink to this definition"></a></dt>
+<dd><p>It gets a value for the scattering angle, S-Q-O (rad) as a function of
+the distance OS (x), the distance OQ (z) and the elongation angle (<img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>), 
+S-Q-O.</p>
+<p>Distance QS (d) is needed for the computations, and therefore obtained from the function
+<code class="docutils literal notranslate"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x,</span> <span class="pre">z,</span> <span class="pre">epsilon)</span></code></p>
+<div class="math">
+<p><img src="_images/math/fa34af8996601b64241c76d642586c744a3ca054.png" alt="\chi = \arcsin{\frac{x \sin{\epsilon}}{d}} \quad where \quad 
+d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle, Q-O-S (rad).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>scattering angle, S-Q-O (rad).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d" title="Permalink to this definition"></a></dt>
+<dd><p>It gets a value for the distance QS (d) as a function of the distance OS (x),
+the distance OQ (z) and the elongation angle, <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/> (Q-O-S).</p>
+<div class="math">
+<p><img src="_images/math/699fc43a279281f1075b56392dd36cd0da7e6e31.png" alt="d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle, Q-O-S (rad).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distance QS (d).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_omega</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/> (T-Q-S) as a function of the distance OS (x),
+the distance OQ (z) and the elongation angle, <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/> (Q-O-S).</p>
+<p>Functions <code class="docutils literal notranslate"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x,</span> <span class="pre">z,</span> <span class="pre">epsilon)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega_d(d)</span></code> are used
+in the computations to obtain d and <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>.</p>
+<div class="math">
+<p><img src="_images/math/0bf5964de29eb5d0e44cc8657ea83bf5cae7d7df.png" alt="\Omega = \arcsin{\frac{RSol}{d}} \quad \quad \quad \quad
+where \quad d = \sqrt{x^2 + z^2 - 2 x z \cos{\epsilon}}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle, Q-O-S (rad).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega_d">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_omega_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega_d" title="Permalink to this definition"></a></dt>
+<dd><p>It gets a value for the omega angle between the distance QS and the distance
+QT as a function of the distance d and the radius of the Sun.</p>
+<div class="math">
+<p><img src="_images/math/8b885f892165dbd4ae1af57729c5f5b492d58921.png" alt="\Omega = \arcsin{\frac{RSol}{d}}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>float</em>) – distance QS (distance d).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>angle omega (rad).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_z">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_z" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a value for the distance OQ (z) as a function of the distance OS (x),
+the elongation angle <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>, and angle <img class="math" src="_images/math/fffd2357ee88a9c50ba9e831ed64c39c73d54a07.png" alt="\phi"/> (O-S-Q).</p>
+<div class="math">
+<p><img src="_images/math/4041018f05c9f1572f957276bda95910732979d0.png" alt="z = \frac{(x \tan \phi)}{(\sin{\epsilon} + \tan(\phi) \cos{\epsilon})}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – scattering angle (rad).</p></li>
+<li><p><strong>phi</strong> (<em>float</em>) – angle O-S-Q (rad).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distance OQ.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_z_intensidad">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">faux_z_intensidad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_z_intensidad" title="Permalink to this definition"></a></dt>
+<dd><p>It gets a value for the distance OQ (z) as a function of the distance OS (x),
+the distance QS (d) and the scattering angle (S-Q-O).</p>
+<div class="math">
+<p><img src="_images/math/be79bc21037e38b837d215818b6ce812cd2f2806.png" alt="z = d \cos{\chi} + \sqrt{d^2(\cos{\chi} - 1)^2 + x^2}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>d</strong> (<em>float</em>) – distance QS.</p></li>
+<li><p><strong>chi</strong> (<em>float</em>) – scattering angle (rad) between distance OQ and distance QS.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distance OQ.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_OQ">
+<span class="sig-name descname"><span class="pre">get_distance_OQ</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_OQ" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the distance between the Observer (O) and the Scattering Point (Q).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>distance OQ.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_OS">
+<span class="sig-name descname"><span class="pre">get_distance_OS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_OS" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the distance between the Observer (O) and the Center of the Sun (S).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>distance OS.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_SQ">
+<span class="sig-name descname"><span class="pre">get_distance_SQ</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_distance_SQ" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the distance between the Center of the Sun (S) and the Scattering Point (Q).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>distance SQ.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_elongation">
+<span class="sig-name descname"><span class="pre">get_elongation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_elongation" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the elongation angle, <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>, between the distance OS and 
+the distance OQ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>elongation (rad).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_radius">
+<span class="sig-name descname"><span class="pre">get_radius</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_radius" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the radius of the star.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>radius of the Sun.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_target">
+<span class="sig-name descname"><span class="pre">get_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.get_target" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the target <img class="math" src="_images/math/cc7a06d567c00fd0bd711cbba54072459d3ac931.png" alt="\vec{t}"/> of Thomson scattering 
+(a.k.a. real-time scattering point) from a pre-computed unitary
+direction <img class="math" src="_images/math/6a344aa2200c81c5f37d6bab40efbf4a4347f8fe.png" alt="\vec{d}_u"/> with the given parameter s.</p>
+<div class="math">
+<p><img src="_images/math/799d70ea5085545b4aede49d84832c62bf3a750f.png" alt="\vec{t} = \vec{o} + s \vec{d}_u"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>float</em>) – parameter of the segment.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a target <img class="math" src="_images/math/cc7a06d567c00fd0bd711cbba54072459d3ac931.png" alt="\vec{t}"/> for Thomson scattering.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray([float, float, float])</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.coef_limb_darkening">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">coef_limb_darkening</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000000000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.coef_limb_darkening" title="Permalink to this definition"></a></dt>
+<dd><p>Adaptation from the private function <code class="docutils literal notranslate"><span class="pre">__allen_clv</span></code> to obtain the coefficient
+of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/> needed for the Thomson scattering computations.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">__allen_clv</span></code> is a function based at the Allen tables (Astrophysical Quantities, 
+Springer 2000) an implemented in the SPG (IAA - CSIC) repositories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wavelength</strong> (<em>float</em>) – wavelength in I.S. units (meters).</p></li>
+<li><p><strong>units</strong> (<em>float</em>) – unit conversion factor, by default <img class="math" src="_images/math/8f2b6aa19d11648608dc06cb8cbc168742717366.png" alt="1E+10"/>, the one used to convert from meters to Ángstroms. Ángstroms are the unit used in <code class="docutils literal notranslate"><span class="pre">__allev_clv</span></code> function. If the parameter <code class="docutils literal notranslate"><span class="pre">wavelength</span></code> is not in I.S. units, a new value should be given.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coefficient of limb-darkening <img class="math" src="_images/math/9b444cf6329a14140aee8ff5a06ff30772cc1c2f.png" alt="u"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.f_Irec_z">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">f_Irec_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NE_MODEL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.f_Irec_z" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the factor of intensity received after the Thomson scattering phenomenon at a 
+point <img class="math" src="_images/math/c0d0f97cd9bb4e6571e2689163f9f2989b304f55.png" alt="z_i"/> of line of sight.</p>
+<div class="math">
+<p><img src="_images/math/280ce0f3d4aae7eb0224cb3d7ed3ce0baaf1b7d1.png" alt="f_{scattering_z}(z) = \rho(z) G_{Total}(z)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>, Q-O-S.</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – distance OQ (independent variable of the function).</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>TG</strong> (<em>float</em>) – object <cite>ThomsonGeometry</cite> storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.</p></li>
+<li><p><strong>NE_MODEL</strong> (<em>float</em>) – model of electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> needed for some simulations, not set by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>factor of intensity received from the Thomson scattering phenomenon at the given point.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.get_scattered_light">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">get_scattered_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wave</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ini_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fin_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incr_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TG</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NE_MODEL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.get_scattered_light" title="Permalink to this definition"></a></dt>
+<dd><p>Computation of the scattered light by the Thomson Scattering of the K-Corona.</p>
+<div class="math">
+<p><img src="_images/math/12eadb82f3fdbd63b764eeef7e60cecdb4f32e28.png" alt="I_{scattered} = I_0 \int_{z=z_0}^{z=z_f} f_{scattering}(z) dz"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wave</strong> (<em>float</em>) – wavelength of the solar spectrum.</p></li>
+<li><p><strong>temperature</strong> – temperature of the Sun.</p></li>
+<li><p><strong>x</strong> (<em>float</em>) – distance OS.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – elongation angle <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/>, Q-O-S.</p></li>
+<li><p><strong>ini_z</strong> (<em>float</em>) – starting value for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>fin_z</strong> (<em>float</em>) – final value for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>incr_z</strong> (<em>float</em>) – step value in the numerical integration for the independent variable <img class="math" src="_images/math/8d051150f8669295ecdbe92367941012175a824d.png" alt="z"/> representing the distance OQ.</p></li>
+<li><p><strong>u</strong> (<em>float</em>) – coefficient of limb-darkening.</p></li>
+<li><p><strong>TG</strong> (<em>float</em>) – object <cite>ThomsonGeometry</cite> storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.</p></li>
+<li><p><strong>NE_MODEL</strong> (<em>float</em>) – model of electron density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> needed for some simulations, not set by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>scattered light for a given wavelength, temperature and line of sight (<img class="math" src="_images/math/2dbc519c138cbfcd7b1edf887754e9cde3a99355.png" alt="W·m^-3"/> in I.S. units).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.ley_wien">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">ley_wien</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.ley_wien" title="Permalink to this definition"></a></dt>
+<dd><p>Given a value for temperature it gives the value of the wavelength with 
+the maximum black body emission.</p>
+<div class="math">
+<p><img src="_images/math/fa39bb59ebb2ac7179b2f3c7f7754649c4a933da.png" alt="\lambda_{max} = \frac{2.8978E-3}{T}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>float</em>) – temperature of the black body.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the wavelength value with the maximum black body emission.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.radiacion_planck">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">radiacion_planck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wave</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_wavelength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.radiacion_planck" title="Permalink to this definition"></a></dt>
+<dd><p>It computes the Planck’s law for the black body radiation.</p>
+<p>Two versions of this law are implemented:</p>
+<ul>
+<li><dl>
+<dt>The one based on the wavelength:</dt><dd><div class="math">
+<p><img src="_images/math/cdcae2b1c7cc8c98d6ab109dc861121297815c08.png" alt="I_\lambda = \frac{2 h c^2}{\lambda^5}\frac{1}{e^{\frac{hc}{\lambda k T}} - 1}"/></p>
+</div></dd>
+</dl>
+</li>
+<li><dl>
+<dt>The one based on the frequency:</dt><dd><div class="math">
+<p><img src="_images/math/c8a1b57a14b6e3b13a8389f3833e53e4a31943f1.png" alt="I_\nu = \frac{2 h \nu^3}{c^2}\frac{1}{e^{\frac{h \nu}{k T}}-1}"/></p>
+</div></dd>
+</dl>
+</li>
+</ul>
+<p>Where:</p>
+<ul class="simple">
+<li><p><img class="math" src="_images/math/a64e4ff1b309031494363dcc57eb516809b7006d.png" alt="h = 6.62607015·10^{-34} J·s"/> Planck’s constant.</p></li>
+<li><p><img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/> is the wavelength of the wave.</p></li>
+<li><p><img class="math" src="_images/math/14eb89266154200b9c81dcfc3bd058638fa221bf.png" alt="\nu"/> is the frequency of the wave.</p></li>
+<li><p><img class="math" src="_images/math/b083c095f0810d4e06ce239c76a705a46aa1b2d8.png" alt="k = 1.38·10^{-23}J·K^{-1}"/> Boltzmann’s constant.</p></li>
+<li><p><img class="math" src="_images/math/8fd656b85cf3fdb2ad864535b22ca966a0358df4.png" alt="c = 3·10^8m·s^{-1}"/> is speed of light.</p></li>
+<li><p><img class="math" src="_images/math/9a3794d4306e72377079a961dfbbcbf82b859731.png" alt="T = 5778 K"/> is temperature of the black body (in this case the Sun).</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature</strong> (<em>float</em>) – temperature of the black body, in this case, of the Sun.</p></li>
+<li><p><strong>wave</strong> (<em>float</em>) – property of the wave (it can be the wavelength <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/> or the frequency <img class="math" src="_images/math/14eb89266154200b9c81dcfc3bd058638fa221bf.png" alt="\nu"/>) defined by the parameter <code class="docutils literal notranslate"><span class="pre">is_wavelength</span></code>.</p></li>
+<li><p><strong>is_wavelength</strong> (<em>boolean</em>) – <code class="docutils literal notranslate"><span class="pre">True</span></code> if the parameter <code class="docutils literal notranslate"><span class="pre">wave</span></code> represents the wavelength <img class="math" src="_images/math/cefc603e5658facb747581f9567192993f21c7ab.png" alt="\lambda"/> of the wave, <code class="docutils literal notranslate"><span class="pre">False</span></code> if the parameter <code class="docutils literal notranslate"><span class="pre">wave</span></code> represents the frequency <img class="math" src="_images/math/14eb89266154200b9c81dcfc3bd058638fa221bf.png" alt="\nu"/> of the wave. The default value is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>radiation of the black body as a function of the wavelength <img class="math" src="_images/math/d0ab2f3783f784466312a004c16f15ffbd4b4127.png" alt="I_\lambda"/> or as a function of the frequency <img class="math" src="_images/math/d9e9f12867495c4bbbc81fcec66f5bf6734a89da.png" alt="I_\nu"/>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulst">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">vanDeHulst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficient</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulst" title="Permalink to this definition"></a></dt>
+<dd><p>It computes any of the four coefficients of van de Hulst given a value for the
+angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/> (T-Q-S).</p>
+<p>The name of the coefficients can be either in uppercase or lowercase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p></li>
+<li><p><strong>coefficient</strong> (<em>string</em>) – name of the coefficient of van de Hulst (in uppercase or lowercase).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the value of the asked coefficient.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstA">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">vanDeHulstA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstA" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the coefficient A of van de Hulst as a function of the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>.</p>
+<div class="math">
+<p><img src="_images/math/adbf117d0323f0e679696892faf1c8b8c98b351e.png" alt="A = \cos{\Omega} \sin^2{\Omega}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coefficient A of van de Hulst.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstB">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">vanDeHulstB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstB" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the coefficient B of van de Hulst as a function of the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>.</p>
+<div class="math">
+<p><img src="_images/math/2967f8c5371167ce1138a803ab82128053770c3c.png" alt="B = -\frac{1}{8} \left(1 - 3 \sin^2{\Omega} - \frac{\cos^2{\Omega}}{\sin{\Omega}} (1 + 3 \sin^2{\Omega}) \log{\left(\frac{1 + \sin{\Omega}}{\cos{\Omega}}\right)}\right)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coefficient B of van de Hulst.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstC">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">vanDeHulstC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstC" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the coefficient C of van de Hulst as a function of the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>.</p>
+<div class="math">
+<p><img src="_images/math/5fd10daf1db57391d82707724acd85289d67ae81.png" alt="C = \frac{4}{3} - \cos{\Omega} - \frac{\cos^3{\Omega}}{3}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coefficient C of van de Hulst.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstD">
+<span class="sig-prename descclassname"><span class="pre">thomsonpy.thomson_scattering.thomson_scattering_tools.</span></span><span class="sig-name descname"><span class="pre">vanDeHulstD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#thomsonpy.thomson_scattering.thomson_scattering_tools.vanDeHulstD" title="Permalink to this definition"></a></dt>
+<dd><p>It gets the coefficient D of van de Hulst as a function of the angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>.</p>
+<div class="math">
+<p><img src="_images/math/0a3206d2076e266d569f2648a018ffb7243d15c6.png" alt="D = \frac{1}{8}  \left(5 + \sin^2{\Omega} - \frac{\cos^2{\Omega}}{\sin{\Omega}} (5 - \sin^2{\Omega}) \log{\left(\frac{1 + \sin{\Omega}}{\cos{\Omega}}\right)}\right)"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>omega</strong> (<em>float</em>) – angle <img class="math" src="_images/math/8b79605e88e6ebb950c74a1319cdc046dae2069c.png" alt="\Omega"/>, T-Q-S (rad).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Coefficient D of van de Hulst.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="thomsonpy.data_management.octree.html" class="btn btn-neutral float-left" title="thomsonpy.data_management.octree package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Alicia Vázquez Ramos (SPG - IAA).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

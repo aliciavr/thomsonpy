@@ -5,6 +5,9 @@ src/thomsonpy.egg-info/
 */__pycache__/*
 *.pyc
 *.obj
-docs/build/
-docs/sources/_templates/
+
+
+src/
+#docs/build/
+#docs/sources/_templates/
 
