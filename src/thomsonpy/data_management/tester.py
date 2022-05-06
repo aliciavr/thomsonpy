@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 14 11:52:57 2021
-
-@author: aliciavr
+.. module:: formatter
+        :platform: Unix
+        :synopsis: testing script
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 import numpy as np
 import pickle

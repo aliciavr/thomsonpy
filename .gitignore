@@ -1,9 +1,10 @@
 data/
 src/dist/
 src/thomsonpy.egg-info/
-aux_notebooks_code/
 *.ipynb_checkpoints*
 */__pycache__/*
 *.pyc
 *.obj
+docs/build/
+docs/sources/_templates/
 

@@ -1,112 +1,116 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 14 11:52:57 2021
-
-@author: aliciavr
+.. module:: fragmenter
+        :platform: Unix
+        :synopsis: it has tools for selecting and fragmenting the original data.
+.. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
+
 import numpy as np
-import pickle
 from pyhdf.SD import SD
-import time
 import thomsonpy.data_management.formatter as formatter
-import thomsonpy.config.paths as paths
 
-# DATA LOADING FROM PREDICTIVE SCIENCE FILES
+def get_ne_raw(filepath):
+    """
+    It loads and the raw model of electron density provided by Predictive Science Inc.
+    
+    :param filepath: filepath to the file storing the raw model.
+    :type filepath: string
+    
+    :return: the electron density raw model.
+    :rtype: np.array([int, int, int])
+    """
+    hdf = SD(filepath)
+    print("\nLoading datasets from", filepath, ":\n", hdf.datasets())
+    data = hdf.select(3).get()  # DATA CUBE OF ELECTRON DENSITY (RHO)
+                                                                           
+    num_points = data.size
+    print("# POINTS = ", num_points)
+    
+    return data
 
-rho_file = paths.NE_PREDSCI_DATA_PATH
+def get_ne_raw_coords(filepath, opt):
+    """
+    It gets the values for the coordinates indicated at ``opt`` parameter of the raw data cube provided by Predictive Science and that can be obtained with the function :py:func:`thomsonpy.data_management.fragmenter`.
+    
+    :param filepath: filepath to the file storing the raw model.
+    :type filepath: string
+    :param opt: it accepts the values ``phi``, ``theta`` or ``radial``, indicating the coordinate in the Spherical Coordinates Systems to be loaded.
+    :type opt: string
+    
+    :return: the values for the chosen spherical coordinate. ``None`` if the ``opt`` parameter has an invalid value.
+    :rtype: np.array([float])
+    """
+    
+    hdf = SD(filepath)
+    print("\nLoading datasets from", filepath, ":\n", hdf.datasets())
+    
+    coords = None
+    if opt == "phi":
+        coords = hdf.select(0).get()  # PHI (rad, 0-2PI) 699
+        num_phi = coords.size
+        print("\nPHI (rad, 0-2PI). # phi =", num_phi)
+    elif opt == "theta":
+        coords = hdf.select(1).get()  # THETA (rad, 0-PI) 327
+        num_theta = coords.size
+        print("THETA (rad, 0-PI). # theta =", num_theta)
+    elif opt == "radial":
+        coords = hdf.select(2).get()  # RADIAL (RSOL, 1-30) 288
+        num_radial = coords.size    
+        print("RADIAL (RSOL, 1-30). # radial =", num_radial)
 
-hdf = SD(rho_file)
-print("\nLoading datasets from", paths.NE_PREDSCI_DATA_PATH, ":\n", hdf.datasets())
-data_phi = hdf.select(0).get()  # PHI (rad, 0-2PI) 699
-data_theta = hdf.select(1).get()  # THETA (rad, 0-PI) 327
-data_radial = hdf.select(2).get()  # RADIAL (RSOL, 1-30) 288
-data = hdf.select(3).get()  # DATA CUBE OF ELECTRON DENSITY (RHO)
+    return coords 
 
-num_phi = data_phi.size
-num_theta = data_theta.size
-num_radial = data_radial.size                                                                               
-num_points = data.size
-print("\nPHI (rad, 0-2PI). # phi =", num_phi)
-print("THETA (rad, 0-PI). # theta =", num_theta)
-print("RADIAL (RSOL, 1-30). # radial =", num_radial)
-print("# POINTS = ", num_points)
+def selection(r, theta, phi, ne):
+    """
+    
+    :param r:
+    :type r: float
+    :param theta:
+    :type theta: float
+    :param phi:
+    :type phi: float
+    :param ne:
+    :type ne: float
+    
+    :return:
+    :rtype: boolean
+    
+    """
+    cartesian_coords = formatter.spherical_to_cartesian(r, theta, phi)
+    x = cartesian_coords[0]
+    y = cartesian_coords[1]
+    z = cartesian_coords[2]
+    limit = 3.5
+    return     (x <= limit and x >= -limit and
+                y <= limit and y >= -limit and
+                z <= limit and z >= -limit)
 
-# DATA FRAGMENTING
-print("\nStarting data fragmenting...")
-
-it = np.nditer(data, flags=['multi_index'])
-
-points_1 = list()
-ne_1 = list()
-points_2 = list()
-ne_2 = list()
-points_3 = list()
-ne_3 = list()
-points_4 = list()
-ne_4 = list()
-
-# Progress and auxiliar variables
-max_r = -1 
-progress = 0
-ini_time = time.perf_counter()
-
-# Fragmentation process.
-for ne in it:
-    i, j, k = it.multi_index
-    if ne > 1e-1:
+def fragment(selection_func, format_func, ne_raw, data_radial, data_theta, data_phi, progress_step = 1e6): 
+    """
+    
+    :param selection_func:
+    :type:
+    
+    """
+    it = np.nditer(ne_raw, flags=['multi_index'])
+    num_points = ne_raw.size
+    print(num_points)
+    data = []
+    # Progress and auxiliar variables
+    progress = 0
+    # Fragmentation process.
+    for ne_mas in it:
+        i, j, k = it.multi_index
         r = data_radial[k]
         theta = data_theta[j]
         phi = data_phi[i]
-        coords = formatter.spherical_to_cartesian(r, theta, phi)
-        if coords[0] >= 0 and coords[1] >= 0:
-            # Octree 1: x >=0 & y >= 0
-            points_1.append(coords)
-            ne_1.append(ne)
-        elif coords[0] <= 0 and coords[1] >= 0:
-            # Octree 2: x <= 0 & y >= 0
-            points_2.append(coords)
-            ne_2.append(ne)
-        elif coords[0] <= 0 and coords[1] <= 0:
-            # Octree 3: x <= 0 & y <= 0
-            points_3.append(coords)
-            ne_3.append(ne)
-        elif coords[0] >= 0 and coords[1] <= 0:
-            # Octree 4: x >= 0 & y <= 0
-            points_4.append(coords)
-            ne_4.append(ne)
+
+        if selection(r, theta, phi, ne_mas) == True:
+            d = format_func(r = r, theta = theta, phi = phi, ne_mas = ne_mas)
+            data.append(d)
+        if progress % 1e6 == 0:
+            print(progress / num_points * 100, "%")
+        progress += 1
         
-        if r > max_r:
-            max_r = r
-    if progress % 3000000 == 0:
-        print(progress / num_points * 100, "%")
-    progress += 1
-
-fin_time = time.perf_counter()
-print("Data fragmentation in", fin_time - ini_time, "seconds.")
-
-print("\n# POINTS =", len(ne_1) + len(ne_2) + len(ne_3) + len(ne_4), " with ne > 1e-1 and max_r =", max_r, "RSol")
-print("Octree 1 has", len(ne_1), "points")
-print("Octree 2 has", len(ne_2), "points")
-print("Octree 3 has", len(ne_3), "points")
-print("Octree 4 has", len(ne_4), "points")
-
-# STORAGE
-# Octree 1
-formatter.dump(paths.OCTREE_DATA_PATH + "points_1.obj", np.array(points_1))
-formatter.dump(paths.OCTREE_DATA_PATH + "ne_1.obj", np.array(ne_1))
-
-# Octree 2
-formatter.dump(paths.OCTREE_DATA_PATH + "points_2.obj", np.array(points_2))
-formatter.dump(paths.OCTREE_DATA_PATH + "ne_2.obj", np.array(ne_2))
-
-# Octree 3
-formatter.dump(paths.OCTREE_DATA_PATH + "points_3.obj", np.array(points_3))
-formatter.dump(paths.OCTREE_DATA_PATH + "ne_3.obj", np.array(ne_3))
-
-# Octree 4
-formatter.dump(paths.OCTREE_DATA_PATH + "points_4.obj", np.array(points_4))
-formatter.dump(paths.OCTREE_DATA_PATH + "ne_4.obj", np.array(ne_4))
-
-print("Stored points and ne values for all octrees at", paths.OCTREE_DATA_PATH)
-
+    return data
