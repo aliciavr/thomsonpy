@@ -106,7 +106,7 @@ def fragment(selection_func, format_func, ne_raw, data_radial, data_theta, data_
         theta = data_theta[j]
         phi = data_phi[i]
 
-        if selection(r, theta, phi, ne_mas) == True:
+        if selection_func(r, theta, phi, ne_mas) == True:
             d = format_func(r = r, theta = theta, phi = phi, ne_mas = ne_mas)
             data.append(d)
         if progress % 1e6 == 0:
