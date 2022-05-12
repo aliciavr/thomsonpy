@@ -27,29 +27,29 @@ MAX_R = 3 * units.RSOL_TO_METERS
 MAX_COORD = MAX_R # * np.sqrt(1/2)
 """ Maximum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
-MIN_COORD = 0
+MIN_COORD = - MAX_R
 """ Minimum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
 # Quadrant 1: x >= 0 & y >= 0
 MAX_1 = np.array([MAX_COORD, MAX_COORD, MAX_COORD])
 """ Maximum coordinates for the first quadrant in :math:`m`. """
-MIN_1 = np.array([0, 0, MIN_COORD])
+MIN_1 = np.array([0, 0, MIN_COORD / 2])
 """ Minimum coordinates for the first quadrant in :math:`m`. """
 
 # Quadrant 2: x <= 0 & y >= 0
-MAX_2 = np.array([0, MAX_COORD, MAX_COORD])
+MAX_2 = np.array([0, MAX_COORD, MAX_COORD / 2])
 """ Maximum coordinates for the second quadrant in :math:`m`. """
-MIN_2 = np.array([MIN_COORD, 0, MIN_COORD])
+MIN_2 = np.array([MIN_COORD, 0, MIN_COORD / 2])
 """ Minimum coordinates for the second quadrant in :math:`m`. """
 
 # Quadrant 3: x <= 0 & y <= 0
-MAX_3 = np.array([0, 0, MAX_COORD])
+MAX_3 = np.array([0, 0, MAX_COORD / 2])
 """ Maximum coordinates for the third quadrant in :math:`m`. """
-MIN_3 = np.array([MIN_COORD, MIN_COORD, MIN_COORD])
+MIN_3 = np.array([MIN_COORD, MIN_COORD, MIN_COORD / 2])
 """ Minimum coordinates for the third quadrant in :math:`m`. """
 
 # Quadrant 4: x >= 0 & y <= 0
-MAX_4 = np.array([MAX_COORD, 0, MAX_COORD])
+MAX_4 = np.array([MAX_COORD, 0, MAX_COORD / 2])
 """ Maximum coordinates for the fourth quadrant in :math:`m`. """
-MIN_4 = np.array([0, MIN_COORD, MIN_COORD])
+MIN_4 = np.array([0, MIN_COORD, MIN_COORD / 2])
 """ Minimum coordinates for the fourth quadrant in :math:`m`. """
