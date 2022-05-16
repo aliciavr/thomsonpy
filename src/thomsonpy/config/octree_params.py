@@ -31,7 +31,7 @@ MIN_COORD = - MAX_R
 """ Minimum bounds for octree according a ``MAX_R`` radius in :math:`m`. """
 
 # Quadrant 1: x >= 0 & y >= 0
-MAX_1 = np.array([MAX_COORD, MAX_COORD, MAX_COORD])
+MAX_1 = np.array([MAX_COORD, MAX_COORD, MAX_COORD / 2])
 """ Maximum coordinates for the first quadrant in :math:`m`. """
 MIN_1 = np.array([0, 0, MIN_COORD / 2])
 """ Minimum coordinates for the first quadrant in :math:`m`. """
