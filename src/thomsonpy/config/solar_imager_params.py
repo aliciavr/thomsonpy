@@ -34,7 +34,7 @@ IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
 IMAGE_MIN = np.array([MIN_COORD, MIN_COORD])
 """ Minimum coordinates of the image in :math:`m`. """
 
-IMAGE_RESOLUTION = 50000000 #  (50000 km)
+IMAGE_RESOLUTION = 7600000 #  (7600 km)
 """ Image resolution in :math:`m`. """
 
 IMAGE_NUM_POINTS = int(np.rint((MAX_COORD - MIN_COORD) / IMAGE_RESOLUTION))
