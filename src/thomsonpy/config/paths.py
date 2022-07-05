@@ -5,7 +5,7 @@
 .. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 
-PROJECT_NAME = "all-sun-maxr3.5"
+PROJECT_NAME = "cmag"
 """ Path to the base folder of the project in execution. """
 
 PREDSCI_FILENAME = "rho002.hdf"

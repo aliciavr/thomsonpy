@@ -281,7 +281,7 @@ class ThomsonGeometry:
 
 """####**Ley de desplazamiento de Wien**"""
 
-def ley_wien(temperature):
+def wien_law(temperature):
     """
     Given a value for temperature it gives the value of the wavelength with 
     the maximum black body emission.
@@ -298,7 +298,7 @@ def ley_wien(temperature):
     
     return 2.8978E-3 / temperature
 
-def radiacion_planck(temperature, wave, is_wavelength = True):
+def planck_law(temperature, wave, is_wavelength = True):
     """
     It computes the Planck's law for the black body radiation. 
     
@@ -900,10 +900,9 @@ def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG 
     :rtype: float
     """
     u = coef_limb_darkening(wave)
-    I0 = radiacion_planck(temperature, wave)
+    I0 = planck_law(temperature, wave)
     scattering = Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG, NE_MODEL)
 
-    #scattered_light = I0 * scattering
-    scattered_light = scattering
+    scattered_light = I0 * scattering
 
     return scattered_light

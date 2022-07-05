@@ -23,9 +23,9 @@ OBSERVER = np.array([0, 0, units.AU_TO_METERS])
 
 MAX_VIS_R = 3 * units.RSOL_TO_METERS
 """ Maximum radius of image visualization in :math:`m`. """
-MAX_COORD = MAX_VIS_R * np.sqrt(1/2)
+MAX_COORD = MAX_VIS_R
 """ Maximum common value for the coordinates of the image in :math:`m`. """
-MIN_COORD = 0
+MIN_COORD = - MAX_VIS_R
 """ Minimum common value for the coordinates of the image in :math:`m`. """
 
 IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
@@ -34,7 +34,7 @@ IMAGE_MAX = np.array([MAX_COORD, MAX_COORD])
 IMAGE_MIN = np.array([MIN_COORD, MIN_COORD])
 """ Minimum coordinates of the image in :math:`m`. """
 
-IMAGE_RESOLUTION = 2000000 #  (2000 km)
+IMAGE_RESOLUTION = 7250000 #  (7250 km)
 """ Image resolution in :math:`m`. """
 
 IMAGE_NUM_POINTS = int(np.rint((MAX_COORD - MIN_COORD) / IMAGE_RESOLUTION))

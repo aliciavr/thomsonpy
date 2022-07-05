@@ -34,7 +34,7 @@ INI_Z = 213 * units.RSOL_TO_METERS
 FIN_Z = 217 * units.RSOL_TO_METERS
 """ Final/Upper limit for numerical integration of the Thomson scattering in :math:`m`. """
 
-INCR_Z = 0.25 * units.RSOL_TO_METERS
+INCR_Z = 0.125 * units.RSOL_TO_METERS
 """ Step for numerical integration of the Thomson scattering in :math:`m`. """
 
 NUM_Z = (FIN_Z - INI_Z) / INCR_Z
