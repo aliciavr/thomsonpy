@@ -21,7 +21,7 @@ MAX_LEVEL = 6
 MAX_DATA = 1000
 """ Maximum amount of data in each leaf node. """
 
-MAX_R = 3 * units.RSOL_TO_METERS
+MAX_R = 5 * units.RSOL_TO_METERS
 """ Maximum and minimum distance of octree data from the center of the Sun in :math:`m`. """
 
 MAX_COORD = MAX_R # * np.sqrt(1/2)
