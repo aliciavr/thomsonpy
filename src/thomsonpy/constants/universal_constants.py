@@ -11,5 +11,5 @@ h = 6.62607015E-34
 c = 3E8
 """Speed of light :math:`(m/s)`."""
 
-k = 1.38E-23 # Boltzmann's constant in J/K
+k = 1.38E-23  # Boltzmann's constant in J/K
 """Boltzmann's constant :math:`(J/K)`."""

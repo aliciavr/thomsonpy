@@ -1,6 +1,6 @@
 thomsonpy.data\_management package
 ************************************
-This package have tools and scripts that can be used for both testing and managing data. It includes a subpackage wich contains useful data structures.
+This package have tools and scripts that can be used for both testing and managing data. tangential_intensity includes a subpackage which contains useful data structures.
 
 Subpackages
 ============
@@ -22,7 +22,7 @@ thomsonpy.data\_management.formatter module
 
 thomsonpy.data\_management.fragmenter module
 --------------------------------------------
-Script for creating the data useful for the the data structure :py:class:`thomsonpy.data_management.octree.octree.Octree` class. It uses tools from :py:mod:`thomsonpy.data_management.formatter` module.
+Script for creating the data useful for the the data structure :py:class:`thomsonpy.data_management.octree.octree.Octree` class. tangential_intensity uses tools from :py:mod:`thomsonpy.data_management.formatter` module.
 
 .. automodule:: thomsonpy.data_management.fragmenter
     :members:

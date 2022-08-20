@@ -14,22 +14,23 @@ import thomsonpy.config.paths as paths
 import thomsonpy.constants.units as units
 import time
 
+
 def vis_octree_data(filepath):
     """
-    It renders the octree data selected in the fragmentation process and the it gives a rainbow color for testing structure.
+    tangential_intensity renders the octree data selected in the fragmentation process and the it gives a rainbow color for testing structure.
     """
     my_data = formatter.load(filepath)
 
     lista = list()
     for p in my_data:
         lista.append(p.get_coordinates() * units.METERS_TO_RSOL)
-        
+
     sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
 
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(lista)
-    #pcd.paint_uniform_color([1, 0, 0])
+    # pcd.paint_uniform_color([1, 0, 0])
 
     viewer = o3d.visualization.Visualizer()
     viewer.create_window()
@@ -42,20 +43,21 @@ def vis_octree_data(filepath):
     viewer.run()
     viewer.destroy_window()
 
+
 def vis_ne(filepath):
     """
-    It renders the octree data selected in the fragmentation process with the values of ne.
+    tangential_intensity renders the octree data selected in the fragmentation process with the values of ne.
     """
     my_data = formatter.load(filepath)
 
     points = list()
     colors = list()
-    
+
     for p in my_data:
         points.append(p.get_coordinates() * units.METERS_TO_RSOL)
         color = np.log(p.get_ne())
         colors.append(np.array([color, color, color]))
-    
+
     sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
 
@@ -73,7 +75,8 @@ def vis_ne(filepath):
     opt.background_color = np.asarray([0.0, 0.2, 0.2])
     viewer.run()
     viewer.destroy_window()
-    
+
+
 def vis_points_and_ne(i):
     points_filenames = ['points_1.obj', 'points_2.obj', 'points_3.obj', 'points_4.obj']
     pclouds = list()
@@ -108,7 +111,8 @@ def vis_points_and_ne(i):
     del pcloud
     del ne_cloud
     del pcd
-    
+
+
 def vis_octree(octree):
     octree_geom = octree.get_visual_octree()
     sphere = o3d.geometry.TriangleMesh.create_sphere(radius=1.0)
@@ -116,7 +120,7 @@ def vis_octree(octree):
     viewer = o3d.visualization.Visualizer()
     viewer.create_window()
     for i in octree_geom:
-            viewer.add_geometry(i)
+        viewer.add_geometry(i)
     viewer.add_geometry(sphere)
     opt = viewer.get_render_option()
     opt.show_coordinate_frame = True
@@ -125,14 +129,13 @@ def vis_octree(octree):
     viewer.destroy_window()
 
 
-
 def vis_found_and_not_found(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")
     my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
 
     listaFOUND = list()
     listaNOTFOUND = list()
-    
+
     length = len(my_data)
     times = []
     count = 0
@@ -162,7 +165,7 @@ def vis_found_and_not_found(i):
     print(f"Min time = {np.min(times)} seconds.")
     print(f"Mean time = {np.mean(times)} seconds.")
     print(f"Median time = {np.median(times)} seconds.")
-    sphere = o3d.geometry.TriangleMesh.create_sphere(radius= (1.0 * units.RSOL_TO_METERS))
+    sphere = o3d.geometry.TriangleMesh.create_sphere(radius=(1.0 * units.RSOL_TO_METERS))
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
 
     pcdFOUND = o3d.geometry.PointCloud()
@@ -184,19 +187,20 @@ def vis_found_and_not_found(i):
     viewer.run()
     viewer.destroy_window()
 
+
 def vis_found_and_not_found_multicore(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")
     my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
 
     listaFOUND = list()
     listaNOTFOUND = list()
-    
+
     length = len(my_data)
     times = []
     count = 0
     found = 0
     not_found = 0
-    
+
     print("Starting")
     for p in my_data:
         coord = p.get_coordinates()
@@ -223,7 +227,7 @@ def vis_found_and_not_found_multicore(i):
     print(f"Min time = {np.min(times)} seconds.")
     print(f"Mean time = {np.mean(times)} seconds.")
     print(f"Median time = {np.median(times)} seconds.")
-    sphere = o3d.geometry.TriangleMesh.create_sphere(radius= (1.0 * units.RSOL_TO_METERS))
+    sphere = o3d.geometry.TriangleMesh.create_sphere(radius=(1.0 * units.RSOL_TO_METERS))
     sphere.paint_uniform_color([0.8, 0.5, 0.0])
 
     pcdFOUND = o3d.geometry.PointCloud()
@@ -244,4 +248,3 @@ def vis_found_and_not_found_multicore(i):
     opt.background_color = np.asarray([0.0, 0.2, 0.2])
     viewer.run()
     viewer.destroy_window()
-    

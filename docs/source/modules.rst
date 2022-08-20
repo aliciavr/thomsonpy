@@ -1,6 +1,6 @@
 thomsonpy Documentation
 ***********************
-Here are the subpackaged and submodules description detailed.
+Here are the subpackages and submodules description detailed.
 
 .. toctree::
    :maxdepth: 4

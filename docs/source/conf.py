@@ -14,8 +14,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../src/thomsonpy'))
 
+sys.path.insert(0, os.path.abspath('../src/thomsonpy'))
 
 # -- Project information -----------------------------------------------------
 
@@ -28,7 +28,6 @@ version = '1.0'
 # The full version, including alpha/beta/rc tags
 release = '1.0.0-beta'
 
-
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -39,7 +38,7 @@ release = '1.0.0-beta'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.imgmath'
-]
+              ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -67,7 +66,6 @@ exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -105,7 +103,6 @@ html_static_path = ['_static']
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'ThomsonScatteringoftheK-Coronadoc'
 
-
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
@@ -134,7 +131,6 @@ latex_documents = [
      'Alicia Vázquez Ramos (SPG - IAA)', 'manual'),
 ]
 
-
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
@@ -143,7 +139,6 @@ man_pages = [
     (master_doc, 'thomsonscatteringofthek-corona', 'Thomson Scattering of the K - Corona Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -156,13 +151,12 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
 epub_title = project
 
-# The unique identifier of the text. This can be a ISBN number
+# The unique identifier of the text. This can be a ISBN
 # or the project homepage.
 #
 # epub_identifier = ''

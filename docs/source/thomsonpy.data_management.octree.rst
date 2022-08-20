@@ -6,7 +6,7 @@ Submodules
 
 thomsonpy.data\_management.octree.generate\_octree module
 ---------------------------------------------------------
-It generates the octree needed for managing the electron density model in the solar imager.
+tangential_intensity generates the octree needed for managing the electron density model in the solar imager.
 
 .. automodule:: thomsonpy.data_management.octree.generate_octree
     :members:
@@ -15,7 +15,7 @@ It generates the octree needed for managing the electron density model in the so
 
 thomsonpy.data\_management.octree.nearest module
 ------------------------------------------------
-It checks the correct construction of the octree.
+tangential_intensity checks the correct construction of the octree.
 
 .. automodule:: thomsonpy.data_management.octree.nearest
     :members:

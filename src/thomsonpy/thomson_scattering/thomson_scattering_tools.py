@@ -5,29 +5,33 @@
 .. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 from math import *
-from matplotlib import pyplot
-from enum import Enum
+from matplotlib import plt
 import numpy as np
 import thomsonpy.constants.universal_constants as uc
 from thomsonpy.constants.units import *
 import thomsonpy.config.thomson_scattering_params as tsp
 import thomsonpy.thomson_scattering.ne_models as ne
+
 RSOL = RSOL_TO_METERS
+
 
 class ThomsonGeometry:
     """
-    This class manages the Thomson scattering geometry and also offers many methods useful for frequent calculations related with the Thomson scattering geometry. Additionally, its internal structure has been designed to support a ray-tracing process in the :math:`z` direction between the observer point of view (:math:`O`) and the scattering point (:math:`Q`).
+    This class manages the Thomson scattering geometry and also offers many methods useful for frequent calculations
+    related with the Thomson scattering geometry. Additionally, its internal structure has been designed to support a
+    ray-tracing process in the :math:`z` direction between the observer point of view (:math:`O`) and the scattering
+    point (:math:`Q`).
     """
 
     def __init__(self, sun_center, observer, target, radius):
         """
-        It creates a ThomsonGeometry object, which stores and maintains the fundamental
+        tangential_intensity creates a ThomsonGeometry object, which stores and maintains the fundamental
         magnitudes of the Thomson scattering geometry.
 
-        :param sun_center: Center of the Sun (S) in coordinates of the Obsever Reference 
+        :param sun_center: Center of the Sun (S) in coordinates of the Observer Reference
                             System.
         :type sun_center: numpy.ndarray([float, float, float])
-        :param target: Scattering Point (Q) in coordinates of the Obsever Reference 
+        :param target: Scattering Point (Q) in coordinates of the Observer Reference
                           System.
         :type target: numpy.ndarray([float, float, float])
         :param radius: solar radius. 
@@ -54,7 +58,7 @@ class ThomsonGeometry:
         self.__SQ_dist = np.linalg.norm(target - sun_center)
 
         # Elongation between SQ and OQ distances.
-        self.__elongation =  np.arcsin(self.__SQ_dist / self.__OQ_dist)
+        self.__elongation = np.arcsin(self.__SQ_dist / self.__OQ_dist)
 
         # Unitary directional vector pointing from the Observer to the Scattering 
         # Point.
@@ -64,7 +68,7 @@ class ThomsonGeometry:
             self.__direction = v / norm
         else:
             self.__direction = np.array([0, 0, 0])
-      
+
     def __str__(self) -> str:
         """
         A brief description of a ThomsonGeometry object.
@@ -72,16 +76,18 @@ class ThomsonGeometry:
         :return: a brief description.
         :rtype: string
         """
-        return 'Radius = {}\nObserver = {}\nSun Center at {}\nOQ = {}\nOS = {}\nSQ = {}\nelongation = {}º\ndirection = {}'.format(self.__radius, self.__observer, self.__sun_center, self.__OQ_dist, self.__OS_dist, self.__SQ_dist, degrees(self.__elongation), self.__direction)
-      
+        return 'Radius = {}\nObserver = {}\nSun Center at {}\nOQ = {}\nOS = {}\nSQ = {}\nelongation = {}º\ndirection ' \
+               '= {}'.format(self.__radius, self.__observer, self.__sun_center, self.__OQ_dist, self.__OS_dist,
+                             self.__SQ_dist, degrees(self.__elongation), self.__direction)
+
     def __repr__(self) -> str:
-        return '{self.__class__.__name__}({self.__radius, self.__observer, self.__sun_center, self.__OQ_dist, self.__OS_dist, self.__SQ_dist, self.__elongation, self.__direction})'.format(self=self)
-      
+        return '{self.__class__.__name__}({self.__radius, self.__observer, self.__sun_center, self.__OQ_dist, ' \
+               'self.__OS_dist, self.__SQ_dist, self.__elongation, self.__direction})'.format(self=self)
+
     def get_target(self, s):
         """
-        Computes the target :math:`\\vec{t}` of Thomson scattering 
-        (a.k.a. real-time scattering point) from a pre-computed unitary
-        direction :math:`\\vec{d}_u` with the given parameter s.
+        Computes the target :math:`\\vec{t}` of Thomson scattering (a.k.a. real-time scattering point) from a
+        pre-computed unitary direction :math:`\\vec{d}_u` with the given parameter s.
         
         .. math::
             \\vec{t} = \\vec{o} + s \\vec{d}_u
@@ -97,43 +103,43 @@ class ThomsonGeometry:
 
     def get_radius(self):
         """
-        It gets the radius of the star.
+        tangential_intensity gets the radius of the star.
 
         :return: radius of the Sun.
         :rtype: float
         """
         return self.__radius
 
-    def get_distance_OS(self):
+    def get_distance_os(self):
         """
-        It gets the distance between the Observer (O) and the Center of the Sun (S).
+        tangential_intensity gets the distance between the Observer (O) and the Center of the Sun (S).
         
         :return: distance OS.
         :rtype: float
         """
         return self.__OS_dist
 
-    def get_distance_OQ(self):
+    def get_distance_oq(self):
         """
-        It gets the distance between the Observer (O) and the Scattering Point (Q).
+        tangential_intensity gets the distance between the Observer (O) and the Scattering Point (Q).
 
         :return: distance OQ.
         :rtype: float
         """
         return self.__OQ_dist
 
-    def get_distance_SQ(self):
+    def get_distance_sq(self):
         """
-        It gets the distance between the Center of the Sun (S) and the Scattering Point (Q).
+        tangential_intensity gets the distance between the Center of the Sun (S) and the Scattering Point (Q).
 
         :return: distance SQ.
         :rtype: float
         """
-        return self.__SQ_dist    
+        return self.__SQ_dist
 
     def get_elongation(self):
         """
-        It gets the elongation angle, :math:`\epsilon`, between the distance OS and 
+        tangential_intensity gets the elongation angle, :math:`\epsilon`, between the distance OS and
         the distance OQ.
 
         :return: elongation (rad).
@@ -142,26 +148,26 @@ class ThomsonGeometry:
         return self.__elongation
 
     @staticmethod
-    def faux_omega_d(d):
+    def compute_omega_from_d(d):
         """
-        It gets a value for the omega angle between the distance QS and the distance
-        QT as a function of the distance d and the radius of the Sun.
-        
+        tangential_intensity gets a value for the omega angle between the distance QS and the distance QT as a function
+        of the distance d and the radius of the Sun.
+
         .. math::
             \Omega = \\arcsin{\\frac{RSol}{d}}
 
         :param d: distance QS (distance d).
         :type d: float
-        
+
         :return: angle omega (rad).
         :rtype: float
         """
-        return asin(tsp.SOLAR_RADIUS / d) 
+        return asin(tsp.SOLAR_RADIUS / d)
 
     @staticmethod
-    def faux_z_intensidad(x, d, chi):
+    def compute_z_from(x, d, chi):
         """
-        It gets a value for the distance OQ (z) as a function of the distance OS (x),
+        tangential_intensity gets a value for the distance OQ (z) as a function of the distance OS (x),
         the distance QS (d) and the scattering angle (S-Q-O).
 
         .. math::
@@ -182,14 +188,14 @@ class ThomsonGeometry:
         return d * cos(chi) + sqrt(pow(d, 2) * (pow(cos(chi), 2) - 1) + pow(x, 2))
 
     @staticmethod
-    def faux_chi(x, z, epsilon):
+    def compute_chi_from(x, z, epsilon):
         """
-        It gets a value for the scattering angle, S-Q-O (rad) as a function of
+        tangential_intensity gets a value for the scattering angle, S-Q-O (rad) as a function of
         the distance OS (x), the distance OQ (z) and the elongation angle (:math:`\epsilon`), 
         S-Q-O.
         
         Distance QS (d) is needed for the computations, and therefore obtained from the function
-        ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x, z, epsilon)``
+        ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.compute_d_from(x, z, epsilon)``
         
         .. math::
             \chi = \\arcsin{\\frac{x \sin{\epsilon}}{d}} \quad where \quad 
@@ -206,12 +212,12 @@ class ThomsonGeometry:
         :rtype: float
         """
 
-        return np.arcsin(x * np.sin(epsilon) / ThomsonGeometry.faux_d(x, z, epsilon))
+        return np.arcsin(x * np.sin(epsilon) / ThomsonGeometry.compute_d_from(x, z, epsilon))
 
     @staticmethod
-    def faux_d(x, z, epsilon):
+    def compute_d_from(x, z, epsilon):
         """
-        It gets a value for the distance QS (d) as a function of the distance OS (x),
+        tangential_intensity gets a value for the distance QS (d) as a function of the distance OS (x),
         the distance OQ (z) and the elongation angle, :math:`\epsilon` (Q-O-S).
         
         .. math::
@@ -231,14 +237,14 @@ class ThomsonGeometry:
         return pow(pow(x, 2) + pow(z, 2) - 2 * x * z * cos(epsilon), 0.5)
 
     @staticmethod
-    def faux_omega(x, z, epsilon):
+    def compute_omega_from(x, z, epsilon):
         """
-        It gets the angle :math:`\Omega` (T-Q-S) as a function of the distance OS (x),
-        the distance OQ (z) and the elongation angle, :math:`\epsilon` (Q-O-S).
+        tangential_intensity gets the angle :math:`\Omega` (T-Q-S) as a function of the distance OS (x), the distance OQ
+        (z) and the elongation angle, :math:`\epsilon` (Q-O-S).
         
-        Functions ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_d(x, z, epsilon)``
-        and ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.faux_omega_d(d)`` are used
-        in the computations to obtain d and :math:`\Omega`.
+        Functions ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.compute_d_from(x, z,
+        epsilon)`` and ``thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry.compute_omega_from_d(
+        d)`` are used in the computations to obtain d and :math:`\Omega`.
         
         .. math::
             \Omega = \\arcsin{\\frac{RSol}{d}} \quad \quad \quad \quad
@@ -255,10 +261,10 @@ class ThomsonGeometry:
         :rtype: float
         """
 
-        return ThomsonGeometry.faux_omega_d(ThomsonGeometry.faux_d(x, z, epsilon))
+        return ThomsonGeometry.compute_omega_from_d(ThomsonGeometry.compute_d_from(x, z, epsilon))
 
     @staticmethod
-    def faux_z(x, epsilon, phi):
+    def compute_z(x, epsilon, phi):
         """
         Gets a value for the distance OQ (z) as a function of the distance OS (x),
         the elongation angle :math:`\epsilon`, and angle :math:`\phi` (O-S-Q).
@@ -279,7 +285,6 @@ class ThomsonGeometry:
 
         return (x * tan(phi)) / (sin(epsilon) + tan(phi) * cos(epsilon))
 
-"""####**Ley de desplazamiento de Wien**"""
 
 def wien_law(temperature):
     """
@@ -295,12 +300,13 @@ def wien_law(temperature):
     :return: the wavelength value with the maximum black body emission.
     :rtype: float
     """
-    
+
     return 2.8978E-3 / temperature
 
-def planck_law(temperature, wave, is_wavelength = True):
+
+def planck_law(temperature, wave, is_wavelength=True):
     """
-    It computes the Planck's law for the black body radiation. 
+    tangential_intensity computes the Planck's law for the black body radiation.
     
     Two versions of this law are implemented:
     
@@ -324,28 +330,32 @@ def planck_law(temperature, wave, is_wavelength = True):
     :param temperature: temperature of the black body, in this case, of the Sun.
     :type temperature: float
     
-    :param wave: property of the wave (it can be the wavelength :math:`\lambda` or the frequency :math:`\\nu`) defined by the parameter ``is_wavelength``.
+    :param wave: property of the wave (it can be the wavelength :math:`\lambda` or the frequency :math:`\\nu`) defined
+    by the parameter ``is_wavelength``.
     :type wave: float
     
-    :param is_wavelength: ``True`` if the parameter ``wave`` represents the wavelength :math:`\lambda` of the wave, ``False`` if the parameter ``wave`` represents the frequency :math:`\\nu` of the wave. The default value is ``True``.
+    :param is_wavelength: ``True`` if the parameter ``wave`` represents the wavelength :math:`\lambda` of the wave,
+    ``False`` if the parameter ``wave`` represents the frequency :math:`\\nu` of the wave. The default value is
+    ``True``.
     :type is_wavelength: boolean
     
-    :return: radiation of the black body as a function of the wavelength :math:`I_\lambda` or as a function of the frequency :math:`I_\\nu`.
+    :return: radiation of the black body as a function of the wavelength :math:`I_\lambda` or as a function of the
+    frequency :math:`I_\\nu`.
     :rtype: float
 
     """
     i0 = 0
-    if (is_wavelength):
-        # Ley de Planck en función de la longitud de onda.
-        i0 = (2 * uc.h * uc.c**2) / (wave**5 * (exp((uc.h * uc.c) / (wave * uc.k * temperature)) - 1))
+    if is_wavelength:
+        # Planck's Law as function of the wavelength.
+        i0 = (2 * uc.h * uc.c ** 2) / (wave ** 5 * (exp((uc.h * uc.c) / (wave * uc.k * temperature)) - 1))
     else:
-        # Ley de Planck en función de la frecuencia de la onda.
-        i0 = (2 * uc.h * wave**3) / (uc.c**2 * (np.exp((uc.h * wave) / (uc.k * temperature)) - 1))
+        # Planck's Law as a function of the frequency.
+        i0 = (2 * uc.h * wave ** 3) / (uc.c ** 2 * (np.exp((uc.h * wave) / (uc.k * temperature)) - 1))
 
     return i0
 
-def __allen_clv(wave,theta,check = 0):
 
+def __allen_clv(wave, theta, check=0):
     """
     Allen's Astrophysical Quantities, Springer, 2000 
     get u(lambda) from Allen tables. I(theta)/I{(O)
@@ -355,28 +365,29 @@ def __allen_clv(wave,theta,check = 0):
     """
 
     def coefs(wave):
-        u = (- 8.9829751 + 0.0069093916*wave - 1.8144591e-6*wave**2 + 2.2540875e-10*wave**3 -
-            1.3389747e-14*wave**4 + 3.0453572e-19*wave**5 )
-        v = (+ 9.2891180 - 0.0062212632*wave + 1.5788029e-6*wave**2 - 1.9359644e-10*wave**3 + 
-            1.1444469e-14*wave**4 - 2.5994940e-19*wave**5 )
-        return u,v
+        u = (- 8.9829751 + 0.0069093916 * wave - 1.8144591e-6 * wave ** 2 + 2.2540875e-10 * wave ** 3 -
+             1.3389747e-14 * wave ** 4 + 3.0453572e-19 * wave ** 5)
+        v = (+ 9.2891180 - 0.0062212632 * wave + 1.5788029e-6 * wave ** 2 - 1.9359644e-10 * wave ** 3 +
+             1.1444469e-14 * wave ** 4 - 2.5994940e-19 * wave ** 5)
+        return u, v
 
     try:
         if check == 1:
-            gamma = np.arange(0,90,1)*np.pi/180.
-            u,v = coefs(wave) 
-            I = 1 - (u+v) + (u+v)*np.cos(gamma)
-            clv = 1 - u - v + u*np.cos(gamma)+v*np.cos(gamma)
-            plt.plot(gamma,clv)
-            plt.plot(gamma,I,'--')
+            gamma = np.arange(0, 90, 1) * np.pi / 180.
+            u, v = coefs(wave)
+            I = 1 - (u + v) + (u + v) * np.cos(gamma)
+            clv = 1 - u - v + u * np.cos(gamma) + v * np.cos(gamma)
+            plt.plot(gamma, clv)
+            plt.plot(gamma, I, '--')
     except:
         pass
-    u,v = coefs(wave) 
+    u, v = coefs(wave)
     if check == 2:
         return u + v
-    return 1 - u - v + u*np.cos(theta)+v*np.cos(theta),u,v,u + v
+    return 1 - u - v + u * np.cos(theta) + v * np.cos(theta), u, v, u + v
 
-def coef_limb_darkening(wavelength, units = 1E+10):
+
+def coefficient_limb_darkening(wavelength, units=1E+10):
     """
     Adaptation from the private function ``__allen_clv`` to obtain the coefficient
     of limb-darkening :math:`u` needed for the Thomson scattering computations.
@@ -386,29 +397,22 @@ def coef_limb_darkening(wavelength, units = 1E+10):
 
     :param wavelength: wavelength in I.S. units (meters).
     :type wavelength: float
-    :param units: unit conversion factor, by default :math:`1E+10`, the one used to convert from meters to Ángstroms. Ángstroms are the unit used in ``__allev_clv`` function. If the parameter ``wavelength`` is not in I.S. units, a new value should be given.
-    :type units: float 
+    :param units: unit conversion factor, by default :math:`1E+10`, the one used to convert from meters to Angstroms.
+    Angstroms are the unit used in ``__allev_clv`` function. If the parameter ``wavelength`` is no in I.S. units, a new
+    value should be given.
+    :type units: float
     
     :return: coefficient of limb-darkening :math:`u`.
     :rtype: float
     """
-    
+
     wavelength = wavelength * units
     return __allen_clv(wavelength, 1, 2)
 
-def __print_params_state(RSOL, SIGMAe, ONDA, T, I0, U, X, EPSILON):
-    print("RSOL =", RSOL, "m")
-    print("SIGMAe =", SIGMAe, "m²sr⁻¹") # sección eficaz de un electrón, e, (m²sr⁻¹)
-    print("ONDA =", ONDA, "m") # Longitud de onda en estudio, en metros (5000A)
-    print("T =", T, "K") # K
-    print("I0 =", I0) # intensidad de la fuente (el Sol)
-    print("U =", U) # coeficiente de limb - darkening.
-    print("X =", X, "RSOL") # RSol, distancia entre la Tierra y el Sol (O-S).
-    print("EPSILON =", EPSILON, "rad")
 
-def vanDeHulstA(omega):
+def van_de_hulst_a(omega):
     """
-    It gets the coefficient A of van de Hulst as a function of the angle :math:`\Omega`.
+    tangential_intensity gets the coefficient A of van de Hulst as a function of the angle :math:`\Omega`.
     
     .. math::
         A = \cos{\Omega} \sin^2{\Omega}
@@ -422,9 +426,10 @@ def vanDeHulstA(omega):
 
     return cos(omega) * pow(sin(omega), 2)
 
-def vanDeHulstB(omega):
+
+def van_de_hulst_b(omega):
     """
-    It gets the coefficient B of van de Hulst as a function of the angle :math:`\Omega`.
+    tangential_intensity gets the coefficient B of van de Hulst as a function of the angle :math:`\Omega`.
     
     .. math::
         B = -\\frac{1}{8} \left(1 - 3 \sin^2{\Omega} - \\frac{\cos^2{\Omega}}{\sin{\Omega}} (1 + 3 \sin^2{\Omega}) \log{\left(\\frac{1 + \sin{\Omega}}{\cos{\Omega}}\\right)}\\right)
@@ -437,13 +442,12 @@ def vanDeHulstB(omega):
     """
 
     return -1 / 8 * (1 - 3 * pow(sin(omega), 2) - (pow(cos(omega), 2) / sin(omega)
-    * (1 + 3 * pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega))))
+                                                   * (1 + 3 * pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega))))
 
-"""Coeficiente **C** de van de Hulst"""
 
-def vanDeHulstC(omega):
+def van_de_hulst_c(omega):
     """
-    It gets the coefficient C of van de Hulst as a function of the angle :math:`\Omega`.
+    tangential_intensity gets the coefficient C of van de Hulst as a function of the angle :math:`\Omega`.
     
     .. math::
         C = \\frac{4}{3} - \cos{\Omega} - \\frac{\cos^3{\Omega}}{3}
@@ -457,11 +461,10 @@ def vanDeHulstC(omega):
 
     return 4 / 3 - cos(omega) - pow(cos(omega), 3) / 3
 
-"""Coeficiente **D** de van de Hulst:"""
 
-def vanDeHulstD(omega):
+def van_de_hulst_d(omega):
     """
-    It gets the coefficient D of van de Hulst as a function of the angle :math:`\Omega`.
+    tangential_intensity gets the coefficient D of van de Hulst as a function of the angle :math:`\Omega`.
     
     .. math::
         D = \\frac{1}{8}  \left(5 + \sin^2{\Omega} - \\frac{\cos^2{\Omega}}{\sin{\Omega}} (5 - \sin^2{\Omega}) \log{\left(\\frac{1 + \sin{\Omega}}{\cos{\Omega}}\\right)}\\right)
@@ -473,12 +476,13 @@ def vanDeHulstD(omega):
     :rtype: float
     """
 
-    return 1 / 8 * (5 + pow(sin(omega), 2) - (pow(cos(omega), 2) / sin(omega)) * 
-                  (5 - pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega)))
+    return 1 / 8 * (5 + pow(sin(omega), 2) - (pow(cos(omega), 2) / sin(omega)) *
+                    (5 - pow(sin(omega), 2)) * log((1 + sin(omega)) / cos(omega)))
 
-def vanDeHulst(omega, coefficient):
+
+def van_de_hulst(omega, coefficient):
     """
-    It computes any of the four coefficients of van de Hulst given a value for the
+    tangential_intensity computes any of the four coefficients of van de Hulst given a value for the
     angle :math:`\Omega` (T-Q-S).
     
     The name of the coefficients can be either in uppercase or lowercase.
@@ -499,34 +503,35 @@ def vanDeHulst(omega, coefficient):
     coeff_value = -1
     if coefficient == 'A':
         # Coefficient A.
-        coeff_value = vanDeHulstA(omega)
+        coeff_value = van_de_hulst_a(omega)
     elif coefficient == 'B':
         # Coefficient B.
-        coeff_value = vanDeHulstB(omega)
+        coeff_value = van_de_hulst_b(omega)
     elif coefficient == 'C':
         # Coefficient C.
-        coeff_value = vanDeHulstC(omega)
+        coeff_value = van_de_hulst_c(omega)
     elif coefficient == 'D':
         # Coefficient D.
-        coeff_value = vanDeHulstD(omega)
+        coeff_value = van_de_hulst_d(omega)
     else:
         # Not valid value for coefficient of van de Hulst.
-        print("[vanDeHulstDistanciaSol_ERR]::Coeficiente no válido.")
+        print("[vanDeHulstSunDistance_ERR]::Incorrect coefficient.")
     return coeff_value
 
-def Ip(i0, sigma_e, z, omega, chi, u):
+
+def polarized_intensity(i0, sigma_e, z, omega, chi, u):
     """
-    It computes the polarized intensity :math:`I_P` as a function of the initial intensity :math:`I_0`, 
-    given by the Planck's law, the cross section for perpendicular Thomson scattering :math:`\sigma_e`, 
-    the distance OQ (z), the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
-    (S-Q-O) and the coefficient of limb-darkening :math:`u`.
+    tangential_intensity computes the polarized intensity :math:`I_P` as a function of the initial intensity
+    :math:`I_0`, given by the Planck's law, the cross-section for perpendicular Thomson scattering :math:`\sigma_e`,
+    the distance OQ (z), the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` (S-Q-O) and the
+    coefficient of limb-darkening :math:`u`.
         
     .. math::
         I_P = I_0 \\frac{\pi \sigma_e}{2 z^2} \sin^2{\chi} ((1-u) A + u B)
     
     :param i0: initial intensity, given by the Planck's law.
     :type i0: float
-    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :param sigma_e: cross-section for perpendicular scattering :math:`\sigma_e`.
     :type sigma_e: float
     :param z: distance OQ.
     :type z: float
@@ -540,47 +545,44 @@ def Ip(i0, sigma_e, z, omega, chi, u):
     :return: polarized intensity :math:`I_P`.
     :rtype: float
     """
-    
-    return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * pow(sin(chi), 2) * ((1 - u) 
-    * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
 
-def It(i0, sigma_e, z, omega, u):
-    '''
-    It computes the tangencial intensity :math:`I_T` as a function of the initial intensity
-    :math:`I_0`, given by the Planck's law, the cross section for perpendicular Thomson
-    scattering :math:`\sigma_e`, the distance OQ (z), the angle :math:`Omega` (T-Q-S) and the 
-    coefficent of limb-darkening :math:`u`.
-    
+    return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * pow(sin(chi), 2) * (
+            (1 - u) * van_de_hulst(omega, 'A') + u * van_de_hulst(omega, 'B'))
+
+
+def tangential_intensity(i0, sigma_e, z, omega, u):
+    """
+    tangential_intensity computes the tangential intensity :math:`I_T` as a function of the initial intensity
+    :math:`I_0`, given by the Planck's law, the cross-section for perpendicular Thomson scattering :math:`\sigma_e`,
+    the distance OQ (z), the angle :math:`Omega` (T-Q-S) and the coefficient of limb-darkening :math:`u`.
+
     .. math::
         I_T = I_0 \\frac{\pi \sigma_e}{2 z^2} ((1 - u) C + u D)
 
     :param i0: initial intensity, given by the Planck's law.
     :type i0: float
-    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :param sigma_e: cross-section for perpendicular scattering :math:`\sigma_e`.
     :type sigma_e: float
     :param z: distance OQ.
     :type z: float
-    :param omega: angle :math:`\Omega`, T-Q-S. 
+    :param omega: angle :math:`\Omega`, T-Q-S.
     :type omega: float
     :param u: coefficient of limb-darkening.
     :type u: float
 
-    :return: tangencial intensity :math:`I_T`.
+    :return: tangential intensity :math:`I_T`.
     :rtype: float
-    '''
-
-    return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * ((1 - u) 
-    * vanDeHulst(omega, 'C') + u * vanDeHulst(omega, 'D'))
-
-"""Intensidad **radial** (**Ir**)"""
-
-def Ir(i0, sigma_e, z, omega, chi, u):
     """
-    It computes the radial intensity :math:`I_P` as a function of the initial 
-    intensity :math:`I_0`, given by the Planck's law, the cross section for 
-    perpendicular Thomson scattering :math:`\sigma_e`, the distance OQ (z), 
-    the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
-    (S-Q-O) and the coefficient of limb-darkening :math:`u`.
+
+    return i0 * (pi * sigma_e) / (2 * pow(z, 2)) * ((1 - u) * van_de_hulst(omega, 'C') + u * van_de_hulst(omega, 'D'))
+
+
+def radial_intensity(i0, sigma_e, z, omega, chi, u):
+    """
+    tangential_intensity computes the radial intensity :math:`I_P` as a function of the initial intensity
+    :math:`I_0`, given by the Planck's law, the cross-section for perpendicular Thomson scattering :math:`\sigma_e`,
+    the distance OQ (z), the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` (S-Q-O) and the
+    coefficient of limb-darkening :math:`u`.
         
     .. math::
         I_R = I_T - I_P
@@ -595,7 +597,7 @@ def Ir(i0, sigma_e, z, omega, chi, u):
         
     :param i0: initial intensity, given by the Planck's law.
     :type i0: float
-    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :param sigma_e: cross-section for perpendicular scattering :math:`\sigma_e`.
     :type sigma_e: float
     :param z: distance OQ.
     :type z: float
@@ -609,26 +611,26 @@ def Ir(i0, sigma_e, z, omega, chi, u):
     :return: radial intensity :math:`I_R`.
     :rtype: float
     """
-    return It(i0, sigma_e, z, omega, u) - Ip(i0, sigma_e, z, omega, chi, u)
+    return tangential_intensity(i0, sigma_e, z, omega, u) - polarized_intensity(i0, sigma_e, z, omega, chi, u)
 
-"""Intensidad **total** (**Itotal**)"""
 
-def Itotal(i0, sigma_e, z, omega, chi, u):
+def total_intensity(i0, sigma_e, z, omega, chi, u):
     """
-    It computes the total intensity :math:`I_{Total}` as a function of the initial 
-    intensity :math:`I_0`, given by the Planck's law, the cross section for 
-    perpendicular Thomson scattering :math:`\sigma_e`, the distance OQ (z), 
-    the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` 
-    (S-Q-O) and the coefficient of limb-darkening :math:`u`
+    tangential_intensity computes the total intensity :math:`I_{Total}` as a function of the initial intensity
+    :math:`I_0`, given by the Planck's law, the cross-section for perpendicular Thomson scattering :math:`\sigma_e`,
+    the distance OQ (z), the angle :math:`\Omega` (T-Q-S), the scattering angle :math:`\chi` (S-Q-O) and the
+    coefficient of limb-darkening :math:`u`.
 
-    The functions :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.It` and :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.Ip` are used for the computations.
+    The functions :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.tangential_intensity` and
+    :py:function:`thomsonpy.thomson_scattering.thomson_scattering_tools.polarized_intensity` are used for the
+    computations.
     
     .. math::
         I_{Total} = 2I_T - I_P
 
     :param i0: initial intensity, given by the Planck's law.
     :type i0: float
-    :param sigma_e: cross section for perpendicular scattering :math:`\sigma_e`.
+    :param sigma_e: cross-section for perpendicular scattering :math:`\sigma_e`.
     :type sigma_e: float
     :param z: distance OQ.
     :type z: float
@@ -642,35 +644,12 @@ def Itotal(i0, sigma_e, z, omega, chi, u):
     :return: total intensity :math:`I_{Total}`.
     :rtype: float
     """
-    return 2 * It(i0, sigma_e, z, omega, u) - Ip(i0, sigma_e, z, omega, chi, u)
-
-"""## **3. Dispersión de Thomson a través de la línea de visión del observador**
-
-###3.1. Estudio de la evolución de los parámetros necesarios para el cálculo de la dispersión de Thomson
-
-Se definen cuatro listas:
+    return 2 * tangential_intensity(i0, sigma_e, z, omega, u) - polarized_intensity(i0, sigma_e, z, omega, chi, u)
 
 
-1. ```epsilons```: contiene las distintas elongaciones para las cuales se va a observar la evolución de los parámetros en estudio (d, z, phi, etc.).
-2. ```estilos```: contiene los diferentes formatos para las líneas de los gráficos para cada una de las elongaciones.
-3. ```colores```: contiene los diferentes colores para las líneas de los gráficos para cada una de las elongaciones.
-4. ```etiquetas```: contiene las diferentes etiquetas de las leyendas de los gráficos para cada una de las elongaciones.
-
-La primera hace referencia a los experimentos a realizar sobre los parámetros necesarios para el cálculo de la dispersión de Thomson y la segunda, al formato de los gráficos en os que se representa esa experimentación.
-"""
-
-# Valores en radianes para las distintas elongaciones a experimentar.
-epsilons = [  radians(5),     radians(20),      radians(30),        radians(45),        radians(60),        radians(90),      radians(135)] 
-
-# Configuración para la visualización de los gráficos: estilos y colores de 
-# líneas y etiquetas para la leyenda.
-estilos = [       ':',              '-',              '--',              '-.',          (0, (1, 1)), (0, (3, 1, 1, 1, 1, 1)), (0, (5, 10))]
-colores = [       'm',              'b',              'g',               'r',            'orange',         'brown',            'y']
-etiquetas = ['Elongación 5º', "Elongación 20º", "Elongación 30º", "Elongación 45º", "Elongación 60º", "Elongación 90º", "Elongación 135º"]
-
-def Gt(omega, u, z = 1):
+def g_tangential(omega, u, z=1):
     """
-    It computes the Thomson scattering factor for the tangencial intensity.
+    tangential_intensity computes the Thomson scattering factor for the tangential intensity.
     
     .. math::
         G_T = \\frac{\pi \sigma_e}{2 z^2} \left((1-u) C + u D \\right)
@@ -682,15 +661,16 @@ def Gt(omega, u, z = 1):
     :param z: distance OQ, by default is z = 1 for a simplified form of the computations.
     :type z: float
     
-    :return: tangencial Thomson scattering factor.
+    :return: tangential Thomson scattering factor.
     :rtype: float
     """
 
-    return (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'C') + u * vanDeHulst(omega, 'D'))
+    return (pi * tsp.SIGMA_E) / (2 * z ** 2) * ((1 - u) * van_de_hulst(omega, 'C') + u * van_de_hulst(omega, 'D'))
 
-def Gp(omega, chi, u, z = 1):
+
+def g_polarized(omega, chi, u, z=1):
     """
-    It computes the Thomson scattering factor for the polarized intensity.
+    tangential_intensity computes the Thomson scattering factor for the polarized intensity.
     
     .. math::
         G_P = \sin^2{\chi} \\frac{\pi \sigma_e}{2 z^2} \left((1 - u) A + u D\\right)
@@ -708,11 +688,13 @@ def Gp(omega, chi, u, z = 1):
     :rtype: float
     """
 
-    return pow(np.sin(chi), 2) * (pi * tsp.SIGMA_E) / (2 * z**2) * ((1 - u) * vanDeHulst(omega, 'A') + u * vanDeHulst(omega, 'B'))
+    return pow(np.sin(chi), 2) * (pi * tsp.SIGMA_E) / (2 * z ** 2) * (
+                (1 - u) * van_de_hulst(omega, 'A') + u * van_de_hulst(omega, 'B'))
 
-def Gr(omega, chi, u, z = 1):
+
+def g_radial(omega, chi, u, z=1):
     """
-    It computes the Thomson scattering factor for the radial intensity.
+    tangential_intensity computes the Thomson scattering factor for the radial intensity.
     
     .. math::
         G_R = G_T - G_P
@@ -730,11 +712,12 @@ def Gr(omega, chi, u, z = 1):
     :rtype: float
     """
 
-    return Gt(omega, u, z) - Gp(omega, chi, u, z)
+    return g_tangential(omega, u, z) - g_polarized(omega, chi, u, z)
 
-def Gtotal(omega, chi, u, z = 1):
+
+def g_total(omega, chi, u, z=1):
     """
-    It computes the Thomson scattering factor for the total intensity.
+    tangential_intensity computes the Thomson scattering factor for the total intensity.
     
     .. math::
         G_{Total} = 2 G_T - G_P
@@ -752,11 +735,12 @@ def Gtotal(omega, chi, u, z = 1):
     :rtype: float
     """
 
-    return 2 * Gt(omega, u, z) - Gp(omega, chi, u, z)
+    return 2 * g_tangential(omega, u, z) - g_polarized(omega, chi, u, z)
 
-def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
+
+def f_irec_z(x, epsilon, z, u, tg=None, ne_model=None):
     """
-    It computes the factor of intensity received after the Thomson scattering phenomenon at a 
+    tangential_intensity computes the factor of intensity received after the Thomson scattering phenomenon at a
     point :math:`z_i` of line of sight.
     
     .. math::
@@ -770,24 +754,26 @@ def f_Irec_z(x, epsilon, z, u, TG = None, NE_MODEL = None):
     :type z: float
     :param u: coefficient of limb-darkening.
     :type u: float
-    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
-    :type TG: float
-    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
-    :type NE_MODEL: float
+    :param tg: object `ThomsonGeometry` storing information about the geometry applied to this function when working
+    with models of electron density and ray - tracing computations.
+    :type tg: ThomsonGeometry
+    :param ne_model: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type ne_model: Octree
     
     :return: factor of intensity received from the Thomson scattering phenomenon at the given point.
     :rtype: float
     """
-    
-    d = ThomsonGeometry.faux_d(x, z, epsilon)
-    omega = ThomsonGeometry.faux_omega(x, z, epsilon)
-    chi = ThomsonGeometry.faux_chi(x, z, epsilon)
-    scatt_factor = Gtotal(omega, chi, u)
-    #ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
-    ne_value = ne.predictive_science_model(z, TG, NE_MODEL)
+
+    d = ThomsonGeometry.compute_d_from(x, z, epsilon)
+    omega = ThomsonGeometry.compute_omega_from(x, z, epsilon)
+    chi = ThomsonGeometry.compute_chi_from(x, z, epsilon)
+    scatt_factor = g_total(omega, chi, u)
+    # ne_value = ne.crammer_model(d / tsp.SOLAR_RADIUS)
+    ne_value = ne.predictive_science_model(z, tg, ne_model)
     return ne_value * scatt_factor
-  
-def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
+
+
+def irec_z(x, epsilon, ini_z, fin_z, incr_z, u, tg=None, ne_model=None):
     """
     Numerical integration of the Thomson scattering along the line of sight over z.
     
@@ -802,73 +788,30 @@ def Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG = None, NE_MODEL = None):
     :type ini_z: float
     :param fin_z: final value for the independent variable :math:`z` representing the distance OQ.
     :type fin_z: float
-    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the distance OQ.
+    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the
+    distance OQ.
     :type incr_z: float
     :param u: coefficient of limb-darkening.
     :type u: float
-    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
-    :type TG: float
-    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
-    :type NE_MODEL: float
+    :param tg: object `ThomsonGeometry` storing information about the geometry applied to this function when working
+    with models of electron density and ray - tracing computations.
+    :type tg: ThomsonGeometry
+    :param ne_model: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type ne_model: Octree
     
     :return: integrated Thomson scattering factor por a given geometry over z.
     :rtype: float
     """
 
-    pasos_z = np.arange(ini_z, fin_z + incr_z, incr_z)
-    valorIrec = 0
-    for i in pasos_z:
-        valorIrec += abs(f_Irec_z(x, epsilon, i + 1, u, TG, NE_MODEL) - f_Irec_z(x, epsilon, i, u, TG, NE_MODEL)) * incr_z
-    return valorIrec
+    steps_z = np.arange(ini_z, fin_z + incr_z, incr_z)
+    value_irec = 0
+    for i in steps_z:
+        value_irec += abs(
+            f_irec_z(x, epsilon, i + 1, u, tg, ne_model) - f_irec_z(x, epsilon, i, u, tg, ne_model)) * incr_z
+    return value_irec
 
-def __f_Irec_PHI(x, epsilon, phi, u):
-    '''
-    Función de la intensidad recibida por la dispersión de Thomson para un ángulo
-    dado phi_i.
 
-    Parámetros
-    ------------
-    x: distancia del observador (O) al centro de la estrella (S).
-    epsilon: ángulo de la elongación, S-Q-O, en radianes (rad).
-    phi: ángulo O-S-Q, en radianes (rad).
-    r: radio de la estrella. Asigna r = RSOL por defecto, para trabajar en 
-    unidades SI. Si r = 1, se entiende que se trabaja en el radio de la estrella.
-
-    Devuelve
-    ------------
-    El valor de la dispersión de Thomson recibida para un ángulo phi_i dado.
-    '''
-    valor_contribucion_fIrec = 0
-    return valor_contribucion_fIrec 
-
-def __Irec_PHI(x, epsilon, phi, incr_phi, u):
-    '''
-    Integración numérica de la dispersión de Thomson recibida a lo largo de toda
-    la línea de visión (integración sobre la variable phi).
-
-    Parámetros
-    ------------
-    x: distancia del observador (O) al centro de la estrella (S).
-    epsilon: ángulo de la elongación, S-Q-O, en radianes (rad).
-    phi: ángulo O-S-Q, en radianes (rad). Límite superior de la integración.
-    phi_z: incremento de phi para el cálculo de la integral numérica.
-    r: radio de la estrella. Asigna r = RSOL por defecto, para trabajar en 
-    unidades SI. Si r = 1, se entiende que se trabaja en el radio de la estrella.
-
-    Devuelve
-    ------------
-    El valor de la dispersión de Thomson recibida para un z_i dado.
-    '''
-
-    # Integración numérica de la función intensidad recibida a lo largo de la línea
-    # de visión, mediante incrementos de z.
-    pasos_phi = np.arange(0, phi + incr_phi, incr_phi)
-    valorIrec = 0
-    for i in pasos_phi:
-        valorIrec += abs(f_Irec_PHI(x, epsilon, i + 1, u) - f_Irec_PHI(x, epsilon, i, u)) * incr_phi
-    return valorIrec
-
-def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG = None, NE_MODEL = None):
+def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, tg=None, ne_model=None):
     """  
     Computation of the scattered light by the Thomson Scattering of the K-Corona.
     
@@ -887,22 +830,22 @@ def get_scattered_light(wave, temperature, x, epsilon, ini_z, fin_z, incr_z, TG 
     :type ini_z: float
     :param fin_z: final value for the independent variable :math:`z` representing the distance OQ.
     :type fin_z: float
-    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the distance OQ.
+    :param incr_z: step value in the numerical integration for the independent variable :math:`z` representing the
+    distance OQ.
     :type incr_z: float
-    :param u: coefficient of limb-darkening.
-    :type u: float
-    :param TG: object `ThomsonGeometry` storing information about the geometry applied to this function when working with models of electron density and ray - tracing computations.
-    :type TG: float
-    :param NE_MODEL: model of electron density :math:`\\rho` needed for some simulations, not set by default.
-    :type NE_MODEL: float
+    :param tg: object `ThomsonGeometry` storing information about the geometry applied to this function when working
+    with models of electron density and ray - tracing computations.
+    :type tg: ThomsonGeometry
+    :param ne_model: model of electron density :math:`\\rho` needed for some simulations, not set by default.
+    :type ne_model: float
     
     :return: scattered light for a given wavelength, temperature and line of sight (:math:`W·m^-3` in I.S. units).
     :rtype: float
     """
-    u = coef_limb_darkening(wave)
-    I0 = planck_law(temperature, wave)
-    scattering = Irec_z(x, epsilon, ini_z, fin_z, incr_z, u, TG, NE_MODEL)
+    u = coefficient_limb_darkening(wave)
+    i0 = planck_law(temperature, wave)
+    scattering = irec_z(x, epsilon, ini_z, fin_z, incr_z, u, tg, ne_model)
 
-    scattered_light = I0 * scattering
+    scattered_light = i0 * scattering
 
     return scattered_light

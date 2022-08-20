@@ -7,18 +7,15 @@
 """
 
 import pickle
-from pyhdf.SD import SD
 import numpy as np
-import time
-import os
-import thomsonpy.config.paths as paths
 import thomsonpy.constants.units as units
 import thomsonpy.data_management.octree.octree as octr
 import thomsonpy.data_management.spherical_mesh.spherical_mesh as sphmesh
 
+
 def dump(filepath, obj):
     """
-    Auxiliar function for storing data.
+    Auxiliary function for storing data.
 
     :param filepath: name for the file storing the data
     :type filepath: string
@@ -29,9 +26,10 @@ def dump(filepath, obj):
     pickle.dump(obj, f)
     f.close()
 
+
 def load(filepath):
     """
-    Auxiliar function for loading stored data.
+    Auxiliary function for loading stored data.
     
     :param filepath: name for the file storing the data
     :type filepath: string
@@ -44,19 +42,20 @@ def load(filepath):
     f.close()
     return obj
 
+
 def cartesian_to_spherical(coords):
     x = coords[0]
     y = coords[1]
     z = coords[2]
-    radial = np.sqrt(x**2 + y**2 + z**2)
+    radial = np.sqrt(x ** 2 + y ** 2 + z ** 2)
     phi = np.arctan(x / z)
     theta = np.arccos(y / radial)
     return np.array([phi, theta, radial])
-    
-    
+
+
 def spherical_to_cartesian(r, theta, phi):
     """
-    It gets cartesian coordinates from spherical coordinates.
+    tangential_intensity gets cartesian coordinates from spherical coordinates.
 
     .. math::
         x &= \sin{\\theta} \sin{\phi} 
@@ -75,14 +74,15 @@ def spherical_to_cartesian(r, theta, phi):
     :return: coordinates in the Cartesian Coordinate System
     :rtype: numpy.ndarray[float, float, float]
     """
-    x = r * np.sin(theta) * np.sin(phi) 
+    x = r * np.sin(theta) * np.sin(phi)
     y = r * np.cos(theta)
     z = r * np.sin(theta) * np.cos(phi)
     return np.array([x, y, z])
 
+
 def apply_octree_data_format(r, theta, phi, ne_mas):
     """
-    It gives the required data format by the octree structure.
+    tangential_intensity gives the required data format by the octree structure.
     
     The original data is stored in hdf format in the Spherical Coordinates System
     in mas units. The octree structure needs the data stored as a list of Data 
@@ -94,7 +94,7 @@ def apply_octree_data_format(r, theta, phi, ne_mas):
     :type r: float
     :param theta: theta coordinate of the Spherical Coordinates System in rad
     :type theta: float
-    :param phi: phi coordinate of the Sherical Coordinates System in rad
+    :param phi: phi coordinate of the Spherical Coordinates System in rad
     :type phi: float
     :param ne_mas: ne value for the given coordinates in MAS units.
     :type ne_mas: float
@@ -104,14 +104,14 @@ def apply_octree_data_format(r, theta, phi, ne_mas):
     :rtype: :class:`thomsonpy.data_management.octree.octree.Data`
     
     """
-    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS # From RSol to m
-    ne = ne_mas * units.NE_MAS_FACTOR # From MAS to m⁻³.
+    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS  # From RSol to m
+    ne = ne_mas * units.NE_MAS_FACTOR  # From MAS to m⁻³.
     data = octr.Data(coords, ne)
     return data
-    
+
+
 def apply_spherical_mesh_data_format(r, theta, phi, ne_mas):
-    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS # From RSol to m
-    ne = ne_mas * units.NE_MAS_FACTOR # From MAS to m⁻³.
+    coords = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS  # From RSol to m
+    ne = ne_mas * units.NE_MAS_FACTOR  # From MAS to m⁻³.
     data = sphmesh.Data(coords, ne)
     return data
-    
