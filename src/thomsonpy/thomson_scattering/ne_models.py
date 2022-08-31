@@ -25,22 +25,22 @@ def crammer_model(d):
     return 1E8 * (3.89 * d ** -10.5 + 0.00869 * d ** -2.57) * 1E6
 
 
-def predictive_science_model(z, tg, ne_model):
+def predictive_science_model(z, tg, model):
     """
     This model retrieves the electron number density from a simulation made and published by **Predictive Science
-    Inc.** for the **solar eclipse of 4th December 2021** for a given distance :math:`z` from the point of view of
-    the observer (:math:`O`) to the scattering point (:math:`Q`) with a predefined ``ThomsonGeometry`` object that
+    Inc.** for the **solar eclipse of 4th December 2021** for a given distance :math:`z` from the coordinates of view of
+    the observer (:math:`O`) to the scattering coordinates (:math:`Q`) with a predefined ``ThomsonGeometry`` obj that
     manages the coherence of the rest of the geometric components for the ray-tracing process.
     
-    .. warning:: This model will not work without a model (``ne_model``) structured in the ``Octree`` data structure
+    .. warning:: This model will not work without a model (``model``) structured in the ``Octree`` coordinates structure
     managed in the :py:mod:`thomsonpy` package.
 
-    :param z: distance OQ. :type z: float :param tg: an object managing the internal coherence of the geometric
+    :param z: distance OQ. :type z: float :param tg: an obj managing the internal coherence of the geometric
     components of the Thomson scattering ray-tracing process.
     :type tg: :py:class:`thomsonpy.thomson_scattering.thomson_scattering_tools.ThomsonGeometry`
-    :param ne_model: an ``Octree`` containing a cloud of ``Data``` objects representing the cloud of points with
+    :param model: an ``Octree`` containing a cloud of ``Data``` objects representing the cloud of points with
     physical measures provided by Predictive Science Inc.
-    :type ne_model: :py:class:`thomsonpy.data_management.octree.octree.Octree`
+    :type model: :py:class:`thomsonpy.data_management.octree.octree.Octree`
     
     :return: electron number density for the solar eclipse of 4th December 2021.
     :rtype: float
@@ -48,5 +48,5 @@ def predictive_science_model(z, tg, ne_model):
     
     """
     target = tg.get_target(z)
-    data = ne_model.search_nearest(target)
+    data = model.search_nearest(target)
     return data.get_ne()
