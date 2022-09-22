@@ -19,8 +19,8 @@ class ThomsonGeometry:
     """
     This class manages the Thomson scattering geometry and also offers many methods useful for frequent calculations
     related with the Thomson scattering geometry. Additionally, its internal structure has been designed to support a
-    ray-tracing process in the :math:`z` direction between the observer point of view (:math:`O`) and the scattering
-    point (:math:`Q`).
+    ray-tracing process in the :math:`z` direction between the observer coordinates of view (:math:`O`) and the scattering
+    coordinates (:math:`Q`).
     """
 
     def __init__(self, sun_center, observer, target, radius):
@@ -86,7 +86,7 @@ class ThomsonGeometry:
 
     def get_target(self, s):
         """
-        Computes the target :math:`\\vec{t}` of Thomson scattering (a.k.a. real-time scattering point) from a
+        Computes the target :math:`\\vec{t}` of Thomson scattering (a.k.a. real-time scattering coordinates) from a
         pre-computed unitary direction :math:`\\vec{d}_u` with the given parameter s.
         
         .. math::
@@ -741,7 +741,7 @@ def g_total(omega, chi, u, z=1):
 def f_irec_z(x, epsilon, z, u, tg=None, ne_model=None):
     """
     tangential_intensity computes the factor of intensity received after the Thomson scattering phenomenon at a
-    point :math:`z_i` of line of sight.
+    coordinates :math:`z_i` of line of sight.
     
     .. math::
         f_{scattering_z}(z) = \\rho(z) G_{Total}(z)
@@ -760,7 +760,7 @@ def f_irec_z(x, epsilon, z, u, tg=None, ne_model=None):
     :param ne_model: model of electron density :math:`\\rho` needed for some simulations, not set by default.
     :type ne_model: Octree
     
-    :return: factor of intensity received from the Thomson scattering phenomenon at the given point.
+    :return: factor of intensity received from the Thomson scattering phenomenon at the given coordinates.
     :rtype: float
     """
 

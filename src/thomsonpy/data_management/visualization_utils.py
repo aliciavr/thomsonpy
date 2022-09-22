@@ -2,13 +2,13 @@
 """
 .. module:: formatter
         :platform: Unix
-        :synopsis: tools for visualizing and testing data 
+        :synopsis: tools for visualizing and testing coordinates
 .. moduleauthor:: Alicia Vázquez Ramos (SPG - IAA) <aliciavr@iaa.es>
 """
 import os
 import open3d as o3d
 import numpy as np
-import thomsonpy.data_management.octree.octree as octr
+import thomsonpy.data_management.data_structures.octree as octr
 import thomsonpy.data_management.formatter as formatter
 import thomsonpy.config.paths as paths
 import thomsonpy.constants.units as units
@@ -17,7 +17,7 @@ import time
 
 def vis_octree_data(filepath):
     """
-    tangential_intensity renders the octree data selected in the fragmentation process and the it gives a rainbow color for testing structure.
+    tangential_intensity renders the octree coordinates selected in the fragmentation process and the it gives a rainbow color for testing structure.
     """
     my_data = formatter.load(filepath)
 
@@ -131,7 +131,7 @@ def vis_octree(octree):
 
 def vis_found_and_not_found(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")
-    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
+    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.coordinates")
 
     listaFOUND = list()
     listaNOTFOUND = list()
@@ -190,7 +190,7 @@ def vis_found_and_not_found(i):
 
 def vis_found_and_not_found_multicore(i):
     my_octree = octr.Octree.load(paths.OCTREES_PATH + "octree_" + str(i) + ".oct")
-    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.data")
+    my_data = formatter.load(f"{paths.OCTREE_DATA_PATH}{os.path.splitext(paths.PREDSCI_FILENAME)[0]}.coordinates")
 
     listaFOUND = list()
     listaNOTFOUND = list()

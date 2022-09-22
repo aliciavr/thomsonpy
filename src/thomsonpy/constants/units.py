@@ -27,4 +27,6 @@ METERS_TO_ANGSTROM = 1E+10
 """ Unit conversion factor: from meters (:math:`m`) to Ángstroms (:math:`\mathring{A}`)."""
 
 NE_MAS_FACTOR = 1E14  # From MAS to m⁻³
-""" Unit conversion factor: from ne raw data (:math:`rho`) of Predictive Science Inc. to meters (:math:`m^{-3}`). """
+"""Unit conversion factor: from ne raw coordinates (:math:`rho`) of Predictive Science Inc. to meters (:math:`m^{
+-3}`). """
+T_MAS_FACTOR = 1E-6  # From MAS to K.
