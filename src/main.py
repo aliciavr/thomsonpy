@@ -7,8 +7,6 @@ import thomsonpy.data_management.utils as utils
 import thomsonpy.config.paths as paths
 
 
-
-
 def arguments_set_up():
     # Parser initialization
     parser = argparse.ArgumentParser(prog="SPGCoronalModeler",
@@ -36,7 +34,7 @@ def arguments_set_up():
     return arguments
 
 
-def create_model(ori_filepath, des_path, model_name, fragment_func, selection_func, format_func):
+def create_model(ori_filepath, des_path, name, fragment_func, selection_func, format_func):
     """
     It creates a view of the raw data model ready to be used to create de image model and data
     structures that can accelerate the imaging process.
@@ -48,8 +46,8 @@ def create_model(ori_filepath, des_path, model_name, fragment_func, selection_fu
     :type ori_filepath: string
     :param des_path: path where the new model will be stored.
     :type des_path: string
-    :param model_name:
-    :type model_name: string
+    :param name: name of the model.
+    :type name: string
     :param fragment_func: function to extract a subspace of the original raw model.
     :type fragment_func: `function`
     :param selection_func: filter for selecting a subspace of the original raw model.
@@ -58,15 +56,19 @@ def create_model(ori_filepath, des_path, model_name, fragment_func, selection_fu
     :type format_func: `function`
     """
 
+    print("Raw models:", ori_filepath)
+    print("Destination path:", des_path)
+    print("Name of the project:", name)
+
     # Creating a preliminary view of the raw model.
-    pre_data = fragment_func(   ori_filepath=ori_filepath,
-                                selection_func=selection_func,
-                                format_func=format_func)
+    pre_data = fragment_func(ori_filepath=[f"{paths.RAW_MODELS_PATH}{o}" for o in ori_filepath],
+                             selection_func=selection_func,
+                             format_func=format_func)
 
     data_model = DataModel(pre_data)
 
     # Storing the data model.
-    utils.store_object(obj=data_model, filename=model_name,
+    utils.store_object(obj=data_model, filename=name,
                        extension=paths.DATA_MODELS_EXTENSION, path=des_path)
 
     return data_model
@@ -135,6 +137,7 @@ def compute_thomson_scattering_image(num_points, min_coord, max_coord, data_mode
 if __name__ == "__main__":
 
     # It manages the console input parameters.
+    """
     args = arguments_set_up()
     print(args.name, args.model_path, args.echo)
 
@@ -150,18 +153,28 @@ if __name__ == "__main__":
         echo = args.echo
     print(f"my name is {model_name}")
     print(f"my model is in {model}")
+    """
 
+    """
     # It creates the data model.
     data_model = None
     if args.data_model:
-        data_model = utils.load_object(f"{paths.MODELS_PATH}{args.name}.{paths.DATA_MODELS_EXTENSION}")
+        data_model = utils.load_object(f"{paths.MODELS_PATH}cmag.{paths.DATA_MODELS_EXTENSION}")
     else:
         data_model = create_model(ori_path=paths.PREDSCI_FILENAME,
                                   dest_path=paths.MODELS_PATH,
-                                  model_name=args.name,
+                                  name=args.name,
                                   fragment_func=utils.predsci_fragmentation,
                                   selection_func=utils.predsci_selection,
                                   format_func=utils.apply_data_format_to_predsci)
+    """
+
+    data_model = create_model(ori_filepath=paths.RAW_FILENAME,
+                              des_path=paths.RAW_MODELS_PATH,
+                              name="cmag",
+                              fragment_func=utils.predsci_fragmentation,
+                              selection_func=utils.predsci_selection,
+                              format_func=utils.apply_data_format_to_predsci)
 
     """
     # It creates the data structure.

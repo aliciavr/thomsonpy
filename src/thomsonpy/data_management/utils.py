@@ -5,7 +5,7 @@ import thomsonpy.constants.units as units
 from thomsonpy.data_management.data_model import Data
 
 
-def store_object(obj, filename, path):
+def store_object(obj, filename, extension, path):
     """
     Auxiliary function for storing coordinates.
 
@@ -13,10 +13,12 @@ def store_object(obj, filename, path):
     :type obj: any
     :param filename: name for the file storing the object.
     :type filename: string
+    :param extension: extension for the file storing the object.
+    :type extension: string
     :param path: path of the folder where the object will be stored.
     :type path: string
     """
-    f = open(f"{path}{filename}.dstruct", 'wb')
+    f = open(f"{path}{filename}.{extension}", 'wb')
     pickle.dump(obj, f)
     f.close()
 
@@ -74,7 +76,7 @@ def spherical_to_cartesian(r, theta, phi):
     return np.array([x, y, z])
 
 
-def apply_data_format(r, theta, phi, ne_mas, t_mas):
+def apply_data_format_to_predsci(r, theta, phi, mas_physical_magnitudes):
     """
     It gives the required coordinates format by the octree structure.
 
@@ -90,18 +92,26 @@ def apply_data_format(r, theta, phi, ne_mas, t_mas):
     :type theta: float
     :param phi: phi coordinate of the Spherical Coordinates System in rad
     :type phi: float
-    :param ne_mas: ne value for the given coordinates in MAS units.
-    :type ne_mas: float
+    :param mas_physical_magnitudes: tuple with the physical magnitudes in mas.
+    :type mas_physical_magnitudes: tuple
 
     :return: a Data object with coordinates in the Cartesian Coordinates System and
             with units in the International System of Units.
     :rtype: :class:`thomsonpy.data_management.octree.octree.Data`
 
     """
+
+    # It transforms the coordinates into the Cartesian System and in I.S. of units.
     coordinates = spherical_to_cartesian(r, theta, phi) * units.RSOL_TO_METERS  # From RSol to m
-    ne = ne_mas * units.NE_MAS_FACTOR  # From MAS to m⁻³.
-    temperature = t_mas * units.T_MAS_FACTOR # From MAS to K.
-    data = Data(coordinates, (ne, temperature))
+
+    # It transforms the physical magnitudes into the I.S. of units.
+    r = range(0, len(mas_physical_magnitudes))
+    conv_factors = [units.NE_MAS_FACTOR, units.T_MAS_FACTOR]
+    physical_magnitudes = list()
+    for m, c in zip(mas_physical_magnitudes, conv_factors):
+        physical_magnitudes.append(m * c)
+
+    data = Data(coordinates, physical_magnitudes)
     return data
 
 
@@ -159,7 +169,7 @@ def get_raw_coords(filepath, opt):
     return coords
 
 
-def selection(r, theta, phi, ne, temperature):
+def predsci_selection(r, theta, phi):
     """
 
     :param r: radial coordinate in the Spherical System of Coordinates.
@@ -168,10 +178,6 @@ def selection(r, theta, phi, ne, temperature):
     :type theta: float
     :param phi: phi coordinate in the Spherical System of Coordinates.
     :type phi: float
-    :param ne: electron density model.
-    :type ne: float
-    :param temperature: temperature model.
-    :type temperature: float
 
     :return:
     :rtype: boolean
@@ -185,43 +191,51 @@ def selection(r, theta, phi, ne, temperature):
     return x <= limit and x >= -limit and y <= limit and y >= -limit and z <= limit and z >= -limit
 
 
-def fragment(selection_func, format_func, raw_model, data_radial, data_theta, data_phi, progress_step=1e6):
+def predsci_fragmentation(ori_filepath, selection_func, format_func, progress_step=1e6):
     """
+    It creates a preliminary model view of an original Predictive Science raw model with a common
+    and useful structure for further computations.
 
+    :param ori_filepath: path of the original Predictive Science raw model.
     :param selection_func: function defining the subspace of points.
     :type selection_func: function
     :param format_func: function defining the format of the output of this fragmentation.
     :type format_func: function
-    :param raw_model: original electron density model from Predictive Science Inc.
-    :type raw_model: 3d array
-    :param data_radial: values for the radial coordinate.
-    :type data_radial: array of float
-    :param data_theta: values for the theta coordinate.
-    :type data_theta: array of float
-    :param data_phi: values for the phi coordinate.
-    :type data_phi: array of float
     :param progress_step: int
     :type progress_step: int
     """
 
-    it = np.nditer(raw_model, flags=['multi_index'])
-    num_points = raw_model.size
-    print(num_points)
-    data = []
-    # Progress and auxiliary variables
-    progress = 0
-    # Fragmentation process.
-    for ne_mas in it:
-        i, j, k = it.multi_index
-        r = data_radial[k]
-        theta = data_theta[j]
-        phi = data_phi[i]
+    raw_models = list()
+    for f in ori_filepath:
+        raw_model = get_predsci_raw(f)
+        raw_models.append(raw_model)
+        print("Size of the raw model", raw_model.size)
 
-        if selection_func(r, theta, phi, ne_mas):
-            d = format_func(r=r, theta=theta, phi=phi, ne_mas=ne_mas)
-            data.append(d)
-        if progress % progress_step == 0:
-            print(progress / num_points * 100, "%")
-        progress += 1
+    if raw_models:
+        data_radial = get_raw_coords(ori_filepath[0], "radial")
+        data_theta = get_raw_coords(ori_filepath[0], "theta")
+        data_phi = get_raw_coords(ori_filepath[0], "phi")
+
+        iterators = list()
+        for raw in raw_models:
+            it = np.nditer(raw, flags=["multi_index"])
+            iterators.append(it)
+            num_points = raw_models[0].size
+
+        data = list()
+        # Progress and auxiliary variables
+        progress = 0
+        # Fragmentation process.
+        for p in zip(*iterators):
+            i, j, k = iterators[0].multi_index
+            r = data_radial[k]
+            theta = data_theta[j]
+            phi = data_phi[i]
+            if selection_func(r=r, theta=theta, phi=phi):
+                d = format_func(r=r, theta=theta, phi=phi, mas_physical_magnitudes=p)
+                data.append(d)
+            if progress % progress_step == 0:
+                print(progress / num_points * 100, "%")
+            progress += 1
 
     return data
