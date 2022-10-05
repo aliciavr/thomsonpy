@@ -29,4 +29,4 @@ METERS_TO_ANGSTROM = 1E+10
 NE_MAS_FACTOR = 1E14  # From MAS to m⁻³
 """Unit conversion factor: from ne raw coordinates (:math:`rho`) of Predictive Science Inc. to meters (:math:`m^{
 -3}`). """
-T_MAS_FACTOR = 1E-6  # From MAS to K.
+T_MAS_FACTOR = 28.07067E+6  # From MAS to K.
