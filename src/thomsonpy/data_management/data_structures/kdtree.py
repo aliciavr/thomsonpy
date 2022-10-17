@@ -1,7 +1,6 @@
 from thomsonpy.data_management.data_structures.data_structure import DataStructure
 import thomsonpy.data_management.utils as utils
 from sklearn.neighbors import KDTree
-from thomsonpy.main import PHYSICAL_MODEL
 
 
 class KDTree(DataStructure):
@@ -44,7 +43,7 @@ class KDTree(DataStructure):
             index = self.__kdtree.query(X=coordinates, k=1)
             return index
 
-    def search_nearest(self, coordinates):
+    def search_nearest(self, coordinates, data_model):
         """
         It searches for the data object associated with the index retrieved by
         :python:func:`thomsonpy.data_management.data_structures.kdtree.search_nearest_index`.
@@ -62,7 +61,7 @@ class KDTree(DataStructure):
         else:
             nearest_index = self.search_nearest_data_index(coordinates)
 
-        data = PHYSICAL_MODEL.get_data_from_index(nearest_index)
+        data = data_model.get_data_from_index(nearest_index)
         return data
 
     def search_k_nearest_indices(self, coordinates, k):

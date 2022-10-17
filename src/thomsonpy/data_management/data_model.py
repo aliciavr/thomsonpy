@@ -8,6 +8,14 @@ class DataModel:
             self.__model[i] = Data(coordinates, physical_data)
             self.__model_coordinates[c] = i
 
+    def __init__(self, data):
+        self.__model = dict()
+        self.__model_coordinates = dict()
+        num_points = len(data)
+        for i, d in zip(num_points, data):
+            self.__model[i] = d
+            self.__model_coordinates[d.get_coordinates()] = i
+
     def get_all_indices(self):
         return self.__model.keys()
 

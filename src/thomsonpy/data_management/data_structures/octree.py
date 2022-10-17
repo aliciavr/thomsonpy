@@ -12,7 +12,6 @@ import sys
 
 from thomsonpy.data_management.data_structures.data_structure import DataStructure
 from thomsonpy.data_management.data_model import Data
-from thomsonpy.main import PHYSICAL_MODEL
 
 
 class Node:
@@ -91,14 +90,14 @@ class Node:
         self.__children[7] = Node(self.__level + 1, self, np.array([min_x, mid_y, mid_z]),
                                   np.array([mid_x, max_y, max_z]), self.__octree)
 
-    def add(self, coordinates):
+    def add(self, coordinates, data_model):
         """
         It adds a new ``Data`` to the ``Octree``.
         
         :param coordinates: new spatial ``Data`` to be added to the ``Octree``.
         :type coordinates: :py:class:`thomsonpy.data_management.octree.octree.Data`
         """
-        index = PHYSICAL_MODEL.get_index(coordinates)  # Index identifying the coordinates passed as a parameter.
+        index = data_model.get_index(coordinates)  # Index identifying the coordinates passed as a parameter.
         if not self.__children:  # If it does not have children.
             if self.__level == self.__octree.get_level_limit() or len(self.__indices) < self.__octree.get_data_limit():
                 # If it has reached the maximum level or there is free space in this node it inserts the index
@@ -111,7 +110,7 @@ class Node:
                 self.__create_children()
                 for i in self.__indices:
                     for c in self.__children:
-                        if c.contains(PHYSICAL_MODEL.get_coordinates(i)):
+                        if c.contains(data_model.get_coordinates(i)):
                             c.add(i)
                 self.__indices.clear()
         else:  # If it has children.
@@ -145,7 +144,7 @@ class Node:
                 return self
         return None
 
-    def search_nearest_data_index(self, coordinates):
+    def search_nearest_data_index(self, coordinates, data_model):
         """
         It searches for the nearest coordinates previously stored in the ``Octree`` coordinates structure.
         
@@ -170,7 +169,7 @@ class Node:
                 nearest = -1
                 min_distance = sys.float_info.max
                 for i in self.__indices:
-                    i_coordinates = PHYSICAL_MODEL.get_coordinates(i)
+                    i_coordinates = data_model.get_coordinates(i)
                     distance = np.linalg.norm(coordinates - i_coordinates)
                     if distance < min_distance:
                         nearest = i
@@ -357,7 +356,7 @@ class Octree(DataStructure):
         """
         return self.__root.search_nearest_data_index(coordinates)
 
-    def search_nearest(self, coordinates):
+    def search_nearest(self, coordinates, data_model):
         """
         It calls the ``search_nearest`` method from the root ``Node`` of this ``Octree``.
         It searches for the nearest coordinates previously stored in the ``Octree`` coordinates structure.
@@ -379,7 +378,7 @@ class Octree(DataStructure):
         if nearest_index == -1:
             data = Data(None, 0)
         else:
-            data = PHYSICAL_MODEL.get_data_from_index(nearest_index)
+            data = data_model.get_data_from_index(nearest_index)
         return data
 
     def search(self, coordinates):
